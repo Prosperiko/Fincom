@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Flow Analysis</title>
+    <link rel="stylesheet" href="../static/css/incomeOverview.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <style>
+        /* Additional CSS to control the size of the chart */
+        #incomeChart {
+            max-width: 400px; /* Set a maximum width for the chart */
+            max-height: 300px; /* Set a maximum height for the chart */
+            width: 100%; /* Make it responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Income Overview</h1>
+
+    <!-- Income Summary Section -->
+    <section class="income-summary">
+        <h2>Monthly Income Summary</h2>
+        <p>Total Income Recorded: <span id="totalIncome">0</span> Naira</p>
+        <p>Number of Income Sources: <span id="incomeSources">0</span></p>
+    </section>
+
+    <!-- Income Trends Chart Section -->
+    <section class="chart-container">
+        <h2>Income Overview Trends</h2>
+        <canvas id="incomeChart"></canvas> <!-- Chart canvas -->
+    </section>
+
+    <!-- Detailed Income Breakdown Table -->
+    <section class="income-breakdown">
+        <h2>Detailed Income Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount (Naira)</th>
+                    <th>Percentage of Total Income</th>
+                </tr>
+            </thead>
+            <tbody id="incomeTable">
+                <tr>
+                    <td colspan="3" style="text-align: center;">No income recorded yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Navigation to Dashboard -->
+    <div style="text-align: center;">
+        <a href="Analysis" class="btn" style="color: orange;">← Back to Analysis</a>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Global variable for income
+        let income = {};
+
+        // Fetch income dynamically from the database via API
+        async function fetchIncome() {
+            try {
+                const response = await fetch('/api/income');
+                if (!response.ok) throw new Error('Failed to fetch income data.');
+                const data = await response.json();
+                return data.reduce((acc, item) => {
+                    acc[item.category] = parseFloat(item.amount); // Ensure the key is 'category'
+                    return acc;
+                }, {});
+            } catch (error) {
+                console.error('Error fetching income:', error);
+                return {};
+            }
+        }
+
+        async function populateIncomeOverview() {
+            const income = await fetchIncome();
+            if (Object.keys(income).length === 0) {
+                alert('No income data found!');
+                return;
+            }
+
+            // Calculate total and populate summary
+            const totalIncome = Object.values(income).reduce((sum, amount) => sum + amount, 0);
+            document.getElementById('totalIncome').textContent = totalIncome;
+            document.getElementById('incomeSources').textContent = Object.keys(income).length;
+
+            // Populate table
+            const incomeTable = document.getElementById('incomeTable');
+            incomeTable.innerHTML = Object.entries(income).map(([category, amount]) => {
+                const percentage = ((amount / totalIncome) * 100).toFixed(2);
+                return `<tr><td>${category}</td><td>${amount} Naira</td><td>${percentage}%</td></tr>`;
+            }).join('');
+
+            // Draw chart
+            const ctx = document.getElementById('incomeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(income),
+                    datasets: [{
+                        label: 'Income Sources',
+                        data: Object.values(income),
+                        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', populateIncomeOverview);
+    </script>
+</body>
+</html>
