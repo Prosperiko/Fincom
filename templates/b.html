@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Z - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: white;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        
+        /* ===========================
+           NAVIGATION BAR
+        =========================== */
+        header {
+            background-color: #222;
+            padding: 20px 0;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            color: #f4b400;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #f4b400;
+        }
+        
+        /* ===========================
+           HERO SECTION
+        =========================== */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(to right, #222, #333);
+        }
+        
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #f4b400;
+            color: #222;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ffcc00;
+        }
+        
+        /* ===========================
+           FEATURES SECTION
+        =========================== */
+        .features {
+            padding: 60px 0;
+            background-color: #181818;
+        }
+        
+        .features h2 {
+            margin-bottom: 30px;
+        }
+        
+        .feature-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            width: 300px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+        }
+        
+        /* ===========================
+           SIGNUP FORM
+        =========================== */
+        .signup-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .signup-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f4b400;
+        }
+        
+        .input-box {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .input-box input,
+        .input-box select {
+            width: 90%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f4b400;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .signup-btn:hover {
+            background: #ffcc00;
+        }
+        
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .login-link a {
+            color: #f4b400;
+            text-decoration: none;
+        }
+        
+        /* ===========================
+           INVENTORS SECTION
+        =========================== */
+        .profile-container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ===========================
+           CALL-TO-ACTION SECTION
+        =========================== */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(to right, #333, #444);
+        }
+        
+        .cta h2 {
+            margin-bottom: 20px;
+        }
+        
+        /* ===========================
+           FOOTER SECTION
+        =========================== */
+        footer {
+            background-color: #111;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        /* ===========================
+           COLOR SWITCHER
+        =========================== */
+        .color-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .color-switcher button {
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+        .customer-type {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .customer-type label {
+            background: #222;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .customer-type input {
+            display: none;
+        }
+        .customer-type input:checked + label {
+            background: #f4b400;
+            color: #222;
+        }
+        /* Theme Colors */
+        .red { background-color: #ff4c4c; }
+        .blue { background-color: #4c9aff; }
+        .green { background-color: #4caf50; }
+        .yellow { background-color: #ffcc00; }
+        .purple { background-color: #800080; }
+        .pink { background-color: #ff69b4; }
+        .gray { background-color: #808080; }
+        .teal { background-color: #008080; }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <h1>Marketplace Z</h1>
+    </header>
+
+    <!-- Color Switcher -->
+    <div class="color-switcher">
+        <button class="red" onclick="changeColor('#ff4c4c')"></button>
+        <button class="blue" onclick="changeColor('#4c9aff')"></button>
+        <button class="green" onclick="changeColor('#4caf50')"></button>
+        <button class="yellow" onclick="changeColor('#ffcc00')"></button>
+        <button class="purple" onclick="changeColor('#800080')"></button>
+        <button class="pink" onclick="changeColor('#ff69b4')"></button>
+        <button class="gray" onclick="changeColor('#808080')"></button>
+        <button class="teal" onclick="changeColor('#008080')"></button>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form action="signup.php" method="POST">
+            <div class="input-box">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <p class="error-message" id="error-message" style="display:none; color:red;">Passwords do not match!</p>
+            <div class="input-box">
+                <select name="nationality" required>
+                    <option value="" disabled selected>Select Nationality</option>
+                    <option value="American">American</option>
+                    <option value="Canadian">Canadian</option>
+                    <option value="British">British</option>
+                    <option value="Australian">Australian</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="customer-type">
+                <input type="radio" id="family" name="customer_type" value="family" required>
+                <label for="family">Family</label>
+                <input type="radio" id="company" name="customer_type" value="company" required>
+                <label for="company">Company</label>
+                <input type="radio" id="individual" name="customer_type" value="individual" required>
+                <label for="individual">Individual</label>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+
+    <!-- Inventors Section -->
+    <div class="profile-container">
+        <h3>Meet Our Inventors</h3>
+        <p class="inventors-story">
+            Our inventors are visionaries dedicated to revolutionizing the marketplace. 
+            With expertise in technology and innovation, they create seamless and efficient 
+            solutions for buyers and sellers worldwide.
+        </p>
+        <div class="profile-grid">
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Desktop/game/WIN_20250225_08_32_57_Pro.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Desktop/game/WhatsApp Image 2025-02-25 at 09.40.59_126a3712.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Desktop/game/WhatsApp Image 2025-02-25 at 09.47.23_6f339929.jpg');"></div>
+            <div class="profile-image" style="background-image: url('https://via.placeholder.com/120');"></div>
+            <div class="profile-image" style="background-image: url('https://via.placeholder.com/120');"></div>
+            <div class="profile-image" style="background-image: url('https://via.placeholder.com/120');"></div>
+        </div>
+    </div>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            document.querySelector('.signup-container').style.backgroundColor = color;
+            document.querySelector('.profile-container').style.backgroundColor = color;
+        }
+
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+
+</body>
+  </html>
