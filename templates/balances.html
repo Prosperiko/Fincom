@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Balance</title>
+    <link rel="stylesheet" href="../static/css/balances.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Balance</h1>
+        
+        {% if balance %}
+            <p class="balance">Cash Balance: {{ balance.cash_balance }}</p>
+            <p class="balance">Card Balance: {{ balance.card_balance }}</p>
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %}
+
+        <a href="{{ url_for(user_home) }}" class="bank-btn">Bank</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 User Balances. All rights reserved.</p>
+    </footer>
+</body>
+</html>

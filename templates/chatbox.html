@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Platform</title>
+    <link rel="stylesheet" href="../static/css/message.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <h2>Users</h2>
+    <div class="container">
+        <form class="search-box" method="GET" action="/chatbox">
+            <input type="text" id="search-input" name="search" class="search-input" 
+                   placeholder="Search users..." value="{{ request.args.get('search', '') }}">
+            <button type="submit" id="search-btn" class="search-btn">Search</button>
+            <button type="button" id="clear-btn" class="clear-btn">Clear</button>
+        </form>
+
+        <div class="user-list">
+            {% for user in users %}
+            <div class="user-card">
+                <div class="user-info">
+                    <h3>{{ user.username }}</h3>
+                    <p>{{ user.occupation }}</p>
+                    <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">Message</a>
+                </div>
+            </div>
+            {% else %}
+            <p>No users found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search-input");
+            const clearBtn = document.getElementById("clear-btn");
+
+            // Function to clear the search input and reload the page without query parameters
+            function clearSearch() {
+                window.location.href = window.location.pathname; // Reloads without search query
+            }
+
+            // Handle "Enter" key press to trigger search
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    if (searchInput.value.trim() === "") {
+                        event.preventDefault(); // Prevent empty search
+                    }
+                }
+            });
+
+            // Attach event listener for clear button
+            clearBtn.addEventListener("click", clearSearch);
+        });
+    </script>
+</body>
+</html>
