@@ -47,6 +47,75 @@ def contact():
     return render_template("contact.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        fullname = request.form['fullname']
+        profession = request.form['profession']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        nationality = request.form['nationality']
+        customer_type = request.form['customer_type']
+
+        # Check if all required fields are filled
+        if not username or not email or not password or not customer_type:
+            flash("All fields are required!", "error")
+            return redirect('/signup')
+
+        # Check if passwords match
+        if password != confirm_password:
+            flash("Passwords do not match!", "error")
+            return redirect('/signup')
+
+        # Hash the password
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+        conn = sqlite3.connect("mydatabase.db")
+        cursor = conn.cursor()
+
+        try:
+            # Check if the username or email already exists
+            cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", (username, email))
+            existing_user = cursor.fetchone()
+            if existing_user:
+                flash("Username or email already exists!", "error")
+                return redirect('/signup')
+
+            # Generate a verification PIN
+            pin = random.randint(100000, 999999)
+
+            # Send the verification email
+            msg = Message("Email Verification", recipients=[email])
+            msg.body = f"Your verification PIN is: {pin}"
+            mail.send(msg)
+
+            # Store user data temporarily
+            session['pending_user'] = {
+                'username': username,
+                'fullname': fullname,
+                'profession': profession,
+                'email': email,
+                'password': hashed_password,
+                'nationality': nationality,
+                'customer_type': customer_type,
+                'pin': pin
+            }
+
+            flash("A verification PIN has been sent to your email. Please check your inbox.", "success")
+            return redirect('/verify_pin')
+
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            flash("An error occurred while signing up. Please try again.", "error")
+        
+        finally:
+            cursor.close()
+            conn.close()
+
+    return render_template('signup.html')
+
+
 @app.route('/verify_pin', methods=['GET', 'POST'])
 def verify_pin():
     if request.method == 'POST':
@@ -206,3 +275,297 @@ def login():
 
     # Render the login page for GET requests
     return render_template('login.html')
+
+
+
+
+def generate_welcome_message(username, customer_type):
+    if customer_type.lower() == "individual":
+        return f"Welcome, {username}! Enjoy your personal finance dashboard."
+    else:
+        return f"Welcome, {username}! Manage your business transactions efficiently."
+
+    
+@app.route('/home')
+def home():
+    if 'username' in session:
+        username = session['username']
+        customer_type = session['customer_type']
+        welcome_message = generate_welcome_message(username, customer_type)
+        return render_template('home.html', message=welcome_message)
+    else:
+        flash("You need to log in first!", "error")
+        return redirect('/login')
+
+@app.route('/home1')
+def home1():
+    if 'username' in session:
+        username = session['username']
+        customer_type = session['customer_type']
+        welcome_message = generate_welcome_message(username, customer_type)
+        return render_template('home1.html', message=welcome_message)  # Render a different template for home1
+    else:
+        flash("You need to log in first!", "error")
+        return redirect('/login')
+
+
+@app.route('/balances')
+def balances():
+    if 'user_id' not in session:
+        flash("Please log in to view your balance.", "error")
+        return redirect('/login')
+
+    conn = get_db_connection()
+    conn.row_factory = sqlite3.Row  # Enables dictionary-like access
+    cursor = conn.cursor()
+
+    user_id = session.get('user_id')
+
+    try:
+        cursor.execute("""
+            SELECT 
+                COALESCE(SUM(CASE WHEN t.transaction_type = 'cash' THEN t.amount ELSE 0 END), 0) AS cash_balance,
+                COALESCE(SUM(CASE WHEN t.transaction_type = 'card' THEN t.amount ELSE 0 END), 0) AS card_balance
+            FROM 
+                transactions t 
+            WHERE 
+                t.user_id = ?;
+        """, (user_id,))
+        
+        balance = cursor.fetchone()
+
+        # Convert SQLite Row to dictionary
+        balance_dict = dict(balance) if balance else {"cash_balance": 0, "card_balance": 0}
+
+        # Determine home page dynamically
+        customer_type = session.get("customer_type", "individual").lower()
+        user_home = "home1" if customer_type == "individual" else "home"
+
+        return render_template('balances.html', balance=balance_dict, user_home=user_home)
+
+    except sqlite3.Error as e:
+        flash(f"An error occurred: {e}", "error")
+        return redirect('/error')  
+    
+    finally:
+        cursor.close()
+        conn.close()
+        
+
+
+
+
+def update_profit(user_id):
+    """Calculate and update profit based on transactions for a user."""
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor()
+        try:
+            # Calculate total income
+            cursor.execute("""
+                SELECT COALESCE(SUM(amount), 0) FROM transactions 
+                WHERE user_id = ? AND type = 'income';
+            """, (user_id,))
+            total_income = cursor.fetchone()[0]  # Fetch first value
+            
+            # Calculate total expenses
+            cursor.execute("""
+                SELECT COALESCE(SUM(amount), 0) FROM transactions 
+                WHERE user_id = ? AND type = 'expense';
+            """, (user_id,))
+            total_expenses = cursor.fetchone()[0]  # Fetch first value
+
+            # Update the users table with the calculated profit
+            profit = total_income - total_expenses
+            cursor.execute("UPDATE users SET profit = ? WHERE id = ?", (profit, user_id))
+            conn.commit()
+        except sqlite3.Error as e:
+            print(f"Error updating profit: {e}")
+            conn.rollback()
+        finally:
+            cursor.close()
+            conn.close()
+
+def add_expenses(submitter_name, expense_type, account, category, description, amount, quantity):
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor()
+        try:
+            # Fetch the user_id based on the username
+            cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
+            user_row = cursor.fetchone()
+            if not user_row:
+                flash("User  not found. Please log in again.", "error")
+                return
+            user_id = user_row[0]
+
+            # Calculate total amount
+            total_amount = amount * quantity  # Total amount is calculated here
+
+            # Insert expense with user_id
+            cursor.execute("""
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, expense_type, account, category, description, total_amount, quantity))
+
+            # Update user profit
+            cursor.execute("""
+                UPDATE users
+                SET profit = COALESCE(profit, 0) - ?,
+                    total_expenses = COALESCE(total_expenses, 0) + ?
+                WHERE id = ?
+            """, (total_amount, total_amount, user_id))
+
+            conn.commit()
+            flash("Expense added successfully!", "success")
+
+        except sqlite3.Error as e:
+            flash(f"Error inserting expense: {e}", "error")
+            conn.rollback()
+        finally:
+            cursor.close()
+            conn.close()
+@app.route('/expenses', methods=['GET', 'POST'])
+def expenses():
+    if request.method == 'POST':
+        try:
+            submitter_name = session.get('username')
+            if not submitter_name:
+                flash("User not logged in. Please log in to add expenses.", "error")
+                return redirect('/login')
+
+            expense_type = request.form['expense_type']
+            account = request.form['account']
+            category = request.form['category']
+            description = request.form['description']
+            amount = float(request.form['amount'])
+            quantity = float(request.form['quantity'])
+
+            add_expenses(submitter_name, expense_type, account, category, description, amount, quantity)
+            update_profit(session.get('user_id'))  # Update user profit
+
+            return redirect('/home1')
+
+        except (KeyError, ValueError):
+            flash("Please fill in all fields correctly.", "error")
+        except Exception as e:
+            flash(f"An error occurred: {str(e)}", "error")
+
+    return render_template('expenses.html')
+# Function to calculate total expenses
+def sum_total_expenses():
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor()
+        try:
+            cursor.execute("SELECT COALESCE(SUM(amount * quantity), 0) FROM transactions WHERE type='expense'")
+            return cursor.fetchone()[0]
+        except sqlite3.Error as e:
+            print(f"Error calculating total expenses: {e}")
+            return 0
+        finally:
+            cursor.close()
+            conn.close()
+
+@app.route('/total_expenses')
+def total_expenses():
+    return render_template('total_expenses.html', total=sum_total_expenses())
+
+# Function to add an income
+def add_income(submitter_name, income_type, account, category, description, amount, quantity):
+    conn = get_db_connection()
+    if conn:
+        cursor = conn.cursor()
+        try:
+            # Fetch the user_id based on the username
+            cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
+            user_row = cursor.fetchone()
+            if not user_row:
+                flash("User  not found. Please log in again.", "error")
+                return
+            user_id = user_row[0]
+
+            # Calculate total amount
+            total_amount = amount * quantity  # Total amount is calculated here
+
+            # Insert income with user_id
+            cursor.execute("""
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, income_type, account, category, description, total_amount, quantity))
+
+            # Update user profit
+            cursor.execute("""
+                UPDATE users
+                SET profit = COALESCE(profit, 0) + ?,
+                    total_income = COALESCE(total_income, 0) + ?
+                WHERE id = ?
+            """, (total_amount, total_amount, user_id))
+
+            conn.commit()
+            flash("Income added successfully!", "success")
+
+        except sqlite3.Error as e:
+            flash(f"Error inserting income: {e}", "error")
+            conn.rollback()
+        finally:
+            cursor.close()
+            conn.close()
+
+@app.route('/income', methods=['GET', 'POST'])
+def income():
+    if request.method == 'POST':
+        try:
+            submitter_name = session.get('username')
+            if not submitter_name:
+                flash("User not logged in. Please log in to add income.", "error")
+                return redirect('/login')
+
+            income_type = request.form['income_type']
+            account = request.form['account']
+            category = request.form['category']
+            description = request.form['description']
+            amount = float(request.form['amount'])
+            quantity = float(request.form['quantity'])
+
+            add_income(submitter_name, income_type, account, category, description, amount, quantity)
+            update_profit(session.get('user_id'))  # Update user profit
+
+            return redirect('/home1')
+
+        except (KeyError, ValueError):
+            flash("Please fill in all fields correctly.", "error")
+               user = cursor.fetchone()
+            if user:
+                username, cash_balance, card_balance = user
+            else:
+                return jsonify({"error": "User  not found"}), 404
+
+            # Fetch total income and expenses from transactions
+            cursor.execute("""
+                SELECT 
+                    SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) AS total_income,
+                    SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) AS total_expenses
+                FROM transactions
+                WHERE user_id = ?
+            """, (user_id,))
+            transaction_row = cursor.fetchone()
+            total_income = transaction_row[0] or 0
+            total_expenses = transaction_row[1] or 0
+
+            # Combine user data with income and expenses
+            comparison_data = {
+                "username": username,
+                "cash_balance": cash_balance or 0,
+                "card_balance": card_balance or 0,
+                "total_income": total_income,
+                "total_expenses": total_expenses
+            }
+
+            return jsonify(comparison_data)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return jsonify({"error": "Database error"}), 500
+
+@app.route('/api/expenses', methods=['GET'])
+def fetch_expenses():
