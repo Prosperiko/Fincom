@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Z</title>
+    <link rel="stylesheet" href="../static/css/about.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        /* Navbar */
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #ffeb3b;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #ffeb3b;
+            color: #222;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #ffc107;
+            transform: scale(1.05);
+        }
+
+        /* Product Listings */
+        .products {
+            padding: 60px 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px auto;
+        }
+
+        .products h2 {
+            margin-bottom: 30px;
+            color: #ffeb3b;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            width: 250px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <h1>Marketplace</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Buy & Sell with Confidence</h2>
+            <p>Find the best deals or list your products for millions of buyers.</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="C:\Users\USER 24\Downloads\pngimg.com - iphone_14_PNG3.png" alt="Product 1">
+                    <h3>Smartphone</h3>
+                    <p>$699.99</p>
+                    <a href="#" class="btn">Buy Now</a>
+                </div>
+                <div class="product">
+                    <img src="C:\Users\USER 24\Downloads\laptop-png-6750.png" alt="Product 2">
+                    <h3>Laptop</h3>
+                    <p>$899.99</p>
+                    <a href="#" class="btn">Buy Now</a>
+                </div>
+                <div class="product">
+                    <img src="C:\Users\USER 24\Downloads\headphones-8021022_1280.jpg" alt="Product 3">
+                    <h3>Headphones</h3>
+                    <p>$199.99</p>
+                    <a href="#" class="btn">Buy Now</a>
+                </div>
+`               <div class="product">
+                <img src="C:\Users\USER 24\Pictures\Camera Roll\WIN_20250221_13_14_50_Pro.jpg" alt="Product 4">
+                <p>$6.99</p>
+                <a href="#" class="btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Marketplace. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
