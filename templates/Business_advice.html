@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Advisor</title>
+    <link rel="stylesheet" href="../static/css/result.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <div class="container">
+        <h1>Business Advisor</h1>
+        <p>Enter your available capital, and we will suggest a suitable business.</p>
+
+        <form action="/Business_advice" method="post"> <!-- Change action to the correct route -->
+            <input type="number" name="capital" placeholder="Enter your capital ($)" required>
+            <button type="submit">Find Business</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
