@@ -1,0 +1,132 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    transition: background-image 0.5s ease; /* Smooth transition for background image */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #002147; /* Dark Blue */
+    color: white;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    text-align: center;
+    padding: 10px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Sidebar Navigation */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    flex: 1;
+}
+
+.sidebar-menu li {
+    margin: 5px 0;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    display: block;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.sidebar-menu a:hover {
+    background: gold;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Main Content */
+.container {
+    margin-left: 270px; /* Offset to accommodate sidebar */
+    padding: 40px;
+    flex: 1;
+    text-align: center;
+}
+
+.dashboard-image {
+    width: 120px;
+    display: block;
+    margin: auto;
+}
+
+h1 {
+    font-size: 28px;
+    color: #002147;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.theme-switcher button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.theme-switcher button:hover {
+    transform: scale(1.1);
+}
+
+/* Video Background */
+.dashboard-video {
+    width: 90%;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #002147;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.logout-btn {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}

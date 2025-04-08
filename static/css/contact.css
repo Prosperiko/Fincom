@@ -1,0 +1,136 @@
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* Navbar */
+header {
+    background-color: #222;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+}
+
+/* Contact Section */
+#contact {
+    background-color: #1a1a1a;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+#contact h2 {
+    margin-top: 0;
+    font-size: 26px;
+    color: #ffcc00;
+}
+
+.participant-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.participant-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Make input fields readonly (non-editable) */
+.participant-form input[readonly] {
+    background-color: #333;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffcc00, #ffcc00);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(45deg, #ffcc00, #ffcc00);
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+    background-color: #222;
+}
+
+footer p {
+    margin: 0;
+    color: #ccc;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #008cba;
+}
+
+/* Background Slideshow */
+.background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    animation: slide 10s infinite;
+}
+
+@keyframes slide {
+    0% { background-image: url('../img/slide1.png'); }
+    25% { background-image: url('../img/slide2.jpg'); }
+    50% { background-image: url('../img/slide4.webp'); }
+    75% { background-image: url('../img/slide4.jpg'); }
+    100% { background-image: url('../img/slide1.png'); }
+}

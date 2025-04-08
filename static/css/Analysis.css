@@ -1,0 +1,181 @@
+:root {
+  --primary-color: #002147; /* Dark Blue */
+  --secondary-color: gold; /* Gold */
+  --accent-color: rgba(255, 255, 255, 0.441);
+  --background-color: #f8f8f8; /* Light Gray */
+  --hover-color: #ffcc00; /* Lighter Gold */
+  --text-color: #002147;
+  --btn-text-color: #002147;
+  --btn-bg-color: gold;
+  --btn-hover-bg: #645f4b;
+}
+
+body {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  color: var(--secondary-color);
+  font-family: "Poppins", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Full-Screen Container for Content */
+.container {
+  width: 100vw;
+  min-height: 100vh; /* Changed to min-height for better content visibility */
+  padding: 40px;
+  background: var(--accent-color);
+  border-radius: 0;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* Ensure content is above diamonds */
+}
+
+/* Headings */
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #002147; /* Classic Navy Blue */
+}
+
+h2 {
+  font-size: 2em;
+  margin: 20px 0 10px;
+  color: var(--btn-bg-color); /* Classic Gold */
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Input Fields */
+input, select, textarea {
+  width: 100%;
+  padding: 16px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #444;
+  color: #FFD700;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  background-color: #555;
+  outline: none;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #002147, #0056b3);
+  color: white;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  background: linear-gradient(90deg, #0056b3, #002147);
+  transform: scale(1.05);
+}
+
+/* Flash Messages */
+.flash-message {
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.flash-success {
+  background-color: #4caf50;
+}
+
+.flash-error {
+  background-color: #f44336;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Diamond Effect */
+.diamond {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+  animation: sparkle 2s infinite alternate;
+  z-index: 0; /* Ensure diamonds are below content */
+}
+
+.diamond.orange {
+  background: rgba(255, 165, 0, 0.5); /* Orange diamond */
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+}
+
+/* Positioning Diamonds */
+.diamond:nth-child(1) { top: 10%; left: 10%; }
+.diamond:nth-child(2) { top: 20%; right: 15%; }
+.diamond:nth-child(3) { bottom: 15%; left: 20%; }
+.diamond:nth-child(4) { bottom: 10%; right: 10%; }
+.diamond:nth-child(5) { top: 50%; left: 40%; }
+.diamond:nth-child(6) { top: 30%; left: 70%; }
+.diamond:nth-child(7) { top: 60%; right: 20%; }
+.diamond:nth-child(8) { bottom: 20%; left: 50%; }
+.diamond:nth-child(9) { bottom: 30%; right: 30%; }
+.diamond:nth-child(10) { top: 80%; left: 15%; }
+
+/* Sparkle Animation */
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}

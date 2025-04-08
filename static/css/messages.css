@@ -1,0 +1,121 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Chat Container */
+h2 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.messages {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    height: 400px; /* Fixed height for scrolling */
+    transition: height 0.3s; /* Smooth height transition */
+}
+
+/* Message Styles */
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.message strong {
+    display: block;
+    font-weight: bold;
+    color: #007bff; /* Username color */
+}
+
+.message.sent {
+    background-color: #e1ffc7; /* Light green for sent messages */
+    text-align: right; /* Align sent messages to the right */
+}
+
+.message.received {
+    background-color: #f1f1f1; /* Light gray for received messages */
+    text-align: left; /* Align received messages to the left */
+}
+
+/* Hover Effect for Messages */
+.message:hover {
+    background-color: #f0f0f0; /* Slightly darker on hover */
+}
+
+/* Message Status */
+.status {
+    font-size: 0.8em;
+    color: #888; /* Gray color for status */
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+/* Input Form Styles */
+form {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Loading Indicator Styles */
+.loading {
+    display: none; /* Hidden by default */
+    font-size: 0.9em;
+    color: gray;
+    margin-left: 10px; /* Space between button and loading text */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .messages {
+        height: 300px; /* Adjust height for smaller screens */
+    }
+
+    form {
+        flex-direction: column; /* Stack input and button on small screens */
+    }
+
+    input[type="text"] {
+        margin-right: 0; /* Remove margin on small screens */
+        margin-bottom: 10px; /* Add margin below input */
+    }
+}

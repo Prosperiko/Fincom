@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text color */
+    margin: 0;
+    padding: 0;
+}
+
+#chat {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #1e1e1e; /* Dark gray background for the chat box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ff9800; /* Orange color for the title */
+    animation: fadeIn 1s ease-in-out; /* Animation for heading */
+}
+
+p {
+    text-align: center;
+    color: #ffffff; /* White text for paragraph */
+    animation: slideIn 1s ease-in-out; /* Animation for paragraph */
+    animation-delay: 0.5s; /* Delay for the paragraph */
+    margin-bottom: 20px; /* Space below the paragraph */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#messages {
+    max-height: 400px;
+    overflow-y: auto; /* Scrollable messages */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #444; /* Dark border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #2a2a2a; /* Darker gray background for messages */
+}
+
+.message {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 5px; /* Rounded corners for messages */
+}
+
+.user {
+    background-color: #ff9800; /* Orange for user messages */
+    text-align: right; /* Align user messages to the right */
+}
+
+.bot {
+    background-color: #333; /* Dark gray for bot messages */
+    text-align: left; /* Align bot messages to the left */
+}
+
+input[type="text"] {
+    width: calc(100% - 100px); /* Full width minus button width */
+    padding: 10px;
+    border: 1px solid #444; /* Dark border */
+    border-radius: 5px; /* Rounded corners */
+    margin-right: 10px; /* Space between input and button */
+    background-color: #1e1e1e; /* Dark background for input */
+    color: #ffffff; /* White text */
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    background-color: #ff9800; /* Orange button */
+    color: white; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #e68a00; /* Darker orange on hover */
+}/* Align

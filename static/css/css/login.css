@@ -1,0 +1,189 @@
+/* ================= General Styles ================= */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 90px; /* Increased padding for better spacing */
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
+
+/* ================= Header ================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #222;
+    padding: 15px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+
+/* Center content inside header */
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Logo */
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* Navbar Title */
+header h1 {
+    font-size: 24px;
+    color: #f4b400;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* ================= Color Switcher ================= */
+.color-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.color-switcher button {
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+/* ================= Login Container ================= */
+.login-container {
+    width: 350px;
+    margin: 50px auto; /* Added more margin for better spacing */
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ================= Input Fields ================= */
+.input-box {
+    margin: 12px 0;
+    width: 100%;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* ================= Login Button ================= */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: #f4b400;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #222;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: #ffcc00;
+}
+
+/* ================= Login Link ================= */
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #f4b400;
+    text-decoration: none;
+}
+
+/* ================= Image Container ================= */
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; /* Increased spacing */
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto; /* Centering */
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Bottom Image */
+.bottom-image {
+    width: 80%; /* Slightly reduced width for better alignment */
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ================= Responsive Adjustments ================= */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .image-container {
+        grid-template-columns: 1fr;
+    }
+
+    .login-container {
+        width: 90%;
+    }
+}
+
+/* ================= Background Slideshow ================= */
+.background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    animation: slide 10s infinite;
+}
+
+@keyframes slide {
+    0% { background-image: url('../img/slide1.png'); }
+    25% { background-image: url('../img/slide2.jpg'); }
+    50% { background-image: url('../img/slide4.webp'); }
+    75% { background-image: url('../img/slide4.jpg'); }
+    100% { background-image: url('../img/slide1.png'); }
+}

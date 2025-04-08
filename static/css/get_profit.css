@@ -1,0 +1,209 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Off-white background */
+    color: #002147; /* Dark Blue text */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+/* Navbar */
+header {
+    background-color: #002147; /* Dark Blue */
+    padding: 20px 0;
+    color: white;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* Navbar Links */
+header h1 {
+    font-size: 24px;
+    color: gold; /* Gold header */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: gold;
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 0;
+    background: linear-gradient(to right, #002147, #004080);
+    text-align: center;
+    color: white;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: gold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: gold;
+    color: #002147;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05);
+}
+
+/* Features Section */
+.features {
+    padding: 60px 0;
+    background-color: #e6e6e6; /* Light Gray */
+}
+
+.features h2 {
+    margin-bottom: 30px;
+    color: #002147;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature:hover {
+    transform: scale(1.05);
+}
+
+/* Feature Images */
+.feature img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Call-to-Action */
+.cta {
+    padding: 80px 0;
+    background: linear-gradient(to right, #004080, #002147);
+    text-align: center;
+    color: white;
+}
+
+.cta h2 {
+    margin-bottom: 20px;
+    color: gold;
+}
+
+/* Image Gallery */
+.image-gallery {
+    padding: 60px 0;
+    background-color: #f8f8f8;
+}
+
+.image-gallery .gallery-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.gallery-item img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: #002147;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+/* Color Switcher */
+.color-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.color-switcher button {
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.red { background-color: #ff4c4c; }
+.blue { background-color: #004080; }
+.green { background-color: #4caf50; }
+.yellow { background-color: gold; }
