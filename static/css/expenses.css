@@ -232,7 +232,17 @@ label {
 .slideshow-background img:first-child {
   opacity: 1;
 }
-
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Start from the very left of the page */
+  background-color: var(--color-medium-grey);
+  width: 100%; /* Cover the entire width of the page */
+  padding: 1px;
+  text-align: center;
+  color: var(--color-white);
+  box-shadow: 0 -2px 5px var(--shadow-color);
+}
 /* Animation for slideshow */
 @keyframes slideshow {
   0% { opacity: 0; }

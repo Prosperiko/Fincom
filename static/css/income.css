@@ -134,3 +134,15 @@ button:hover {
 label {
   font-weight: bold;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Start from the very left of the page */
+  background-color: var(--color-medium-grey);
+  width: 100%; /* Cover the entire width of the page */
+  padding: 1px;
+  text-align: center;
+  color: var(--color-white);
+  box-shadow: 0 -2px 5px var(--shadow-color);
+}
