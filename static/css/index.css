@@ -10,12 +10,12 @@
     --shadow-color: rgba(0, 33, 71, 0.4);
 
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue),var(--color-gold));
-    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+    --color-accent: linear-gradient(to left, var(--color-navy), var(--highlight-gold));
 }
 
 /* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Pacifico',sans-serif;
     margin: 0;
     padding: 0;
     background: var(--background-gradient);
@@ -66,6 +66,7 @@ header .container {
 /* Navbar Links */
 header h1 {
     font-size: 24px;
+    font-family: Raleway, sans-serif;
     color: var(--highlight-gold);
 }
 
@@ -81,7 +82,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: var(--color-navy);
+    color: var(--highlight-gold);
     text-decoration: none;
     font-size: 16px;
     transition: color 3s;
@@ -131,6 +132,7 @@ nav ul li a:hover {
 
 .features h2 {
     margin-bottom: 30px;
+    color: var(--color-gold)
 }
 
 /* Feature Grid */
@@ -253,4 +255,34 @@ nav ul li a:hover {
     border: 2px solid var(--highlight-gold);
 }
 
-/* Testimonial Text */
+/* Social Media Section */
+footer {
+    background-color: var(--color-accent);
+    padding: 70px 0; /* increase top & bottom padding */
+    text-align: center;
+    color: var(--color-white);
+    font-size: 18px; /* optional: increase text size */
+}
+footer .social-media {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+footer .social-media p {
+    font-size: 16px;
+    color: var(--color-white);
+    margin-bottom: 10px;
+}
+
+footer .social-icon {
+    color: var(--color-gold);
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icon:hover {
+    color: var(--highlight-gold);
+    transform: scale(1.2);
+}
