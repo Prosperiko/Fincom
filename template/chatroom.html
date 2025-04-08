@@ -1,0 +1,101 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111; /* Set background color to black */
+            margin: 0;
+            padding: 0;
+            color: white; /* Set default text color to white for better contrast */
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        #messages {
+            margin: 20px;
+            padding: 10px;
+            background-color: #222; /* Darker background for the messages area */
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        
+        /* Message styles */
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%; /* Limit the width of messages */
+            clear: both; /* Ensure messages don't float */
+        }
+        
+        /* Sender message style */
+        .message.sender {
+            background-color: orange; /* Sender messages in orange */
+            color: black; /* Text color for sender messages */
+            align-self: flex-end; /* Align sender messages to the right */
+        }
+        
+        /* Receiver message style */
+        .message.receiver {
+            background-color: blue; /* Receiver messages in blue */
+            color: white; /* Text color for receiver messages */
+            align-self: flex-start; /* Align receiver messages to the left */
+        }
+        
+        #message_input {
+            margin: 20px;
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        #send_button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat Room for {{ username }}</h1>
+    <div id="messages"></div>
+    <input id="message_input" type="text" placeholder="Type your message here...">
+    <button id="send_button">Send</button>
+
+    <script>
+        const socket = io();
+    
+        // Send message on button click
+        $('#send_button').click(function() {
+            const message = $('#message_input').val();
+            const username = "{{ username }}"; // Assuming you have the username available
+            socket.emit('send_message', { message: message, sender: username });
+            $('#message_input').val(''); // Clear input
+        });
+    
+        // Receive message
+        socket.on('receive_message', function(data) {
+            const messageClass = data.sender === "{{ username }}" ? 'sender' : 'receiver'; // Determine message class
+            $('#messages').append('<div class="message ' + messageClass + '">' + data.message + '</div>');
+            $('#messages').scrollTop($('#messages')[0].scrollHeight); // Auto-scroll to the bottom
+        });
+    </script>
+</body>
+</html>

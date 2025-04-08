@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fincom</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../static/img/logo.webp" alt="Fincom Logo">
+            </div>
+            <h1>Fincom</h1>
+            <nav>
+                <ul>
+                    <li><a href="about">About</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Track your Finance</h2>
+            <p>Join millions of users and spend wisely</p>
+            <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+            <a href="{{ url_for('login') }}" class="btn">Login</a>
+
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="image-gallery">
+        <div class="container">
+            <p>FinCom is designed to empower you with simple, yet powerful tools to track your daily expenses, identify wasteful spending, and create a smarter, more balanced financial life.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../static/img/finance-16.jpg" alt="Finance Dashboard">
+                </div>
+                <div class="gallery-item">
+                    <img src="../static/img/finance-02.jpg" alt="Expense Chart">
+                </div>
+                <div class="gallery-item">
+                    <img src="../static/img/mike.png" alt="User Analytics">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="testimonials">
+        <h2> FeedBacks From Our Users</h2>
+        <div class="testimonial-container">
+            
+            <div class="testimonial">
+                <img src="../static/img/one.webp" alt="User 1">
+                <div class="text">
+                    <h3>Olatunji Sandra</h3>
+                    <p class="role">Software Engineer</p>
+                    <p>"This service completely changed my workflow. Highly recommended!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="../static/img/two.webp" alt="User 2">
+                <div class="text">
+                    <h3>Jane Smith</h3>
+                    <p class="role">Product Manager</p>
+                    <p>"Amazing experience! I can't imagine going back to the old way."</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="../static/img/three.webp" alt="User 3">
+                <div class="text">
+                    <h3>Anita Johnson</h3>
+                    <p class="role">Freelancer</p>
+                    <p>"Simple, efficient, and powerful. Definitely worth trying!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user4.jpg" alt="User 4">
+                <div class="text">
+                    <h3>Lisa Brown</h3>
+                    <p class="role">UX Designer</p>
+                    <p>"An intuitive platform that has helped my team collaborate better!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user5.jpg" alt="User 5">
+                <div class="text">
+                    <h3>Chris Evans</h3>
+                    <p class="role">Entrepreneur</p>
+                    <p>"Highly effective and well-designed. The team support is great!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user6.jpg" alt="User 6">
+                <div class="text">
+                    <h3>Emma Wilson</h3>
+                    <p class="role">Data Scientist</p>
+                    <p>"Great tool for analysis. I use it daily in my workflow."</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user7.jpg" alt="User 7">
+                <div class="text">
+                    <h3>Michael Scott</h3>
+                    <p class="role">Business Analyst</p>
+                    <p>"Easy to use and extremely efficient. Highly recommended!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user8.jpg" alt="User 8">
+                <div class="text">
+                    <h3>Olivia Green</h3>
+                    <p class="role">Digital Marketer</p>
+                    <p>"A must-have tool for any marketing professional."</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user9.jpg" alt="User 9">
+                <div class="text">
+                    <h3>Robert King</h3>
+                    <p class="role">Project Manager</p>
+                    <p>"Helped us streamline our projects effectively!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="user10.jpg" alt="User 10">
+                <div class="text">
+                    <h3>Sarah Lee</h3>
+                    <p class="role">Consultant</p>
+                    <p>"Innovative and powerful. I use it for all my projects!"</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose Our Platform?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <img src="../static/img/graph2.jpg" alt="Tracking Finance">
+                    <h3>Helps in tracking your financial status</h3>
+                    <p>Our platform is reliable and helps you improve financially.</p>
+                </div>
+                <div class="feature">
+                    <img src="../static/img/graph3.jpg" alt="Fast Development">
+                    <h3>Fast Development</h3>
+                    <p>Start with a small amount and watch it grow.</p>
+                </div>
+                
+                <div class="feature">
+                    <img src="../static/img/graph1.jpg" alt="Smart Insights">
+                    <h3>Smart Insights</h3>
+                    <p>Get AI-powered financial insights to optimize your spending.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Start Your Finance Tracking Today</h2>
+            <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+        </div>
+    </footer>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            document.querySelectorAll('.feature').forEach(feature => {
+                feature.style.backgroundColor = color;
+            });
+        }
+    </script>
+
+</body>
+</html>

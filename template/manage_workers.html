@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Workers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffa500; /* Orange */
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffa500; /* Orange */
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ffa500; /* Orange */
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #000;
+            color: #fff;
+        }
+
+        button {
+            background-color: #ffa500; /* Orange */
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #e69500; /* Darker Orange */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ffa500; /* Orange */
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #ffa500; /* Orange */
+            color: #000;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #333; /* Dark Gray */
+        }
+
+        table tr:hover {
+            background-color: #444; /* Slightly Lighter Gray */
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #ffa500; /* Orange */
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Workers</h1>
+
+        <!-- Form to Invite a Worker -->
+        <form method="POST" action="/invite_worker">
+            <label for="email">Worker Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter worker's email" required>
+            <button type="submit">Send Invitation</button>
+        </form>
+
+        <h2>Current Workers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Worker Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for worker in workers %}
+                <tr>
+                    <td>{{ worker['worker_name'] }}</td>
+                    <td>{{ worker['email'] }}</td>
+                    <td>{{ worker['status'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="/home" class="back-link">Back to Dashboard</a>
+    </div>
+</body>
+</html>

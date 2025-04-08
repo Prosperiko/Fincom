@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CryptoWorld</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+
+</head>
+<body>
+    
+    <!-- Background Slideshow -->
+    <div class="background-slideshow"></div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../static/img/logo.webp" alt="Fincom Logo">
+            </div>
+        </div>
+    </header>
+    <!-- Color Switcher -->
+    <div class="color-switcher">
+        <button class="red" onclick="changeColor('#ff4c4c')"></button>
+        <button class="blue" onclick="changeColor('#4c9aff')"></button>
+        <button class="green" onclick="changeColor('#4caf50')"></button>
+        <button class="yellow" onclick="changeColor('#ffcc00')"></button>
+    </div>
+
+    <!-- Image Containers -->
+   
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <h2>Welcome back</h2>
+        <p>Sign in to your account</p>
+        <form action="/login" method="POST">
+            <div class="input-box">
+                <input type="username" id="username" name="username" placeholder="username" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p>Forgot password<a href="{{ url_for('forgot_password') }}" class="btn">forgot_password</a></p>
+        <p>don't have  an account? <a href="{{ url_for('signup') }}" class="btn">signup</a></p>
+    </div>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            let textColor = (color === "#111" || color === "#222" || color === "#181818") ? "white" : "black";
+
+            document.querySelectorAll('body, .login-container').forEach(element => {
+                element.style.backgroundColor = color;
+                element.style.color = textColor;
+            });
+
+            document.querySelectorAll(".login-btn").forEach(btn => {
+                btn.style.backgroundColor = textColor === "white" ? "#f4b400" : "#222";
+                btn.style.color = textColor;
+            });
+
+            document.querySelectorAll(".login-link a").forEach(link => {
+                link.style.color = textColor === "white" ? "#f4b400" : "#222";
+            });
+        }
+    </script>
+
+</body>
+</html>

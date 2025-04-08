@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income vs Expenses Overview</title>
+    <link rel="stylesheet" href="../static/css/incomeOverview.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Additional CSS */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .chart-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #financialAdvice {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Financial Overview</h1>
+    <section class="chart-container">
+        <h2>Income vs Expenses Comparison for <span id="username"></span></h2>
+        <canvas id="incomeExpensesChart"></canvas>
+        <div id="financialAdvice"></div>
+    </section>
+
+    <script>
+        // Fetch user financial data
+        async function fetchUserFinancials() {
+            try {
+                const response = await fetch('/api/user_financials');
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById("financialAdvice").innerHTML = `<p style="color: red;">Error loading financial data.</p>`;
+                return null;
+            }
+        }
+
+        // Draw the financial chart
+        async function drawIncomeExpensesChart() {
+            const data = await fetchUserFinancials();
+            if (!data) return;
+
+            document.getElementById('username').textContent = data.username;
+
+            const categories = ['Cash Balance', 'Card Balance'];
+            const incomeValues = [data.cash_balance, data.card_balance];
+            const expenseValues = [data.total_expenses / 2, data.total_expenses / 2]; // Split expenses equally for visualization
+
+            const ctx = document.getElementById('incomeExpensesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [
+                        {
+                            label: 'Income',
+                            data: incomeValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        },
+                        {
+                            label: 'Expenses',
+                            data: expenseValues,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (Naira)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Provide financial advice
+            provideFinancialAdvice(data);
+        }
+
+        function provideFinancialAdvice(data) {
+            const adviceElement = document.getElementById('financialAdvice');
+            let advice = '';
+
+            if (data.total_income > data.total_expenses) {
+                advice = "Great job! You're earning more than you're spending. Keep saving!";
+            } else if (data.total_income < data.total_expenses) {
+                advice = "Warning! You're spending more than you're earning. Consider reviewing your expenses.";
+            } else {
+                advice = "You're breaking even. It's a good time to start saving or investing!";
+            }
+
+            adviceElement.innerHTML = `<p>${advice}</p>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', drawIncomeExpensesChart);
+    </script>
+
+</body>
+</html>

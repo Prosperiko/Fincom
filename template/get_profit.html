@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profit</title>
+    <link rel="stylesheet" href="../static/css/get_profit.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Your Profit</h1>
+        
+        {% if total_profit %}
+            <p class="profit">Total Profit: {{ total_profit }}</p>
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %}
+
+        <a href="{{ url_for('home1') }}" class="bank-btn">Bank</a>
+    </div>
+
+
+</body>
+</html>

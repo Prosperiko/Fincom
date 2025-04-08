@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Recommendations</title>
+    <link rel="stylesheet" href="../static/css/result.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <div class="container">
+        <h1>Business Suggestions</h1>
+        <h2>{{ category }}</h2>
+        
+        <ul>
+            {% for business, video in suggestions %}
+                <li>
+                    <p>{{ business }}</p>
+                    <video width="320" height="200" controls>
+                        <source src="{{ url_for('static', filename='videos/' + video) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="/home1">Go Back</a>
+    </div>
+</body>
+</html>

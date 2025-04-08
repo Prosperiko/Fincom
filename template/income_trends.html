@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Overview</title>
+    <link rel="stylesheet" href="../static/css/incomeOverview.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Additional CSS to control the size of the chart */
+        #incomeChart {
+            max-width: 400px; /* Set a maximum width for the chart */
+            max-height: 300px; /* Set a maximum height for the chart */
+            width: 100%; /* Make it responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Income Overview</h1>
+
+    <!-- Income Summary Section -->
+    <section class="income-summary">
+        <h2>Monthly Income Summary</h2>
+        <p>Total Income Recorded: <span id="totalIncome">0</span> Naira</p>
+        <p>Number of Income Sources: <span id="incomeSources">0</span></p>
+    </section>
+
+    <!-- Income Trends Chart Section -->
+    <section class="chart-container">
+        <h2>Income Trends</h2>
+        <canvas id="incomeChart"></canvas> <!-- Chart canvas -->
+    </section>
+
+    <!-- Detailed Income Breakdown Table -->
+    <section class="income-breakdown">
+        <h2>Detailed Income Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount (Naira)</th>
+                </tr>
+            </thead>
+            <tbody id="incomeTable">
+                <tr>
+                    <td colspan="3" style="text-align: center;">No income recorded yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Navigation to Dashboard -->
+    <div style="text-align: center;">
+        <a href="Analysis" class="btn" style="color: orange;">← Back to Analysis</a>
+    </div>
+
+    <script>
+        async function fetchIncomeTrends() {
+            const response = await fetch('/api/income_trends');
+            return await response.json();
+        }
+
+        async function fetchIncomeDetails() {
+            const response = await fetch('/api/income_details');
+            return await response.json();
+        }
+
+
+        
+
+        async function drawIncomeChart() {
+            const incomeData = await fetchIncomeTrends();
+            const labels = incomeData.map(data => data.date); // Assuming date is formatted correctly
+            const dataValues = incomeData.map(data => data.total_amount);
+
+            const ctx = document.getElementById('incomeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Income Amount',
+                        data: dataValues,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        async function populateIncomeOverview() {
+            const incomeDetails = await fetchIncomeDetails();
+            if (incomeDetails.length === 0) {
+                alert('No income data found!');
+                return;
+            }
+
+            // Calculate total and populate summary
+            const totalIncome = incomeDetails.reduce((sum, item) => sum + item.amount, 0);
+            document.getElementById('totalIncome').textContent = totalIncome;
+            document.getElementById('incomeSources').textContent = incomeDetails.length;
+
+            // Populate table
+            const incomeTable = document.getElementById('incomeTable');
+            incomeTable.innerHTML = incomeDetails.map(item => {
+                return `<tr>
+                            <td>${item.created_at}</td> <!-- Displaying created_at under Date column -->
+                            <td>${item.category}</td>
+                            <td>${item.amount} Naira</td>
+                        </tr>`;
+            }).join('');
+
+            // Draw the income chart
+            drawIncomeChart();
+        }
+
+        // Initialize the income overview
+        document.addEventListener('DOMContentLoaded', populateIncomeOverview);
+    </script>
+</body>
+</html>

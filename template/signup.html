@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fincom - Sign Up</title>
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow"></div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="../static/img/logo.webp" alt="Fincom Logo">
+            </div>
+        </div>
+    </header>
+
+    <!-- Signup Form -->
+    <div class="signup-container">
+        <h1>Fincom</h1>
+        <p>Create an Account</p>
+        <form id="signupForm" action="{{ url_for('signup') }}" method="POST" onsubmit="return validateForm()">
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username or Company username" required aria-label="Username or Company username">
+            </div>
+            <div class="input-box">
+                <input type="text" name="fullname" placeholder="FullName or Company Name" required aria-label="FullName or Company Name">
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="profession" placeholder="Profession or Industry" required aria-label="Profession or Industry">
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Email Address" required aria-label="Email">
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="Password" required aria-label="Password">
+            </div>
+            <div class="input-box">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required aria-label="Confirm Password">
+            </div>
+            <p class="error-message" id="error-message">Passwords do not match!</p>
+            <div class="input-box">
+                <select name="nationality" required>
+                    <option value="" disabled selected>Select Nationality</option>
+                    <option value="American">American</option>
+                    <option value="British">British</option>
+                    <option value="Canadian">Canadian</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Nigerian">Nigerian</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+           
+            <div class="customer-type">
+        
+                <input type="radio" id="company" name="customer_type" value="company" required onclick="toggleWorkerInput()">
+                <label for="company">Company</label>
+                <input type="radio" id="individual" name="customer_type" value="individual" required onclick="toggleWorkerInput()">
+                <label for="individual">Individual</label>
+            </div>
+
+            <!-- Number of Workers Dropdown -->
+            <div class="input-box" id="workers-input" style="display: none;">
+                <select name="number_of_workers" aria-label="Number of Workers">
+                    <option value="" disabled selected>Select Number of Workers</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}" class="btn">Login</a></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            if (!passwordRegex.test(password)) {
+                errorMessage.innerText = "Password must be at least 8 characters, include a number and a special character!";
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.innerText = "Passwords do not match!";
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            errorMessage.style.display = 'none';
+            return true;
+        }
+
+        function toggleWorkerInput() {
+            const companyRadio = document.getElementById('company');
+            const workersInput = document.getElementById('workers-input');
+
+            if (companyRadio.checked) {
+                workersInput.style.display = 'block';
+            } else {
+                workersInput.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

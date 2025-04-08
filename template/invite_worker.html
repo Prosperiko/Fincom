@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Worker</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <div class="container">
+        <h1>Invite a Worker</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/invite_worker" method="POST">
+            <label for="email">Worker's Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Send Invitation</button>
+        </form>
+
+        <a href="/manage_workers">Back to Manage Workers</a>
+    </div>
+</body>
+</html>

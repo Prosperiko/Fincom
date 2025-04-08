@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Marketplace Z</title>
+    <link rel="stylesheet" href="../static/css/about.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* Navbar */
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #ffeb3b;
+        }
+
+        /* Signup Container */
+        .signup-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .signup-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffeb3b;
+        }
+
+        /* Input Fields */
+        .input-box {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .input-box input {
+            width: 90%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* Signup Button */
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ffeb3b;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .signup-btn:hover {
+            background: #ffc107;
+        }
+
+        /* Login Link */
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .profile-container h3 {
+            margin-bottom: 10px;
+            color: #ffeb3b;
+            font-size: 20px;
+        }
+
+        /* Inventors Story */
+        .inventors-story {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+            font-style: italic;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Profile Grid */
+        .profile-grid {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 150px;
+            background-color: white;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <h1>Marketplace Z</h1>
+    </header>
+
+    <!-- Signup Form -->
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+
+        <form action="signup.php" method="POST">
+            <div class="input-box">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+
+    <!-- Profile Images Box -->
+    <div class="profile-container">
+        <h3>Meet Our Inventors</h3>
+        <p class="inventors-story">
+            Our inventors are visionaries dedicated to revolutionizing the marketplace. 
+            With diverse expertise in technology and innovation, they strive to create 
+            seamless and efficient solutions for buyers and sellers worldwide.
+        </p>
+        <div class="profile-grid">
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Pictures/Camera Roll/WIN_20250225_08_32_57_Pro.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Desktop/WhatsApp Image 2025-02-25 at 09.47.23_6f339929.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Desktop/WhatsApp Image 2025-02-25 at 09.40.59_126a3712.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Pictures/Profile4.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Pictures/Profile5.jpg');"></div>
+            <div class="profile-image" style="background-image: url('C:/Users/USER 24/Pictures/Profile6.jpg');"></div>
+        </div>
+    </div>
+
+</body>
+</html>

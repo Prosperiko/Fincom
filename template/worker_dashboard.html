@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting Dashboard</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+    <div class="container">
+        <h1>Accounting Dashboard</h1>
+        <div class="theme-switcher">
+            <button class="red" onclick="changeTheme('#ff4c4c')"></button>
+            <button class="blue" onclick="changeTheme('#4c9aff')"></button>
+            <button class="green" onclick="changeTheme('#4caf50')"></button>
+            <button class="yellow" onclick="changeTheme('#ffcc00')"></button>
+            <button class="purple" onclick="changeTheme('#800080')"></button>
+            <button class="pink" onclick="changeTheme('#ff69b4')"></button>
+            <button class="gray" onclick="changeTheme('#808080')"></button>
+            <button class="teal" onclick="changeTheme('#008080')"></button>
+        </div>
+
+        <div class="company-info">
+            <h2>Company Information</h2>
+            <p><strong>Company Name:</strong> {{ company[0] }}</p>
+            <p><strong>Email:</strong> {{ company[1] }}</p>
+            <p><strong>Profession:</strong> {{ company[2] }}</p>
+        </div>
+
+        <h2>What would you like to do today?</h2>
+        <div class="nav-buttons">
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/bank.jpg') }})`); window.location.href='/expenses'">Add Expense</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='cash.jpg') }})`); window.location.href='/get_profit'">Profit</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/graph1.jpg') }})`); window.location.href='/income'">Add Income</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/analysis-bg.jpg') }})`); window.location.href='/Analysis'">Analysis</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/invite.jpg') }})`); window.location.href='/invite_worker'">Add a user</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/invite.jpg') }})`); window.location.href='/manage_workers'">Manage workers</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/chatbot-bg.jpg') }})`); window.location.href='/chatbot'">Talk to our AI</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/community-bg.jpg') }})`); window.location.href='/community'">Talk to Millionaires</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/community-bg.jpg') }})`); window.location.href='/budget'">Create a budget</button>
+            <button onclick="changeBackground(`url({{ url_for('static', filename='img/community-bg.jpg') }})`); window.location.href='/worker_dashboard'">View Company Info</button>
+        </div>
+    </div>
+
+    <script>
+        function changeTheme(color) {
+            document.body.style.backgroundColor = color;
+            document.body.style.color = (color === "#111" || color === "#800080") ? "white" : "black";
+        }
+
+        function changeBackground(imageUrl) {
+            document.body.style.backgroundImage = imageUrl; // Change the background image
+        }
+
+        // Slideshow animation function
+        function startSlideshow(slideshowClass) {
+            let slides = document.querySelectorAll(`.${slideshowClass} img`);
+            let index = 0;
+
+            function showNextSlide() {
+                slides.forEach(slide => slide.style.opacity = "0");
+                slides[index].style.opacity = "1";
+                index = (index + 1) % slides.length;
+            }
+
+            setInterval(showNextSlide, 3000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            startSlideshow("left-slideshow");
+            startSlideshow("right-slideshow");
+        });
+    </script>
+
+</body>
+<footer>
+    <p>&copy; 2025 Fincom. All Rights Reserved.</p>
+    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+</footer>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <link rel="stylesheet" href="../static/css/notification.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+
+    <button id="notify-btn">Show Notification</button>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}  
+    {% endwith %}
+
+    <script>
+        document.getElementById("notify-btn").addEventListener("click", function() {
+            let notification = document.getElementById("notification");
+            notification.classList.add("show");
+
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 4000);
+        });
+
+        document.querySelector(".close-btn").addEventListener("click", function() {
+            document.getElementById("notification").classList.remove("show");
+        });
+    </script>
+
+</body>
+</html>
