@@ -12,7 +12,7 @@
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 body {
-  background-color: #F5F5F5; /* Light Gray */
+  background-color: var(--color-navy); /* Light Gray */
   color: #002147; /* Navy Blue */
   font-family: Arial, sans-serif;
 }
@@ -72,18 +72,23 @@ body {
   max-width: 500px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #FFFFFF; /* White */
+  background-color: var(--color-navy); /* White */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--color-gold);
 }
-
+h2 {
+  font-size: 24px;
+  color: var(--color-gold); /* Gold */
+  text-align: center;
+  margin-bottom: 20px;
+}
 input, select, textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: none;
   border-radius: 4px;
-  background-color: #FFFFFF; /* White */
+  background-color: var(--color-white); /* White */
   color: #002147; /* Navy Blue */
 }
 
