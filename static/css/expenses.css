@@ -11,6 +11,18 @@
   --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-light-grey), var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
+/* Main Container */
+/* Main Container */
+.container {
+  max-width: 350px; /* Reduced width to make it smaller */
+  margin: 15px auto; /* Reduced vertical margin for a more compact fit */
+  padding: 20px; /* Reduced padding for a smaller layout */
+  background-color: var(--color-navy); /* Navy background */
+  border-radius: 8px; /* Slightly smaller border radius */
+  box-shadow: 0 3px 6px var(--color-gold); /* Adjusted shadow for a smaller look */
+  max-height: 100vh; /* Limit the height to 80% of the viewport */
+  overflow-y: auto; /* Add scrolling if content exceeds the height */
+}
 /* General Page Style */
 body {
   background-color: var(--color-navy); /* Updated to Gray */
@@ -72,14 +84,8 @@ body {
   color: var(--color-navy);
 }
 /* Main Container */
-.container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: var(--color-navy); /* White Background */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px var(--color-gold);
-}
+
+
 h2 {
   font-size: 24px;
   color: var(--color-gold); /* Gold */
@@ -88,15 +94,25 @@ h2 {
 }
 /* Inputs and Select */
 input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  width: 80%; /* Reduced width for a smaller fit */
+  padding: 8px; /* Reduced padding for compactness */
+  margin: 3px 0; /* Reduced margin for less spacing between fields */
   border: 1px solid var(--color-navy); /* Navy Blue Border */
   border-radius: 4px;
   background-color: var(--color-white);
   color: var(--color-navy);
 }
-
+#user-input {
+  width: 80%; /* Reduce the width to make it smaller */
+  padding: 6px; /* Reduce padding for compactness */
+  font-size: 10px; /* Reduce font size */
+  margin: 5px 0; /* Reduce margin for less spacing */
+  border: 1px solid var(--color-navy); /* Navy Blue Border */
+  border-radius: 4px; /* Keep a small border radius */
+  background-color: var(--color-white); /* White background */
+  color: var(--color-navy); /* Navy text color */
+  box-shadow: 0 1px 3px var(--shadow-color); /* Add a subtle shadow */
+}
 /* Buttons */
 button {
   background-color: #FFD700; /* Gold */

@@ -17,33 +17,61 @@
             <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
             <h2>Fincom</h2>
         </div>
-        
         <ul class="sidebar-menu">
             <li><a href="/expenses" onclick="changeBackground('img/bank.jpg')">Add Expense</a></li>
-            <li><a href="/get_profit" onclick="changeBackground('img/cash.jpg')">Profit</a></li>
             <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-            <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+            <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
             <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-            <li><a href="/chatbot" onclick="changeBackground('img/chatbot-bg.jpg')">Talk to our AI</a></li>
-            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Talk to Millionaires</a></li>
+            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Discuss with some users </a></li>
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Talk to users</a></li>
             <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
             <li><a href="/worker_dashboard" onclick="changeBackground('img/community-bg.jpg')">View Company</a></li>
         </ul>
-   
     </div>
-
-
 
     <!-- Main Content -->
     <div class="container">
         <h1>Accounting Dashboard</h1>
-        <h2>{{ message }}</h2>
-        <h3>What would you like to do today?</h3>
+        <h2>{{ message }}</h2> <!-- Welcome message -->
 
-        <video class="dashboard-video" autoplay loop muted>
-            <source src="{{ url_for('static', filename='videos/nice.mp4') }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <!-- Financial Summary Section -->
+        <div class="financial-summary">
+            <div>
+                <h3>Profit</h3>
+                <p>${{ profit }}</p>
+            </div>
+            <div>
+                <h3>Cash Balance</h3>
+                <p>${{ cash_balance }}</p>
+            </div>
+            <div>
+                <h3>Card Balance</h3>
+                <p>${{ card_balance }}</p>
+            </div>
+        </div>
+
+        <!-- Recent Transactions Section -->
+        <div class="recent-transactions">
+            <h3>Recent Transactions</h3>
+            <ul>
+                {% for transaction in recent_transactions %}
+                <li>
+                    <span>{{ transaction['type'] }} - {{ transaction['category'] }}</span>
+                    <span class="amount">${{ transaction['amount'] }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div id="chat" class="chatbot-container">
+        <div class="chatbot-header">TALK TO FINBOT</div>
+        <p>Welcome! I'm here to help you with your finance-related questions. How can I assist you today?</p>
+        <div id="messages" class="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="user_input" placeholder="Type your message here..." aria-label="User input" />
+            <button id="send">Send</button>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -58,10 +86,72 @@
         <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         function changeBackground(image) {
             document.body.style.backgroundImage = `url({{ url_for('static', filename='${image}') }})`;
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const sendButton = document.getElementById('send');
+            const userInputField = document.getElementById('user_input');
+            const messagesContainer = document.getElementById('messages');
+    
+            sendButton.addEventListener('click', async function () {
+                const userInput = userInputField.value.trim();
+                if (!userInput) return; // Prevent empty messages
+    
+                // Append user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = userInput;
+                messagesContainer.appendChild(userMessage);
+                userInputField.value = ''; // Clear input field
+    
+                // Show loading indicator
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'loading';
+                loadingIndicator.textContent = 'Finbot is typing...';
+                messagesContainer.appendChild(loadingIndicator);
+    
+                try {
+                    // Send user input to the server
+                    const response = await fetch('/generate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_input: userInput })
+                    });
+    
+                    const data = await response.json();
+                    loadingIndicator.remove();
+    
+                    // Append bot response
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot-message';
+                    botMessage.textContent = data.response;
+                    messagesContainer.appendChild(botMessage);
+    
+                    // Auto-scroll to the bottom
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                } catch (error) {
+                    loadingIndicator.remove();
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'message bot-message';
+                    errorMessage.textContent = 'Sorry, something went wrong. Please try again later.';
+                    messagesContainer.appendChild(errorMessage);
+                }
+            });
+    
+            // Allow pressing Enter to send the message
+            userInputField.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        });
+
+                // Append user message
+
     </script>
 
 </body>

@@ -11,13 +11,28 @@
   --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-light-grey), var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
+/* Main Container */
+/* Main Container */
+.container {
+  max-width: 350px; /* Reduced width to make it smaller */
+  margin: 15px auto; /* Reduced vertical margin for a more compact fit */
+  padding: 20px; /* Reduced padding for a smaller layout */
+  background-color: var(--color-navy); /* Navy background */
+  border-radius: 8px; /* Slightly smaller border radius */
+  box-shadow: 0 3px 6px var(--color-gold); /* Adjusted shadow for a smaller look */
+  max-height: 100vh; /* Limit the height to 80% of the viewport */
+  overflow-y: auto; /* Add scrolling if content exceeds the height */
+}
+/* General Page Style */
 body {
-  background-color: var(--color-navy); /* Light Gray */
+  background-color: var(--color-navy); /* Updated to Gray */
   color: #002147; /* Navy Blue */
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-
+/* Sidebar */
 .sidebar {
   width: 250px;
   background-color: var(--color-navy);
@@ -68,73 +83,171 @@ body {
   background-color: var(--color-gold);
   color: var(--color-navy);
 }
-.container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: var(--color-navy); /* White */
-  border-radius: 8px;
-  box-shadow: var(--color-gold);
-}
+/* Main Container */
+
+
 h2 {
   font-size: 24px;
   color: var(--color-gold); /* Gold */
   text-align: center;
   margin-bottom: 20px;
 }
+/* Inputs and Select */
 input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
+  width: 80%; /* Reduced width for a smaller fit */
+  padding: 8px; /* Reduced padding for compactness */
+  margin: 3px 0; /* Reduced margin for less spacing between fields */
+  border: 1px solid var(--color-navy); /* Navy Blue Border */
   border-radius: 4px;
-  background-color: var(--color-white); /* White */
-  color: #002147; /* Navy Blue */
+  background-color: var(--color-white);
+  color: var(--color-navy);
 }
-
+#user-input {
+  width: 80%; /* Reduce the width to make it smaller */
+  padding: 6px; /* Reduce padding for compactness */
+  font-size: 10px; /* Reduce font size */
+  margin: 5px 0; /* Reduce margin for less spacing */
+  border: 1px solid var(--color-navy); /* Navy Blue Border */
+  border-radius: 4px; /* Keep a small border radius */
+  background-color: var(--color-white); /* White background */
+  color: var(--color-navy); /* Navy text color */
+  box-shadow: 0 1px 3px var(--shadow-color); /* Add a subtle shadow */
+}
+/* Buttons */
 button {
   background-color: #FFD700; /* Gold */
-  color: #002147; /* Navy Blue */
+  color: #002147; /* Navy Blue Text */
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
-  margin-top: 10px; /* Add some space above the button */
+  margin-top: 10px;
 }
 
 button:hover {
   background-color: #CCAC00; /* Darker Gold */
 }
 
-.back-button {
-  background-color: #FFD700; /* Gold for the back button */
-}
 
-.back-button:hover {
-  background-color: #CCAC00; /* Darker Gold on hover */
-}
 
+/* Flash Messages */
 .flash-message {
   margin: 10px 0;
   padding: 10px;
   border-radius: 4px;
-  color: white;
+  color: var(--color-navy);
 }
 
 .flash-success {
-  background-color: #4CAF50; /* Green */
+  background-color: var(--color-gold); /* Green */
 }
 
 .flash-error {
-  background-color: #F44336; /* Red */
+  background-color: var(--color-deep-blue); /* Red */
 }
 
+/* Labels */
 label {
   font-weight: bold;
 }
 
+/* Account Selection */
+.custom-select {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  display: none;
+}
+
+/* Dropdown Styling */
+.dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #FFD700; /* Gold Border */
+  padding: 10px;
+  cursor: pointer;
+  background-color: white;
+  color: #002147;
+  border-radius: 5px;
+}
+
+.dropdown-selected img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.dropdown-options {
+  position: absolute;
+  width: 100%;
+  display: none;
+  background: white; /* Change to white for better visibility */
+  border: 1px solid #FFD700;
+  box-shadow: var(--color-gold);
+  border-radius: 5px;
+  z-index: 1000; /* Ensure it is above other elements */
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+
+.dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  color: #002147;
+}
+
+.dropdown-option img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.dropdown-option:hover {
+  background-color: #FFD700; /* Gold */
+  color: #002147;
+}
+
+/* Slideshow Background */
+.slideshow-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.slideshow-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Show first image */
+.slideshow-background img:first-child {
+  opacity: 1;
+}
 footer {
   position: fixed;
   bottom: 0;
@@ -145,4 +258,52 @@ footer {
   text-align: center;
   color: var(--color-white);
   box-shadow: 0 -2px 5px var(--shadow-color);
+}
+/* Animation for slideshow */
+@keyframes slideshow {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+}
+
+.slideshow-background img {
+  animation: slideshow 20s infinite;
+}
+
+/* Adjust timing for each image */
+.slideshow-background img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.slideshow-background img:nth-child(2) {
+  animation-delay: 10s;
+}
+
+.slideshow-background img:nth-child(3) {
+  animation-delay: 20s;
+}
+
+footer .social-media {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .social-media p {
+  font-size: 16px;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+footer .social-icon {
+  color: var(--color-gold);
+  font-size: 20px;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icon:hover {
+  color: var(--highlight-gold);
+  transform: scale(1.2);
 }

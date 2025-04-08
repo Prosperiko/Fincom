@@ -21,37 +21,64 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('#send').click(function() {
-                var userInput = $('#user_input').val().trim();
-                if (userInput === "") return; // Prevent empty messages
-
+        document.addEventListener('DOMContentLoaded', function () {
+            const sendButton = document.getElementById('send');
+            const userInputField = document.getElementById('user_input');
+            const messagesContainer = document.getElementById('messages');
+        
+            sendButton.addEventListener('click', async function () {
+                const userInput = userInputField.value.trim();
+                if (!userInput) return; // Prevent empty messages
+        
                 // Append user message
-                $('#messages').append('<div class="message user">' + userInput + '</div>');
-                $('#user_input').val(''); // Clear input field
-
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = userInput;
+                messagesContainer.appendChild(userMessage);
+                userInputField.value = ''; // Clear input field
+        
                 // Show loading indicator
-                $('#messages').append('<div class="loading" id="loading">Finbot is typing...</div>');
-
-                // Send user input to the server
-                $.post('/generate', { user_input: userInput }, function(data) {
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'loading';
+                loadingIndicator.id = 'loading';
+                loadingIndicator.textContent = 'Finbot is typing...';
+                messagesContainer.appendChild(loadingIndicator);
+        
+                try {
+                    // Send user input to the server
+                    const response = await fetch('/generate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_input: userInput })
+                    });
+        
+                    const data = await response.json();
+        
                     // Remove loading indicator
-                    $('#loading').remove();
-
+                    loadingIndicator.remove();
+        
                     // Append bot response
-                    $('#messages').append('<div class="message bot">' + data.response + '</div>');
-                    $('#messages').scrollTop($('#messages')[0].scrollHeight); // Auto-scroll to the bottom
-                }).fail(function() {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot';
+                    botMessage.textContent = data.response;
+                    messagesContainer.appendChild(botMessage);
+        
+                    // Auto-scroll to the bottom
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                } catch (error) {
                     // Remove loading indicator and show error message
-                    $('#loading').remove();
-                    $('#messages').append('<div class="message bot">Sorry, something went wrong. Please try again later.</div>');
-                });
+                    loadingIndicator.remove();
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'message bot';
+                    errorMessage.textContent = 'Sorry, something went wrong. Please try again later.';
+                    messagesContainer.appendChild(errorMessage);
+                }
             });
-
+        
             // Allow pressing Enter to send the message
-            $('#user_input').keypress(function(e) {
-                if (e.which == 13) {
-                    $('#send').click();
+            userInputField.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendButton.click();
                 }
             });
         });

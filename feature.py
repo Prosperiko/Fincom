@@ -265,7 +265,7 @@ def login():
                     flash("Login successful!", "success")
 
                     # Redirect based on customer type
-                    return redirect('/home1' if customer_type.lower() == 'individual' else '/home')
+                    return redirect('/home1' if customer_type.lower() == 'individual' else '/home1')
                 else:
                     flash("Invalid password!", "error")
                     print("Invalid password")  # Debug print
@@ -312,8 +312,57 @@ def home1():
     if 'username' in session:
         username = session['username']
         customer_type = session['customer_type']
-        welcome_message = generate_welcome_message(username, customer_type)
-        return render_template('home1.html', message=welcome_message)  # Render a different template for home1
+        user_id = session['user_id']  # Get the logged-in user's ID
+
+        conn = sqlite3.connect("mydatabase.db")
+        conn.row_factory = sqlite3.Row  # Enable dictionary-like access
+        cursor = conn.cursor()
+
+        try:
+            # Fetch user's profit, cash balance, and card balance
+            cursor.execute("""
+                SELECT profit, cash_balance, card_balance 
+                FROM users 
+                WHERE id = ?
+            """, (user_id,))
+            user_data = cursor.fetchone()
+
+            if user_data:
+                profit = user_data['profit']
+                cash_balance = user_data['cash_balance']
+                card_balance = user_data['card_balance']
+            else:
+                profit = cash_balance = card_balance = 0
+
+            # Fetch top five recent transactions
+            cursor.execute("""
+                SELECT type, category, amount, created_at 
+                FROM transactions 
+                WHERE user_id = ? 
+                ORDER BY created_at DESC 
+                LIMIT 5
+            """, (user_id,))
+            recent_transactions = cursor.fetchall()
+
+            # Generate the welcome message
+            welcome_message = generate_welcome_message(username, customer_type)
+
+            # Pass chatbot data to the template
+            return render_template(
+                'home1.html',
+                message=welcome_message,
+                profit=profit,
+                cash_balance=cash_balance,
+                card_balance=card_balance,
+                recent_transactions=recent_transactions,
+                chatbot_enabled=True  # Enable chatbot on the home page
+            )
+        except sqlite3.Error as e:
+            flash(f"An error occurred while fetching data: {e}", "error")
+            return redirect('/error')
+        finally:
+            cursor.close()
+            conn.close()
     else:
         flash("You need to log in first!", "error")
         return redirect('/login')
@@ -866,7 +915,95 @@ def Business_advice():
 
     return render_template("Business_advice.html")
 
+@app.route('/ana')
+def ana():
+    if 'user_id' not in session:
+        return jsonify({"error": "Unauthorized access"}), 401
 
+    user_id = session['user_id']
+    
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Fetch user details
+        cursor.execute("SELECT username, cash_balance, card_balance FROM users WHERE id = ?", (user_id,))
+        user = cursor.fetchone()
+        if user:
+            username, cash_balance, card_balance = user
+        else:
+            return jsonify({"error": "User  not found"}), 404
+
+        # Fetch total income and expenses from transactions
+        cursor.execute("""
+            SELECT 
+                SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) AS total_income,
+                SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) AS total_expenses
+            FROM transactions
+            WHERE user_id = ?
+        """, (user_id,))
+        transaction_row = cursor.fetchone()
+        total_income = transaction_row[0] or 0
+        total_expenses = transaction_row[1] or 0
+
+        # Fetch expenses
+        cursor.execute("""
+            SELECT category, SUM(amount) AS total_amount
+            FROM transactions
+            WHERE type = 'expense' AND user_id = ?
+            GROUP BY category
+        """, (user_id,))
+        expenses = cursor.fetchall()
+
+        # Fetch income
+        cursor.execute("""
+            SELECT category, SUM(amount) AS total_amount
+            FROM transactions
+            WHERE type = 'income' AND user_id = ?
+            GROUP BY category
+        """, (user_id,))
+        income = cursor.fetchall()
+
+        # Fetch income trends
+        cursor.execute("""
+            SELECT strftime('%Y-%m-%d', created_at) AS date, SUM(amount) AS total_amount
+            FROM transactions
+            WHERE type = 'income' AND user_id = ?
+            GROUP BY date
+            ORDER BY date
+        """, (user_id,))
+        income_trends = cursor.fetchall()
+
+        # Fetch expense trends
+        cursor.execute("""
+            SELECT strftime('%Y-%m-%d', created_at) AS date, SUM(amount) AS total_amount
+            FROM transactions
+            WHERE type = 'expense' AND user_id = ?
+            GROUP BY date
+            ORDER BY date
+        """, (user_id,))
+        expense_trends = cursor.fetchall()
+
+        # Prepare data for rendering
+        expense_data = [{"category": row['category'], "amount": row['total_amount']} for row in expenses]
+        income_data = [{"category": row['category'], "amount": row['total_amount']} for row in income]
+        income_trend_data = [{"date": row['date'], "total_amount": row['total_amount']} for row in income_trends]
+        expense_trend_data = [{"date": row['date'], "total_amount": row['total_amount']} for row in expense_trends]
+
+        # Render the overview template with all data
+        return render_template('ana.html', 
+                               username=username,
+                               cash_balance=cash_balance,
+                               card_balance=card_balance,
+                               total_income=total_income,
+                               total_expenses=total_expenses,
+                               expenses=expense_data,
+                               income=income_data,
+                               income_trends=income_trend_data,
+                               expense_trends=expense_trend_data)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return jsonify({"error": "Database error"}), 500
 
 @app.route('/Analysis')
 def Analysis():
@@ -1394,7 +1531,11 @@ def chatbot():
     return render_template('chatbot.html')
 @app.route('/generate', methods=['POST'])
 def generate():
-    user_input = request.form['user_input']
+    data = request.get_json()  # Parse JSON data from the request
+    if not data or 'user_input' not in data:
+        return jsonify({'error': 'user_input is required'}), 400
+
+    user_input = data['user_input']
     response = generate_response(user_input)
     return jsonify({'response': response})
 

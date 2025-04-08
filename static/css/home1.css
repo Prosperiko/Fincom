@@ -78,15 +78,100 @@ body {
     color: var(--color-navy);
 }
 
+
 /* Main Content */
 .container {
-    margin-left: 270px;
+    margin-left: 220px;
     padding: 20px;
     flex: 1;
     background-color: var(--color-navy);
     min-height: 100vh;
     border-radius: 10px;
     box-shadow: -2px 0 5px var(--shadow-color);
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align content */
+}
+
+/* Financial Summary Section */
+.financial-summary {
+    width: 100%; /* Take full width of the container */
+    max-width: 400px; /* Reduced width */
+    display: grid;
+    grid-template-columns: 1fr; /* Stack items vertically */
+    gap: 10px; /* Reduced gap */
+    margin: 10px 0; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    background-color: var(--color-gold);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--shadow-color); /* Reduced shadow size */
+    color: var(--color-white);
+    text-align: center;
+}
+
+.financial-summary div {
+    padding: 5px; /* Reduced padding */
+    background-color: var(--color-deep-blue);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px var(--shadow-color); /* Reduced shadow size */
+}
+
+.financial-summary div h3 {
+    font-size: 14px; /* Reduced font size */
+    color: var(--color-gold);
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+.financial-summary div p {
+    font-size: 12px; /* Reduced font size */
+    margin: 0;
+}
+
+/* Recent Transactions Section */
+.recent-transactions {
+    width: 100%; /* Take full width of the container */
+    max-width: 400px; /* Reduced width */
+    margin: 10px 0; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    background-color: var(--color-medium-grey);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--shadow-color); /* Reduced shadow size */
+    color: var(--color-white);
+}
+
+.recent-transactions h3 {
+    font-size: 16px; /* Reduced font size */
+    color: var(--color-gold);
+    margin-bottom: 10px; /* Reduced margin */
+    text-align: center;
+}
+
+.recent-transactions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-transactions li {
+    padding: 10px; /* Reduced padding */
+    border-bottom: 1px solid var(--color-light-grey);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.recent-transactions li:last-child {
+    border-bottom: none;
+}
+
+.recent-transactions li span {
+    font-size: 12px; /* Reduced font size */
+    color: var(--color-white);
+}
+
+.recent-transactions li span.amount {
+    font-weight: bold;
+    color: var(--color-gold);
 }
 
 /* Message Section */
@@ -95,17 +180,94 @@ h1, h2, h3 {
     color: var(--color-gold); /* Gold for better contrast */
     margin-bottom: 20px;
 }
-
-/* Video Section */
-.dashboard-video {
-    width: 80%; /* Reduced size */
-    max-height: 300px; /* Limit height */
-    border-radius: 10px;
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 4px 8px var(--shadow-color);
+.chatbot-container {
+    position: fixed;
+    top: 0; /* Align it to the top of the page */
+    right: 0; /* Position it on the right side */
+    width: 320px; /* Match the width of the sidebar/dashboard */
+    height: 85vh; /* Full height of the viewport */
+    background-color: var(--color-medium-grey); /* Match the sidebar style */
+    color: var(--color-white);
+    border-left: 2px solid var(--shadow-color); /* Add a border to separate it from the main content */
+    box-shadow: -2px 0 5px var(--shadow-color); /* Add a shadow for emphasis */
+    z-index: 1000; /* Ensure it appears above other elements */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content overflow */
 }
 
+.chatbot-header {
+    background-color: var(--color-gold); /* Highlight the header */
+    color: var(--color-navy);
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid var(--shadow-color); /* Add a border below the header */
+}
+
+.chatbot-messages {
+    flex: 1; /* Allow the messages section to grow */
+    padding: 10px;
+    overflow-y: auto; /* Enable scrolling for long conversations */
+    background-color: var(--color-deep-blue); /* Background for the message container */
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.chatbot-messages .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    max-width: 80%; /* Limit the width of messages */
+    word-wrap: break-word; /* Ensure long words break properly */
+}
+
+.chatbot-messages .user-message {
+    background-color: var(--color-navy); /* Navy blue for user messages */
+    color: var(--color-white);
+    text-align: right;
+    margin-left: auto; /* Align user messages to the right */
+}
+
+.chatbot-messages .bot-message {
+    background-color: var(--color-gold); /* Gold for AI messages */
+    color: var(--color-navy);
+    text-align: left;
+    margin-right: auto; /* Align bot messages to the left */
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 10px;
+    background-color: var(--color-medium-grey);
+    border-top: 2px solid var(--shadow-color); /* Add a border above the input section */
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.chatbot-input button {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chatbot-input button:hover {
+    background-color: var(--highlight-gold);
+}
 /* Footer */
 footer {
     position: fixed;
@@ -171,6 +333,7 @@ footer {
         max-height: 150px;
     }
 }
+/* Chatbot Section */
 
 /* Social Media Section */
 footer .social-media {
@@ -196,3 +359,5 @@ footer .social-icon:hover {
     color: var(--highlight-gold);
     transform: scale(1.2);
 }
+
+/* Financial Summary Section */

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Overview</title>
+    <link rel="stylesheet" href="../static/css/overview.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .chart-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #financialAdvice {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .small-card {
+            width: 40px;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+        
+          .small-card canvas {
+            display: block;
+            margin: 0 auto;
+          }
+    </style>
+</head>
+<body>
+
+    <h1>Financial Overview</h1>
+
+    <!-- Income vs Expenses Comparison Section -->
+    <section class="chart-container">
+        <h2>Income vs Expenses Comparison for <span id="username"></span></h2>
+        <canvas id="incomeExpensesChart" width="50" height="50"></canvas>
+        <div id="financialAdvice"></div>
+    </section>
+
+    <!-- Expense Overview Section -->
+    <section class="expense-summary">
+        <h2>Monthly Expense Summary</h2>
+        <p>Total Expenses Recorded: <span id="totalExpenses">0</span> Naira</p>
+        <p>Number of Expense Categories: <span id="expenseCategories">0</span></p>
+    </section>
+
+    <section class="chart-container">
+        <h2>Expense Overview Trends</h2>
+        <canvas id="expenseChart"></canvas>
+    </section>
+
+    <!-- Expense Trends Section -->
+    <section class="chart-container">
+        <h2>Expense Trends</h2>
+        <canvas id="expensesTrendChart"></canvas>
+    </section>
+
+    <!-- Detailed Expense Breakdown -->
+    <section class="expense-breakdown">
+        <h2>Detailed Expense Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount (Naira)</th>
+                    <th>Percentage of Total Expenses</th>
+                </tr>
+            </thead>
+            <tbody id="expenseTable">
+                <tr>
+                    <td colspan="3" style="text-align: center;">No expenses recorded yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- Income Overview Section -->
+    <section class="income-summary">
+        <h2>Monthly Income Summary</h2>
+        <p>Total Income Recorded: <span id="totalIncome">0</span> Naira</p>
+        <p>Number of Income Sources: <span id="incomeSources">0</span></p>
+    </section>
+
+    <section class="chart-container">
+        <h2>Income Overview Trends</h2>
+        <canvas id="incomeChart"></canvas>
+    </section>
+
+    <!-- Income Trends Section -->
+    <section class="chart-container">
+        <h2>Income Trends</h2>
+        <canvas id="incomeTrendChart"></canvas>
+    </section>
+
+    <!-- Detailed Income Breakdown -->
+    <section class="income-breakdown">
+        <h2>Detailed Income Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount (Naira)</th>
+                    <th>Percentage of Total Income</th>
+                </tr>
+            </thead>
+            <tbody id="incomeTable">
+                <tr>
+                    <td colspan="3" style="text-align: center;">No income recorded yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- Total Expenses Section -->
+    <div class="container">
+        <h2>Total Expenses</h2>
+        <p>The total expense amount is: <strong id="totalExpenseAmount">0</strong> Naira</p>
+        <button onclick="window.location.href='expenses'">Add More Expenses</button>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script>
+        async function fetchUserFinancials() {
+            try {
+                const response = await fetch('/api/user_financials');
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById("financialAdvice").innerHTML = `<p style="color: red;">Error loading financial data.</p>`;
+                return null;
+            }
+        }
+    
+        async function drawIncomeExpensesChart() {
+            const data = await fetchUserFinancials();
+            if (!data) return;
+    
+            document.getElementById('username').textContent = data.username;
+    
+            const categories = ['Cash Balance', 'Card Balance'];
+            const incomeValues = [data.cash_balance, data.card_balance];
+            const expenseValues = [data.total_expenses / 2, data.total_expenses / 2];
+    
+            const ctx = document.getElementById('incomeExpensesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [
+                        {
+                            label: 'Income',
+                            data: incomeValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        },
+                        {
+                            label: 'Expenses',
+                            data: expenseValues,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (Naira)'
+                            }
+                        }
+                    }
+                }
+            });
+    
+            provideFinancialAdvice(data);
+        }
+    
+        function provideFinancialAdvice(data) {
+            const adviceElement = document.getElementById('financialAdvice');
+            let advice = '';
+    
+            if (data.total_income > data.total_expenses) {
+                advice = "Great job! You're earning more than you're spending. Keep saving!";
+            } else if (data.total_income < data.total_expenses) {
+                advice = "Warning! You're spending more than you're earning. Consider reviewing your expenses.";
+            } else {
+                advice = "You're breaking even. It's a good time to start saving or investing!";
+            }
+    
+            adviceElement.innerHTML = `<p>${advice}</p>`;
+        }
+    
+        async function fetchExpenses() {
+            const response = await fetch('/api/expenses');
+            const data = await response.json();
+            return data.reduce((acc, item) => {
+                acc[item.category] = parseFloat(item.amount);
+                return acc;
+            }, {});
+        }
+    
+        async function populateExpenseOverview() {
+            const expenses = await fetchExpenses();
+            const totalExpenses = Object.values(expenses).reduce((sum, amount) => sum + amount, 0);
+            document.getElementById('totalExpenses').textContent = totalExpenses;
+            document.getElementById('expenseCategories').textContent = Object.keys(expenses).length;
+    
+            const expenseTable = document.getElementById('expenseTable');
+            expenseTable.innerHTML = Object.entries(expenses).map(([category, amount]) => {
+                const percentage = ((amount / totalExpenses) * 100).toFixed(2);
+                return `<tr><td>${category}</td><td>${amount} Naira</td><td>${percentage}%</td></tr>`;
+            }).join('');
+    
+            const ctxExpense = document.getElementById('expenseChart').getContext('2d');
+            new Chart(ctxExpense, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(expenses),
+                    datasets: [{
+                        label: 'Expense Categories',
+                        data: Object.values(expenses),
+                        backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)']
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+        }
+    
+        async function fetchIncome() {
+            const response = await fetch('/api/income');
+            const data = await response.json();
+            return data.reduce((acc, item) => {
+                acc[item.category] = parseFloat(item.amount);
+                return acc;
+            }, {});
+        }
+    
+        async function populateIncomeOverview() {
+            const income = await fetchIncome();
+            const totalIncome = Object.values(income).reduce((sum, amount) => sum + amount, 0);
+            document.getElementById('totalIncome').textContent = totalIncome;
+            document.getElementById('incomeSources').textContent = Object.keys(income).length;
+    
+            const incomeTable = document.getElementById('incomeTable');
+            incomeTable.innerHTML = Object.entries(income).map(([category, amount]) => {
+                const percentage = ((amount / totalIncome) * 100).toFixed(2);
+                return `<tr><td>${category}</td><td>${amount} Naira</td><td>${percentage}%</td></tr>`;
+            }).join('');
+    
+            const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+            new Chart(ctxIncome, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(income),
+                    datasets: [{
+                        label: 'Income Sources',
+                        data: Object.values(income),
+                        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)']
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+        }
+    
+        async function drawExpensesTrendChart() {
+            const response = await fetch('/api/expenses_trends');
+            const data = await response.json();
+            const labels = data.map(item => item.date);
+            const values = data.map(item => item.total_amount);
+    
+            const ctx = document.getElementById('expensesTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Expenses Trends',
+                        data: values,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    
+        async function drawIncomeTrendChart() {
+            const response = await fetch('/api/income_trends');
+            const data = await response.json();
+            const labels = data.map(item => item.date);
+            const values = data.map(item => item.total_amount);
+    
+            const ctx = document.getElementById('incomeTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Income Trends',
+                        data: values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', async () => {
+            await populateExpenseOverview();
+            await populateIncomeOverview();
+            await drawIncomeExpensesChart();
+            await drawExpensesTrendChart();
+            await drawIncomeTrendChart();
+        });
+    </script>
+    
+</body>
+</html>
