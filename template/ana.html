@@ -4,142 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Overview</title>
-    <link rel="stylesheet" href="../static/css/overview.css">
+    <link rel="stylesheet" href="../static/css/analysics2.css">
     <link rel="icon" type="image/webp" href="../static/img/logo.webp">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .chart-container, .card {
-            max-width: 700px;
-            margin: auto;
-        }
-        canvas {
-            max-width: 100%;
-            height: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        #financialAdvice {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
-        }
-        .card {
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px auto;
-            text-align: center;
-        }
-        .card h2 {
-            margin-top: 0;
-        }
-        .summary-text {
-            margin-top: 15px;
-            font-size: 1em;
-            color: #444;
-        }
-    </style>
+    
+
 </head>
 <body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
+            <h2>Fincom</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/expenses" onclick="changeBackground('img/bank.jpg')">Add Expense</a></li>
+            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
+            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+            <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
+            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Discuss with some users </a></li>
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Talk to users</a></li>
+            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
+            <li><a href="/worker_dashboard" onclick="changeBackground('img/community-bg.jpg')">View Company</a></li>
+        </ul>
+    </div>
+
     <h1>Financial Overview</h1>
 
-    <!-- Income vs Expenses Comparison -->
-    <section class="card">
-        <h2>Income vs Expenses for <span id="username"></span></h2>
-        <canvas id="incomeExpensesChart"></canvas>
-        <div id="financialAdvice" class="summary-text"></div>
+    <!-- Income vs Expenses Comparison Section -->
+    <section class="chart-container">
+        <h2>Income vs Expenses Comparison for <span id="username"></span></h2>
+        <canvas id="incomeExpensesChart" width="300" height="300"></canvas>
+        <div id="financialAdvice"></div>
     </section>
 
-    <!-- Monthly Expense Summary -->
-    <section class="card">
+    <!-- Expense Overview Section -->
+    <section class="expense-summary">
         <h2>Monthly Expense Summary</h2>
         <p>Total Expenses Recorded: <span id="totalExpenses">0</span> Naira</p>
         <p>Number of Expense Categories: <span id="expenseCategories">0</span></p>
-        <canvas id="expenseChart"></canvas>
     </section>
 
-    <!-- Expense Breakdown -->
-    <section class="card">
+    <section class="chart-container">
+        <h2>Expense Overview Trends</h2>
+        <canvas id="expenseChart" width="300" height="300"></canvas>
+    </section>
+
+    <!-- Expense Trends Section -->
+    <section class="chart-container">
+        <h2>Expense Trends</h2>
+        <canvas id="expensesTrendChart" width="300" height="300"></canvas>
+    </section>
+
+    <!-- Detailed Expense Breakdown -->
+    <section class="expense-breakdown">
         <h2>Detailed Expense Breakdown</h2>
         <table>
             <thead>
                 <tr>
                     <th>Category</th>
                     <th>Amount (Naira)</th>
-                    <th>Percentage</th>
+                    <th>Percentage of Total Expenses</th>
                 </tr>
             </thead>
             <tbody id="expenseTable">
-                <tr><td colspan="3">No expenses recorded yet.</td></tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">No expenses recorded yet.</td>
+                </tr>
             </tbody>
         </table>
     </section>
 
-    <!-- Expense Trend Chart -->
-    <section class="card">
-        <h2>Expense Trends</h2>
-        <canvas id="expensesTrendChart"></canvas>
-    </section>
+    <hr>
 
-    <!-- Monthly Income Summary -->
-    <section class="card">
+    <!-- Income Overview Section -->
+    <section class="income-summary">
         <h2>Monthly Income Summary</h2>
         <p>Total Income Recorded: <span id="totalIncome">0</span> Naira</p>
         <p>Number of Income Sources: <span id="incomeSources">0</span></p>
-        <canvas id="incomeChart"></canvas>
     </section>
 
-    <!-- Income Breakdown -->
-    <section class="card">
+    <section class="chart-container">
+        <h2>Income Overview Trends</h2>
+        <canvas id="incomeChart" width="300" height="300"></canvas>
+    </section>
+
+    <!-- Income Trends Section -->
+    <section class="chart-container">
+        <h2>Income Trends</h2>
+        <canvas id="incomeTrendChart" width="300" height="300"></canvas>
+    </section>
+
+    <!-- Detailed Income Breakdown -->
+    <section class="income-breakdown">
         <h2>Detailed Income Breakdown</h2>
         <table>
             <thead>
                 <tr>
                     <th>Category</th>
                     <th>Amount (Naira)</th>
-                    <th>Percentage</th>
+                    <th>Percentage of Total Income</th>
                 </tr>
             </thead>
             <tbody id="incomeTable">
-                <tr><td colspan="3">No income recorded yet.</td></tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">No income recorded yet.</td>
+                </tr>
             </tbody>
         </table>
     </section>
 
-    <!-- Income Trend Chart -->
-    <section class="card">
-        <h2>Income Trends</h2>
-        <canvas id="incomeTrendChart"></canvas>
-    </section>
+    <hr>
 
-    <!-- Total Expenses Summary -->
-    <section class="card">
-        <h2>Total Expenses</h2>
-        <p>The total expense amount is: <strong id="totalExpenseAmount">0</strong> Naira</p>
-        <button onclick="window.location.href='expenses'">Add More Expenses</button>
-    </section>
+    <!-- Total Expenses Section -->
+  
 
-    <!-- Scripts -->
+    <!-- Chart.js Script -->
     <script>
-        // (Script remains the same as in your latest version)
-        // To save space here, let me know if you'd like the full updated JavaScript as well
         async function fetchUserFinancials() {
             try {
                 const response = await fetch('/api/user_financials');
@@ -153,17 +134,17 @@
                 return null;
             }
         }
-
+    
         async function drawIncomeExpensesChart() {
             const data = await fetchUserFinancials();
             if (!data) return;
-
+    
             document.getElementById('username').textContent = data.username;
-
+    
             const categories = ['Cash Balance', 'Card Balance'];
             const incomeValues = [data.cash_balance, data.card_balance];
             const expenseValues = [data.total_expenses / 2, data.total_expenses / 2];
-
+    
             const ctx = document.getElementById('incomeExpensesChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
@@ -183,7 +164,8 @@
                     ]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -195,14 +177,14 @@
                     }
                 }
             });
-
+    
             provideFinancialAdvice(data);
         }
-
+    
         function provideFinancialAdvice(data) {
             const adviceElement = document.getElementById('financialAdvice');
             let advice = '';
-
+    
             if (data.total_income > data.total_expenses) {
                 advice = "Great job! You're earning more than you're spending. Keep saving!";
             } else if (data.total_income < data.total_expenses) {
@@ -210,10 +192,10 @@
             } else {
                 advice = "You're breaking even. It's a good time to start saving or investing!";
             }
-
+    
             adviceElement.innerHTML = `<p>${advice}</p>`;
         }
-
+    
         async function fetchExpenses() {
             const response = await fetch('/api/expenses');
             const data = await response.json();
@@ -222,19 +204,19 @@
                 return acc;
             }, {});
         }
-
+    
         async function populateExpenseOverview() {
             const expenses = await fetchExpenses();
             const totalExpenses = Object.values(expenses).reduce((sum, amount) => sum + amount, 0);
             document.getElementById('totalExpenses').textContent = totalExpenses;
             document.getElementById('expenseCategories').textContent = Object.keys(expenses).length;
-
+    
             const expenseTable = document.getElementById('expenseTable');
             expenseTable.innerHTML = Object.entries(expenses).map(([category, amount]) => {
                 const percentage = ((amount / totalExpenses) * 100).toFixed(2);
                 return `<tr><td>${category}</td><td>${amount} Naira</td><td>${percentage}%</td></tr>`;
             }).join('');
-
+    
             const ctxExpense = document.getElementById('expenseChart').getContext('2d');
             new Chart(ctxExpense, {
                 type: 'pie',
@@ -247,14 +229,15 @@
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'top' }
                     }
                 }
             });
         }
-
+    
         async function fetchIncome() {
             const response = await fetch('/api/income');
             const data = await response.json();
@@ -263,19 +246,19 @@
                 return acc;
             }, {});
         }
-
+    
         async function populateIncomeOverview() {
             const income = await fetchIncome();
             const totalIncome = Object.values(income).reduce((sum, amount) => sum + amount, 0);
             document.getElementById('totalIncome').textContent = totalIncome;
             document.getElementById('incomeSources').textContent = Object.keys(income).length;
-
+    
             const incomeTable = document.getElementById('incomeTable');
             incomeTable.innerHTML = Object.entries(income).map(([category, amount]) => {
                 const percentage = ((amount / totalIncome) * 100).toFixed(2);
                 return `<tr><td>${category}</td><td>${amount} Naira</td><td>${percentage}%</td></tr>`;
             }).join('');
-
+    
             const ctxIncome = document.getElementById('incomeChart').getContext('2d');
             new Chart(ctxIncome, {
                 type: 'pie',
@@ -288,20 +271,21 @@
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'top' }
                     }
                 }
             });
         }
-
+    
         async function drawExpensesTrendChart() {
             const response = await fetch('/api/expenses_trends');
             const data = await response.json();
             const labels = data.map(item => item.date);
             const values = data.map(item => item.total_amount);
-
+    
             const ctx = document.getElementById('expensesTrendChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
@@ -316,7 +300,8 @@
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true
@@ -325,13 +310,13 @@
                 }
             });
         }
-
+    
         async function drawIncomeTrendChart() {
             const response = await fetch('/api/income_trends');
             const data = await response.json();
             const labels = data.map(item => item.date);
             const values = data.map(item => item.total_amount);
-
+    
             const ctx = document.getElementById('incomeTrendChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
@@ -346,7 +331,8 @@
                     }]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true
@@ -355,7 +341,7 @@
                 }
             });
         }
-
+    
         document.addEventListener('DOMContentLoaded', async () => {
             await populateExpenseOverview();
             await populateIncomeOverview();
@@ -364,6 +350,6 @@
             await drawIncomeTrendChart();
         });
     </script>
-    </script>
+    
 </body>
 </html>

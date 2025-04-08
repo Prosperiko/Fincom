@@ -1,0 +1,127 @@
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background: var(--color-navy);
+    color: var(--color-gold);
+}
+
+.chart-container {
+    max-width: 600px;
+    margin: auto;
+    background: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    padding: 20px;
+    margin-bottom: 40px; /* Add space below the graph */
+}
+
+canvas {
+    max-width: 80%; /* Reduced from 100% to 80% */
+    height: 200px; /* Set a fixed height for smaller graphs */
+}
+
+table {
+    width: 80%; /* Reduce the table width */
+    margin: 0 auto 20px auto; /* Center the table and add space below */
+    border-collapse: collapse;
+    background: var(--color-white);
+    color: var(--color-medium-grey);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid var(--color-light-grey);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-weight: bold;
+}
+
+#financialAdvice {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: var(--highlight-gold);
+}
+
+.small-card {
+    width: 40px;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 10px;
+    background-color: var(--color-light-grey);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    color: var(--color-medium-grey);
+}
+
+.small-card canvas {
+    display: block;
+    margin: 0 auto;
+}
+.sidebar {
+    width: 250px;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow-color);
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar-header .logo {
+    width: 60px;
+    border-radius: 50%;
+}
+
+.sidebar h2 {
+    margin: 10px 0;
+    color: var(--color-gold);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin: 15px 0;
+}
+
+.sidebar-menu a {
+    color: var(--color-white);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: var(--color-medium-grey);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+}
