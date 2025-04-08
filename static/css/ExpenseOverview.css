@@ -1,7 +1,20 @@
-/* General Page Style */
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
-    background-color: #F5F5F5; /* Light Gray Background */
-    color: #002147; /* Navy Blue Text */
+    background-color: var(--color-light-grey); /* Light Gray Background */
+    color: var(--color-navy); /* Navy Blue Text */
     font-family: Arial, sans-serif; /* Clean font */
     margin: 0;
     padding: 0;
@@ -12,20 +25,20 @@ body {
     max-width: 800px; /* Wider for analysis sections */
     margin: 50px auto;
     padding: 20px;
-    background-color: white; /* White Box Background */
+    background-color: var(--color-white); /* White Box Background */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft Shadow */
+    box-shadow: 0 4px 8px var(--shadow-color); /* Soft Shadow */
 }
 
 /* Headings */
 h1, h2 {
-    color: #002147; /* Navy Blue */
+    color: var(--color-navy); /* Navy Blue */
     text-align: center;
     margin-bottom: 20px;
 }
 
 h2 {
-    border-bottom: 2px solid #FFD700; /* Gold Underline */
+    border-bottom: 2px solid var(--color-gold); /* Gold Underline */
     padding-bottom: 5px;
 }
 
@@ -33,7 +46,7 @@ h2 {
 section {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #EAEAEA; /* Light Gray Sections */
+    background-color: var(--color-light-grey); /* Light Gray Sections */
     border-radius: 8px;
 }
 
@@ -41,8 +54,8 @@ section {
 .chart-placeholder {
     width: 100%;
     height: 300px; /* Height for the chart placeholder */
-    background-color: #CCCCCC; /* Mid-gray Placeholder */
-    color: #002147; /* Navy Blue Text */
+    background-color: var(--color-medium-grey); /* Mid-gray Placeholder */
+    color: var(--color-navy); /* Navy Blue Text */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,25 +67,25 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    background-color: white; /* Table Background */
-    color: #002147; /* Navy Blue Text */
+    background-color: var(--color-white); /* Table Background */
+    color: var(--color-navy); /* Navy Blue Text */
 }
 
 th, td {
-    border: 1px solid #CCCCCC; /* Subtle Border */
+    border: 1px solid var(--color-light-grey); /* Subtle Border */
     padding: 10px;
     text-align: left;
 }
 
 th {
-    background-color: #FFD700; /* Gold Header Background */
-    color: #002147; /* Navy Blue Text */
+    background-color: var(--color-gold); /* Gold Header Background */
+    color: var(--color-navy); /* Navy Blue Text */
 }
 
 /* Buttons */
 button {
-    background-color: #002147; /* Navy Blue Button */
-    color: white; /* Button Text Color */
+    background-color: var(--color-navy); /* Navy Blue Button */
+    color: var(--color-white); /* Button Text Color */
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -83,18 +96,18 @@ button {
 }
 
 button:hover {
-    background-color: #004080; /* Darker Navy Blue on Hover */
+    background-color: var(--color-deep-blue); /* Darker Navy Blue on Hover */
 }
 
 /* Back Button */
 .back-button {
-    background-color: #FFD700; /* Gold Back Button */
-    color: #002147; /* Navy Blue Text */
+    background-color: var(--color-gold); /* Gold Back Button */
+    color: var(--color-navy); /* Navy Blue Text */
     margin-right: 10px;
 }
 
 .back-button:hover {
-    background-color: #CCAC00; /* Darker Gold on Hover */
+    background-color: var(--highlight-gold); /* Darker Gold on Hover */
 }
 
 /* Flash Message */
@@ -102,7 +115,7 @@ button:hover {
     margin: 10px 0;
     padding: 10px;
     border-radius: 4px;
-    color: white;
+    color: var(--color-white); /* White Text */
 }
 
 .flash-success {
@@ -124,91 +137,12 @@ button:hover {
 form {
     margin-top: 20px;
     padding: 20px;
-    background-color: #EAEAEA; /* Light Gray Form Background */
+    background-color: var(--color-light-grey); /* Light Gray Form Background */
     border-radius: 8px;
 }
 
 input[type="text"],
-input[type="number"],
+input[type = "number"],	
 textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-    background-color: white;
-    color: #002147; /* Navy Blue Text */
-}
-
-/* Input Focus States */
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-    border-color: #FFD700; /* Gold Border on Focus */
-    outline: none;
-}
-
-/* Textarea */
-textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-/* Submit Button */
-input[type="submit"],
-button.submit {
-    background-color: #4CAF50; /* Green Submit Button */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover,
-button.submit:hover {
-    background-color: #45A049; /* Darker Green on Hover */
-}
-
-/* List Styles */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #EAEAEA; /* Light Gray List Items */
-    color: #002147; /* Navy Blue Text */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 2.5em;
-    }
-
-    h2 {
-        font-size: 1.8em;
-    }
-
-    button,
-    input[type="submit"] {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea {
-        padding: 8px;
-    }
+    padding: 8px ;
 }

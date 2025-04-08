@@ -1,7 +1,20 @@
-/* General Page Styling */
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Light gray background */
+    background-color: var(--color-light-grey); /* Light gray background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,8 +24,8 @@ body {
 /* Sidebar */
 .sidebar {
     width: 250px;
-    background: #002147; /* Dark Blue */
-    color: white;
+    background: var(--color-navy); /* Dark Blue */
+    color: var(--color-white); /* White */
     height: 100vh;
     padding-top: 20px;
     position: fixed;
@@ -20,7 +33,7 @@ body {
     top: 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 5px var(--shadow-color); /* Use shadow color */
 }
 
 /* Sidebar Header */
@@ -49,7 +62,7 @@ body {
 
 .sidebar-menu a {
     text-decoration: none;
-    color: white;
+    color: var(--color-white); /* White */
     font-size: 16px;
     padding: 12px 20px;
     display: block;
@@ -58,8 +71,8 @@ body {
 }
 
 .sidebar-menu a:hover {
-    background: gold;
-    color: black;
+    background: var(--color-gold); /* Gold */
+    color: var(--color-navy); /* Navy Blue */
     transform: scale(1.05);
 }
 
@@ -79,7 +92,7 @@ body {
 
 h1 {
     font-size: 28px;
-    color: #002147;
+    color: var(--color-navy); /* Navy Blue */
 }
 
 /* Theme Switcher */
@@ -107,22 +120,22 @@ h1 {
     width: 90%;
     border-radius: 10px;
     margin-top: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px var(--shadow-color); /* Use shadow color */
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 15px;
-    background: #002147;
-    color: white;
+    background: var(--color-navy); /* Dark Blue */
+    color: var(--color-white); /* White */
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
 .logout-btn {
-    color: gold;
+    color: var(--color-gold); /* Gold */
     text-decoration: none;
     font-weight: bold;
 }

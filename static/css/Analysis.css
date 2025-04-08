@@ -1,18 +1,20 @@
 :root {
-  --primary-color: #002147; /* Dark Blue */
-  --secondary-color: gold; /* Gold */
-  --accent-color: rgba(255, 255, 255, 0.441);
-  --background-color: #f8f8f8; /* Light Gray */
-  --hover-color: #ffcc00; /* Lighter Gold */
-  --text-color: #002147;
-  --btn-text-color: #002147;
-  --btn-bg-color: gold;
-  --btn-hover-bg: #645f4b;
+  --color-navy: #002147; /* Dark Blue */
+  --color-gold: #FFD700; /* Gold */
+  --color-light-grey: #F5F5F5; /* Light Gray */
+  --color-deep-blue: #1f2641; /* Deep Blue */
+  --color-white: #fff; /* White */
+  --color-medium-grey: #222; /* Medium Grey */
+  --highlight-gold: #f4b400; /* Highlight Gold */
+  --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+
+  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+  --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 
 body {
   background: linear-gradient(135deg, #000000, #1a1a1a);
-  color: var(--secondary-color);
+  color: var(--color-navy); /* Dark Blue */
   font-family: "Poppins", Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -29,9 +31,9 @@ body {
   width: 100vw;
   min-height: 100vh; /* Changed to min-height for better content visibility */
   padding: 40px;
-  background: var(--accent-color);
+  background: var(--color-accent); /* Use accent color */
   border-radius: 0;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 12px 24px var(--shadow-color); /* Use shadow color */
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -43,13 +45,13 @@ h1 {
   font-size: 3em;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: #002147; /* Classic Navy Blue */
+  color: var(--color-navy); /* Dark Blue */
 }
 
 h2 {
   font-size: 2em;
   margin: 20px 0 10px;
-  color: var(--btn-bg-color); /* Classic Gold */
+  color: var(--color-gold); /* Gold */
 }
 
 /* Paragraphs */
@@ -66,21 +68,21 @@ input, select, textarea {
   margin: 12px 0;
   border: none;
   border-radius: 8px;
-  background-color: #444;
-  color: #FFD700;
+  background-color: var(--color-medium-grey); /* Medium Grey */
+  color: var(--color-gold); /* Gold */
   font-size: 16px;
   transition: background 0.3s;
 }
 
 input:focus, select:focus, textarea:focus {
-  background-color: #555;
+  background-color: #555; /* Keeping this as a fixed color for contrast */
   outline: none;
 }
 
 /* Buttons */
 button {
-  background: linear-gradient(90deg, #002147, #0056b3);
-  color: white;
+  background: linear-gradient(90deg, var(--color-navy), #0056b3); /* Dark Blue to a lighter blue */
+  color: var(--color-white); /* White */
   padding: 16px 32px;
   border: none;
   border-radius: 8px;
@@ -88,11 +90,11 @@ button {
   font-size: 18px;
   transition: background 0.3s, transform 0.2s;
   margin-top: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px var(--shadow-color); /* Use shadow color */
 }
 
 button:hover {
-  background: linear-gradient(90deg, #0056b3, #002147);
+  background: linear-gradient(90deg, #0056b3, var(--color-navy)); /* Lighter blue to Dark Blue */
   transform: scale(1.05);
 }
 
@@ -101,17 +103,17 @@ button:hover {
   margin: 12px 0;
   padding: 16px;
   border-radius: 8px;
-  color: white;
+  color: var(--color-white); /* White */
   font-size: 16px;
   font-weight: bold;
 }
 
 .flash-success {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Keeping this as a fixed color for success messages */
 }
 
 .flash-error {
-  background-color: #f44336;
+  background-color: #f44336; /* Keeping this as a fixed color for error messages */
 }
 
 /* Labels */
@@ -144,38 +146,3 @@ label {
 .diamond:nth-child(2) { top: 20%; right: 15%; }
 .diamond:nth-child(3) { bottom: 15%; left: 20%; }
 .diamond:nth-child(4) { bottom: 10%; right: 10%; }
-.diamond:nth-child(5) { top: 50%; left: 40%; }
-.diamond:nth-child(6) { top: 30%; left: 70%; }
-.diamond:nth-child(7) { top: 60%; right: 20%; }
-.diamond:nth-child(8) { bottom: 20%; left: 50%; }
-.diamond:nth-child(9) { bottom: 30%; right: 30%; }
-.diamond:nth-child(10) { top: 80%; left: 15%; }
-
-/* Sparkle Animation */
-@keyframes sparkle {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-  }
-  h1 {
-    font-size: 2em;
-  }
-  h2 {
-    font-size: 1.5em;
-  }
-  button {
-    padding: 12px 24px;
-    font-size: 16px;
-  }
-}

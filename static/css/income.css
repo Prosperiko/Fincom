@@ -8,7 +8,7 @@
   --highlight-gold: #f4b400;
   --shadow-color: rgba(0, 33, 71, 0.4);
 
-  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-light-grey), var(--color-gold));
+  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 body {

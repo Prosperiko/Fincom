@@ -1,6 +1,20 @@
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #1e3c72, #2a5298);
+    background: var(--background-gradient); /* Background gradient using root colors */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,17 +26,17 @@ body {
 button {
     padding: 12px 20px;
     font-size: 16px;
-    background: #ff9800;
-    color: white;
+    background: var(--highlight-gold); /* Gold background */
+    color: var(--color-white); /* White text */
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4); /* Adjust shadow color if needed */
     transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background: #e68900;
+    background: var(--color-gold); /* Darker gold on hover */
     transform: scale(1.1);
 }
 
@@ -30,8 +44,8 @@ button:hover {
     position: fixed;
     bottom: -100px;
     right: 20px;
-    background: #4CAF50;
-    color: white;
+    background: var(--color-navy); /* Navy background for notification */
+    color: var(--color-white); /* White text */
     padding: 15px 25px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -48,10 +62,10 @@ button:hover {
 
 @keyframes glow {
     from {
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.8); /* Adjust if needed */
     }
     to {
-        box-shadow: 0 0 20px rgba(76, 175, 80, 1);
+        box-shadow: 0 0 20px rgba(76, 175, 80, 1); /* Adjust if needed */
     }
 }
 
@@ -60,5 +74,5 @@ button:hover {
     font-weight: bold;
     cursor: pointer;
     margin-left: 15px;
-    color: white;
+    color: var(--color-white); /* White text for close button */
 }

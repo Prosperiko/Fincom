@@ -1,17 +1,30 @@
-/* ================= General Styles ================= */
+:root {
+    --color-navy: #002147;
+    --color-gold: #FFD700;
+    --color-light-grey: #F5F5F5;
+    --color-deep-blue: #1f2641;
+    --color-white: #fff;
+    --color-medium-grey: #222;
+    --highlight-gold: #f4b400;
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #111;
-    color: white;
+    background-color: var(--color-medium-grey); /* Changed to variable */
+    color: var(--color-white); /* Changed to variable */
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
 }
 
 /* ================= Header ================= */
 header {
-    background-color: #222;
+    background-color: var(--color-deep-blue); /* Changed to variable */
     padding: 20px 0;
 }
 
@@ -30,7 +43,7 @@ header .container {
 /* Navbar Title */
 header h1 {
     font-size: 24px;
-    color: #f4b400;
+    color: var(--highlight-gold); /* Changed to variable */
 }
 
 /* ================= Signup Form ================= */
@@ -47,7 +60,7 @@ header h1 {
 .signup-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #f4b400;
+    color: var(--highlight-gold); /* Changed to variable */
 }
 
 /* Input Fields */
@@ -65,7 +78,7 @@ header h1 {
     font-size: 16px;
     outline: none;
     background: rgba(255, 255, 255, 0.2);
-    color: white;
+    color: var(--color-white); /* Changed to variable */
 }
 
 .input-box input::placeholder {
@@ -76,23 +89,22 @@ header h1 {
 .signup-btn {
     width: 100%;
     padding: 12px;
-    background: #f4b400;
+    background: var(--highlight-gold); /* Changed to variable */
     border: none;
     border-radius: 8px;
     font-size: 18px;
-    color: #222;
+    color: var(--color-medium-grey); /* Changed to variable */
     cursor: pointer;
     transition: background 0.3s;
 }
 
 .signup-btn:hover {
-    background: #ffcc00;
+    background: var(--color-gold); /* Changed to variable */
 }
 
 /* Error Message */
 .error-message {
-    color: red;
-    display: none;
+    color: red; /* This can remain as is, or you can define a variable for error colors */
 }
 
 /* ================= Customer Type Selection ================= */
@@ -108,7 +120,7 @@ header h1 {
 }
 
 .customer-type label {
-    background: #222;
+    background: var(--color-deep-blue); /* Changed to variable */
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -116,8 +128,8 @@ header h1 {
 }
 
 .customer-type input:checked + label {
-    background: #f4b400;
-    color: #222;
+    background: var(--highlight-gold); /* Changed to variable */
+    color: var(--color-medium-grey); /* Changed to variable */
 }
 
 /* ================= Background Slideshow ================= */
@@ -131,14 +143,6 @@ header h1 {
     background-size: cover;
     background-position: center;
     animation: slide 10s infinite;
-}
-
-@keyframes slide {
-    0% { background-image: url('../img/slide1.png'); }
-    25% { background-image: url('../img/slide2.jpg'); }
-    50% { background-image: url('../img/slide4.webp'); }
-    75% { background-image: url('../img/slide4.jpg'); }
-    100% { background-image: url('../img/slide1.png'); }
 }
 
 /* ================= Responsive Design ================= */
@@ -164,8 +168,8 @@ header h1 {
 }
 select {
     color: black; /* Ensures the text is visible */
-    background-color: white; /* Sets a clear background */
-    border: 1px solid #ccc; /* Adds a light border */
+    background-color: var(--color-accent); /* Sets a clear background */
+    border: 1px solid var(--color-gold); /* Adds a light border */
     padding: 5px;
 }
 option {
