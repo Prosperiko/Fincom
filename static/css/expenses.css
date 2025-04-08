@@ -250,7 +250,22 @@ footer {
   30% { opacity: 1; }
   40% { opacity: 0; }
 }
+.logout-btn {
+  color: var(--color-white);
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
 
+.logout-btn:hover {
+  background-color: var(--highlight-gold);
+  color: var(--color-navy);
+}
 .slideshow-background img {
   animation: slideshow 20s infinite;
 }

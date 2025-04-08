@@ -146,3 +146,43 @@ footer {
   color: var(--color-white);
   box-shadow: 0 -2px 5px var(--shadow-color);
 }
+
+.logout-btn {
+  color: var(--color-white);
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: var(--highlight-gold);
+  color: var(--color-navy);
+}
+footer .social-media {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .social-media p {
+  font-size: 16px;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+footer .social-icon {
+  color: var(--color-gold);
+  font-size: 20px;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icon:hover {
+  color: var(--highlight-gold);
+  transform: scale(1.2);
+}
