@@ -1,7 +1,21 @@
+:root {
+    --color-navy: #002147;
+    --color-gold: #FFD700;
+    --color-light-grey: #F5F5F5;
+    --color-deep-blue: #1f2641;
+    --color-white: #fff;
+    --color-medium-grey: #222;
+    --highlight-gold: #f4b400;
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #000; /* Black background */
-    color: #fff; /* White text */
+    background-color: var(--color-medium-grey); /* Changed to variable */
+    color: var(--color-white); /* Changed to variable */
     margin: 0;
     padding: 20px;
 }
@@ -9,38 +23,38 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: #222; /* Darker background for the container */
+    background: var(--color-deep-blue); /* Changed to variable */
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Orange shadow */
+    box-shadow: 0 0 10px var(--highlight-gold); /* Changed to variable */
 }
 
 h1 {
     text-align: center;
-    color: #FFA500; /* Orange color for the heading */
+    color: var(--highlight-gold); /* Changed to variable */
 }
 
 label {
     display: block;
     margin: 10px 0 5px;
-    color: #FFA500; /* Orange color for labels */
+    color: var(--highlight-gold); /* Changed to variable */
 }
 
 input[type="email"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #FFA500; /* Orange border */
+    border: 1px solid var(--highlight-gold); /* Changed to variable */
     border-radius: 4px;
-    background-color: #333; /* Dark background for input */
-    color: #fff; /* White text for input */
+    background-color: var(--color-navy); /* Changed to variable */
+    color: var(--color-white); /* Changed to variable */
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #FFA500; /* Orange background */
-    color: #000; /* Black text */
+    background-color: var(--highlight-gold); /* Changed to variable */
+    color: var(--color-medium-grey); /* Changed to variable */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -48,7 +62,7 @@ button {
 }
 
 button:hover {
-    background-color: #ff8c00; /* Darker orange on hover */
+    background-color: var(--color-gold); /* Changed to variable */
 }
 
 .flashes {
@@ -63,20 +77,20 @@ button:hover {
 }
 
 .error {
-    background-color: rgba(255, 0, 0, 0.8); /* Red background for errors */
-    color: #fff;
+    background-color: rgba(255, 0, 0, 0.8); /* This can remain as is, or you can define a variable for error colors */
+    color: var(--color-white); /* Changed to variable */
 }
 
 .success {
-    background-color: rgba(0, 255, 0, 0.8); /* Green background for success */
-    color: #000;
+    background-color: rgba(0, 255, 0, 0.8); /* This can remain as is, or you can define a variable for success colors */
+    color: var(--color-medium-grey); /* Changed to variable */
 }
 
 a {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #FFA500; /* Orange color for the link */
+    color: var(--highlight-gold); /* Changed to variable */
     text-decoration: none;
 }
 

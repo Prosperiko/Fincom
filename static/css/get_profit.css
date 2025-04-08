@@ -1,10 +1,23 @@
-/* Global Styles */
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Off-white background */
-    color: #002147; /* Dark Blue text */
+    background-color: var(--color-light-grey); /* Off-white background */
+    color: var(--color-navy); /* Dark Blue text */
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -17,9 +30,9 @@ body {
 
 /* Navbar */
 header {
-    background-color: #002147; /* Dark Blue */
+    background-color: var(--color-navy); /* Dark Blue */
     padding: 20px 0;
-    color: white;
+    color: var(--color-white); /* White */
 }
 
 header .container {
@@ -37,7 +50,7 @@ header .container {
 /* Navbar Links */
 header h1 {
     font-size: 24px;
-    color: gold; /* Gold header */
+    color: var(--color-gold); /* Gold header */
 }
 
 nav ul {
@@ -52,28 +65,28 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: var(--color-white); /* White */
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: gold;
+    color: var(--color-gold); /* Gold on hover */
 }
 
 /* Hero Section */
 .hero {
     padding: 100px 0;
-    background: linear-gradient(to right, #002147, #004080);
+    background: linear-gradient(to right, var(--color-navy), var(--color-deep-blue)); /* Dark Blue to Deep Blue */
     text-align: center;
-    color: white;
+    color: var(--color-white); /* White */
 }
 
 .hero h2 {
     font-size: 36px;
     margin-bottom: 10px;
-    color: gold;
+    color: var(--color-gold); /* Gold */
 }
 
 .hero p {
@@ -85,8 +98,8 @@ nav ul li a:hover {
 .btn {
     display: inline-block;
     padding: 12px 24px;
-    background-color: gold;
-    color: #002147;
+    background-color: var(--color-gold); /* Gold */
+    color: var(--color-navy); /* Dark Blue */
     font-size: 18px;
     text-decoration: none;
     border-radius: 5px;
@@ -95,19 +108,19 @@ nav ul li a:hover {
 }
 
 .btn:hover {
-    background-color: #ffcc00;
+    background-color: var(--highlight-gold); /* Highlight Gold */
     transform: scale(1.05);
 }
 
 /* Features Section */
 .features {
     padding: 60px 0;
-    background-color: #e6e6e6; /* Light Gray */
+    background-color: var(--color-light-grey); /* Light Gray */
 }
 
 .features h2 {
     margin-bottom: 30px;
-    color: #002147;
+    color: var(--color-navy); /* Dark Blue */
 }
 
 /* Feature Grid */
@@ -121,7 +134,7 @@ nav ul li a:hover {
 .feature {
     width: 300px;
     padding: 20px;
-    background-color: white;
+    background-color: var(--color-white); /* White */
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
@@ -143,20 +156,20 @@ nav ul li a:hover {
 /* Call-to-Action */
 .cta {
     padding: 80px 0;
-    background: linear-gradient(to right, #004080, #002147);
+    background: linear-gradient(to right, var(--color-deep-blue), var(--color-navy)); /* Deep Blue to Dark Blue */
     text-align: center;
-    color: white;
+    color: var(--color-white); /* White */
 }
 
 .cta h2 {
     margin-bottom: 20px;
-    color: gold;
+    color: var(--color-gold); /* Gold */
 }
 
 /* Image Gallery */
 .image-gallery {
     padding: 60px 0;
-    background-color: #f8f8f8;
+    background-color: var(--color-light-grey); /* Light Gray */
 }
 
 .image-gallery .gallery-grid {
@@ -180,10 +193,10 @@ nav ul li a:hover {
 
 /* Footer */
 footer {
-    background-color: #002147;
+    background-color: var(--color-navy); /* Dark Blue */
     padding: 20px 0;
     text-align: center;
-    color: white;
+    color: var(--color-white); /* White */
 }
 
 /* Color Switcher */
@@ -204,6 +217,6 @@ footer {
 }
 
 .red { background-color: #ff4c4c; }
-.blue { background-color: #004080; }
+.blue { background-color: var(--color-deep-blue); /* Deep Blue */ }
 .green { background-color: #4caf50; }
-.yellow { background-color: gold; }
+.yellow { background-color: var(--color-gold); /* Gold */ }

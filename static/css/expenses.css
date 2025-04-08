@@ -8,7 +8,7 @@
   --highlight-gold: #f4b400;
   --shadow-color: rgba(0, 33, 71, 0.4);
 
-  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-light-grey), var(--color-gold));
+  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue),var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 /* Main Container */
@@ -266,7 +266,22 @@ footer {
   30% { opacity: 1; }
   40% { opacity: 0; }
 }
+.logout-btn {
+  color: var(--color-white);
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
 
+.logout-btn:hover {
+  background-color: var(--highlight-gold);
+  color: var(--color-navy);
+}
 .slideshow-background img {
   animation: slideshow 20s infinite;
 }

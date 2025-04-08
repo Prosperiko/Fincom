@@ -1,4 +1,17 @@
-/* ================= General Styles ================= */
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -7,8 +20,8 @@ body {
     height: 100vh;
     margin: 0;
     padding-top: 90px; /* Increased padding for better spacing */
-    background-color: #111;
-    color: white;
+    background-color: var(--color-medium-grey); /* Dark background */
+    color: var(--color-white); /* White text */
     text-align: center;
 }
 
@@ -18,7 +31,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #222;
+    background-color: var(--color-navy); /* Dark Blue */
     padding: 15px 0;
     z-index: 1000;
     display: flex;
@@ -44,7 +57,7 @@ header .container {
 /* Navbar Title */
 header h1 {
     font-size: 24px;
-    color: #f4b400;
+    color: var(--highlight-gold); /* Gold */
     margin: 0;
     text-align: center;
     flex-grow: 1;
@@ -93,23 +106,25 @@ header h1 {
     border-radius: 8px;
     font-size: 16px;
     outline: none;
+    background-color: var(--color-white); /* White background */
+    color: var(--color-navy); /* Navy Blue Text */
 }
 
 /* ================= Login Button ================= */
 .login-btn {
     width: 100%;
     padding: 12px;
-    background: #f4b400;
+    background: var(--highlight-gold); /* Gold */
     border: none;
     border-radius: 8px;
     font-size: 18px;
-    color: #222;
+    color: var(--color-medium-grey); /* Dark Grey Text */
     cursor: pointer;
     transition: background 0.3s;
 }
 
 .login-btn:hover {
-    background: #ffcc00;
+    background: var(--color-gold); /* Darker Gold on Hover */
 }
 
 /* ================= Login Link ================= */
@@ -119,7 +134,7 @@ header h1 {
 }
 
 .login-link a {
-    color: #f4b400;
+    color: var(--highlight-gold); /* Gold */
     text-decoration: none;
 }
 
@@ -180,10 +195,3 @@ header h1 {
     animation: slide 10s infinite;
 }
 
-@keyframes slide {
-    0% { background-image: url('../img/slide1.png'); }
-    25% { background-image: url('../img/slide2.jpg'); }
-    50% { background-image: url('../img/slide4.webp'); }
-    75% { background-image: url('../img/slide4.jpg'); }
-    100% { background-image: url('../img/slide1.png'); }
-}

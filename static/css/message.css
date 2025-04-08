@@ -1,122 +1,202 @@
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #007bff; /* Blue background color */
-    color: white; /* White text color for better contrast */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 90px; /* Increased padding for better spacing */
+    background-color: var(--color-medium-grey); /* Dark background */
+    color: var(--color-white); /* White text */
+    text-align: center;
+}
+
+/* ================= Header ================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-navy); /* Dark Blue */
+    padding: 15px 0;
+    z-index: 1000;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0; /* Ensure no default margin */
 }
 
-.container {
+/* Center content inside header */
+header .container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    max-width: 1000px;
-    padding: 20px;
-}
-
-.search-box {
+    max-width: 1200px;
     width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-    display: flex;
+    padding: 0 20px;
 }
 
-.search-input {
+/* Logo */
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+/* Navbar Title */
+header h1 {
+    font-size: 24px;
+    color: var(--highlight-gold); /* Gold */
+    margin: 0;
+    text-align: center;
     flex-grow: 1;
+}
+
+/* ================= Color Switcher ================= */
+.color-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.color-switcher button {
+    border: none;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-btn {
-    padding: 10px 15px;
-    background-color: #0056b3; /* Darker blue for buttons */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-left: 5px;
+    margin: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effect */
-}
-
-.search-btn:hover {
-    background-color: #004494; /* Even darker blue on hover */
-}
-
-.clear-btn {
-    padding: 10px 15px;
-    background-color: #dc3545; /* Red for clear button */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-left: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effect */
-}
-
-.clear-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
-
-.user-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.user-card {
-    background: #d4edda; /* Light green background for user cards */
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    width: 300px;
-    transition: transform 0.3s, box-shadow 0.3s; /* Add transition for hover effect */
-    animation: fadeIn 0.5s ease-in-out; /* Add fade-in animation */
-}
-
-.user-card:hover {
-    transform: scale(1.05); /* Scale effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
-
-.profile-pic {
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
-    margin-right: 15px;
+    width: 30px;
+    height: 30px;
 }
 
-.user-info {
-    flex-grow: 1;
+/* ================= Login Container ================= */
+.login-container {
+    width: 350px;
+    margin: 50px auto; /* Added more margin for better spacing */
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h3, p {
-    margin: 5px 0;
+/* ================= Input Fields ================= */
+.input-box {
+    margin: 12px 0;
+    width: 100%;
 }
 
-.message-btn {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #007bff; /* Blue for message button */
-    color: white;
+.input-box input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background-color: var(--color-white); /* White background */
+    color: var(--color-navy); /* Navy Blue Text */
+}
+
+/* ================= Login Button ================= */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--highlight-gold); /* Gold */
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    color: var(--color-medium-grey); /* Dark Grey Text */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: var(--color-gold); /* Darker Gold on Hover */
+}
+
+/* ================= Login Link ================= */
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: var(--highlight-gold); /* Gold */
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effect */
 }
 
-.message-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+/* ================= Image Container ================= */
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; /* Increased spacing */
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto; /* Centering */
 }
 
-/* Animation for fade-in effect */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.image-container img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
 }
+
+/* Bottom Image */
+.bottom-image {
+    width: 80%; /* Slightly reduced width for better alignment */
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ================= Responsive Adjustments ================= */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .image-container {
+        grid-template-columns: 1fr;
+    }
+
+    .login-container {
+        width: 90%;
+    }
+}
+
+/* ================= Background Slideshow ================= */
+.background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    animation: slide 10s infinite;
+}
+
+
+
+
+
+

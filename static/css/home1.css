@@ -7,11 +7,10 @@
     --color-medium-grey: #222;
     --highlight-gold: #f4b400;
     --shadow-color: rgba(0, 33, 71, 0.4);
-
-    --background-gradient: var(--color-navy); /* Navy Blue Background */
-    --color-accent: linear-gradient(to right, #FFA500, #FFFFFF);
-}
-
+  
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+  }
 body {
     margin: 0;
     padding: 0;
