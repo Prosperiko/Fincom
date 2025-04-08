@@ -1,5 +1,5 @@
 :root {
-<<<<<<< HEAD
+
   --color-navy: #002147; /* Dark Blue */
   --color-gold: #FFD700; /* Gold */
   --color-light-grey: #F5F5F5; /* Light Gray */
@@ -16,7 +16,7 @@
 body {
   background: linear-gradient(135deg, #000000, #1a1a1a);
   color: var(--color-navy); /* Dark Blue */
-=======
+
   --primary-color: #002147; /* Dark Blue */
   --secondary-color: #FFD700; /* Gold */
   --accent-color: rgba(255, 255, 255, 0.441); /* Light Transparent White */
@@ -36,7 +36,7 @@ body {
 body {
   background: var(--color-navy);
   color: var(--secondary-color);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
   font-family: "Poppins", Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -142,22 +142,19 @@ h1 {
   font-size: 3em;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-<<<<<<< HEAD
+
   color: var(--color-navy); /* Dark Blue */
-=======
+
   color: var(--color-navy);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
 }
 
 h2 {
   font-size: 2em;
   margin: 20px 0 10px;
-<<<<<<< HEAD
-  color: var(--color-gold); /* Gold */
-=======
-  color: var(--btn-bg-color);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
-}
+
+  color: var(--color-gold),var(--btn-bg-color);
+
 
 /* Paragraphs */
 p {
@@ -173,35 +170,34 @@ input, select, textarea {
   margin: 12px 0;
   border: none;
   border-radius: 8px;
-<<<<<<< HEAD
+
   background-color: var(--color-medium-grey); /* Medium Grey */
   color: var(--color-gold); /* Gold */
-=======
+
   background-color: var(--color-medium-grey);
   color: var(--color-gold);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   font-size: 16px;
   transition: background 0.3s;
 }
 
 input:focus, select:focus, textarea:focus {
-<<<<<<< HEAD
+
   background-color: #555; /* Keeping this as a fixed color for contrast */
-=======
+
   background-color: var(--hover-color);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
   outline: none;
 }
 
 /* Buttons */
 button {
-<<<<<<< HEAD
+
   background: linear-gradient(90deg, var(--color-navy), #0056b3); /* Dark Blue to a lighter blue */
   color: var(--color-white); /* White */
-=======
+
   background: linear-gradient(90deg, var(--color-navy), #0056b3);
   color: var(--color-white);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
   padding: 16px 32px;
   border: none;
   border-radius: 8px;
@@ -213,11 +209,11 @@ button {
 }
 
 button:hover {
-<<<<<<< HEAD
+
   background: linear-gradient(90deg, #0056b3, var(--color-navy)); /* Lighter blue to Dark Blue */
-=======
+
   background: linear-gradient(90deg, #0056b3, var(--color-navy));
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
   transform: scale(1.05);
 }
 
@@ -226,11 +222,10 @@ button:hover {
   margin: 12px 0;
   padding: 16px;
   border-radius: 8px;
-<<<<<<< HEAD
   color: var(--color-white); /* White */
-=======
+
   color: var(--color-white);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
   font-size: 16px;
   font-weight: bold;
 }
@@ -272,9 +267,7 @@ label {
 .diamond:nth-child(1) { top: 10%; left: 10%; }
 .diamond:nth-child(2) { top: 20%; right: 15%; }
 .diamond:nth-child(3) { bottom: 15%; left: 20%; }
-<<<<<<< HEAD
 .diamond:nth-child(4) { bottom: 10%; right: 10%; }
-=======
 .diamond:nth-child(4) { bottom: 10%; right: 10%; }
 .diamond:nth-child(5) { top: 50%; left: 40%; }
 .diamond:nth-child(6) { top: 30%; left: 70%; }
@@ -311,4 +304,4 @@ label {
     font-size: 16px;
   }
 }
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+}

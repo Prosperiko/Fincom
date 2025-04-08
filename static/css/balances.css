@@ -16,7 +16,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color-light-grey); /* Light Gray */
+    background-color: var(--color-accent); /* Light Gray */
     color: var(--color-navy); /* Dark Blue */
     text-align: center;
 }
