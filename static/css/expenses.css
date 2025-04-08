@@ -13,7 +13,7 @@
 }
 /* General Page Style */
 body {
-  background-color: white; /* Updated to Gray */
+  background-color: var(--color-navy); /* Updated to Gray */
   color: #002147; /* Navy Blue */
   font-family: Arial, sans-serif;
   margin: 0;
@@ -76,20 +76,25 @@ body {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background-color: white; /* White Background */
+  background-color: var(--color-navy); /* White Background */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--color-gold);
 }
-
+h2 {
+  font-size: 24px;
+  color: var(--color-gold); /* Gold */
+  text-align: center;
+  margin-bottom: 20px;
+}
 /* Inputs and Select */
 input, select, textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #002147; /* Navy Blue Border */
+  border: 1px solid var(--color-navy); /* Navy Blue Border */
   border-radius: 4px;
-  background-color: white;
-  color: #002147;
+  background-color: var(--color-white);
+  color: var(--color-navy);
 }
 
 /* Buttons */
@@ -109,29 +114,22 @@ button:hover {
   background-color: #CCAC00; /* Darker Gold */
 }
 
-.back-button {
-  background-color: #002147; /* Navy Blue */
-  color: white;
-}
 
-.back-button:hover {
-  background-color: #00152E; /* Darker Navy */
-}
 
 /* Flash Messages */
 .flash-message {
   margin: 10px 0;
   padding: 10px;
   border-radius: 4px;
-  color: grey;
+  color: var(--color-navy);
 }
 
 .flash-success {
-  background-color: #4CAF50; /* Green */
+  background-color: var(--color-gold); /* Green */
 }
 
 .flash-error {
-  background-color: #F44336; /* Red */
+  background-color: var(--color-deep-blue); /* Red */
 }
 
 /* Labels */
@@ -183,7 +181,7 @@ label {
   display: none;
   background: white; /* Change to white for better visibility */
   border: 1px solid #FFD700;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--color-gold);
   border-radius: 5px;
   z-index: 1000; /* Ensure it is above other elements */
   max-height: 200px;
@@ -234,7 +232,17 @@ label {
 .slideshow-background img:first-child {
   opacity: 1;
 }
-
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Start from the very left of the page */
+  background-color: var(--color-medium-grey);
+  width: 100%; /* Cover the entire width of the page */
+  padding: 1px;
+  text-align: center;
+  color: var(--color-white);
+  box-shadow: 0 -2px 5px var(--shadow-color);
+}
 /* Animation for slideshow */
 @keyframes slideshow {
   0% { opacity: 0; }
@@ -242,7 +250,22 @@ label {
   30% { opacity: 1; }
   40% { opacity: 0; }
 }
+.logout-btn {
+  color: var(--color-white);
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
 
+.logout-btn:hover {
+  background-color: var(--highlight-gold);
+  color: var(--color-navy);
+}
 .slideshow-background img {
   animation: slideshow 20s infinite;
 }
@@ -260,3 +283,26 @@ label {
   animation-delay: 20s;
 }
 
+footer .social-media {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .social-media p {
+  font-size: 16px;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+footer .social-icon {
+  color: var(--color-gold);
+  font-size: 20px;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icon:hover {
+  color: var(--highlight-gold);
+  transform: scale(1.2);
+}

@@ -12,7 +12,7 @@
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 body {
-  background-color: #F5F5F5; /* Light Gray */
+  background-color: var(--color-navy); /* Light Gray */
   color: #002147; /* Navy Blue */
   font-family: Arial, sans-serif;
 }
@@ -72,18 +72,23 @@ body {
   max-width: 500px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #FFFFFF; /* White */
+  background-color: var(--color-navy); /* White */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--color-gold);
 }
-
+h2 {
+  font-size: 24px;
+  color: var(--color-gold); /* Gold */
+  text-align: center;
+  margin-bottom: 20px;
+}
 input, select, textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: none;
   border-radius: 4px;
-  background-color: #FFFFFF; /* White */
+  background-color: var(--color-white); /* White */
   color: #002147; /* Navy Blue */
 }
 
@@ -128,4 +133,56 @@ button:hover {
 
 label {
   font-weight: bold;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Start from the very left of the page */
+  background-color: var(--color-medium-grey);
+  width: 100%; /* Cover the entire width of the page */
+  padding: 1px;
+  text-align: center;
+  color: var(--color-white);
+  box-shadow: 0 -2px 5px var(--shadow-color);
+}
+
+.logout-btn {
+  color: var(--color-white);
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: var(--color-gold);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: var(--highlight-gold);
+  color: var(--color-navy);
+}
+footer .social-media {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .social-media p {
+  font-size: 16px;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+footer .social-icon {
+  color: var(--color-gold);
+  font-size: 20px;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
+}
+
+footer .social-icon:hover {
+  color: var(--highlight-gold);
+  transform: scale(1.2);
 }

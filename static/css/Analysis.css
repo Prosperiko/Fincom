@@ -1,4 +1,5 @@
 :root {
+<<<<<<< HEAD
   --color-navy: #002147; /* Dark Blue */
   --color-gold: #FFD700; /* Gold */
   --color-light-grey: #F5F5F5; /* Light Gray */
@@ -15,6 +16,27 @@
 body {
   background: linear-gradient(135deg, #000000, #1a1a1a);
   color: var(--color-navy); /* Dark Blue */
+=======
+  --primary-color: #002147; /* Dark Blue */
+  --secondary-color: #FFD700; /* Gold */
+  --accent-color: rgba(255, 255, 255, 0.441); /* Light Transparent White */
+  --background-color: #f8f8f8; /* Light Gray */
+  --hover-color: #ffcc00; /* Lighter Gold */
+  --text-color: #002147; /* Navy Blue */
+  --btn-text-color: #002147; /* Navy Blue */
+  --btn-bg-color: #FFD700; /* Gold */
+  --btn-hover-bg: #645f4b; /* Darker Gold */
+  --shadow-color: rgba(0, 33, 71, 0.4); /* Navy Shadow */
+  --color-navy: #002147; /* Navy Blue */
+  --color-white: #fff; /* White */
+  --color-medium-grey: #222; /* Medium Grey */
+  --color-gold: #FFD700; /* Gold */
+}
+
+body {
+  background: var(--color-navy);
+  color: var(--secondary-color);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   font-family: "Poppins", Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -26,10 +48,79 @@ body {
   overflow: hidden;
 }
 
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 2px 0 5px var(--shadow-color);
+}
+
+.sidebar-header {
+  text-align: center;
+}
+
+.sidebar-header .logo {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.sidebar h2 {
+  margin: 10px 0;
+  color: var(--color-gold);
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  margin: 15px 0;
+}
+
+.sidebar-menu a {
+  color: var(--color-white);
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: var(--color-medium-grey);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+/* Main Container */
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: var(--color-navy);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+h2 {
+  font-size: 24px;
+  color: var(--color-gold);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 /* Full-Screen Container for Content */
 .container {
   width: 100vw;
-  min-height: 100vh; /* Changed to min-height for better content visibility */
+  min-height: 100vh;
   padding: 40px;
   background: var(--color-accent); /* Use accent color */
   border-radius: 0;
@@ -37,21 +128,35 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  z-index: 1; /* Ensure content is above diamonds */
+  z-index: 1;
 }
-
+.main-content {
+  margin-left: 250px; /* Matches the sidebar width */
+  padding: 20px;
+  flex: 1;
+  background: var(--accent-color);
+  overflow: auto;
+}
 /* Headings */
 h1 {
   font-size: 3em;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+<<<<<<< HEAD
   color: var(--color-navy); /* Dark Blue */
+=======
+  color: var(--color-navy);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
 }
 
 h2 {
   font-size: 2em;
   margin: 20px 0 10px;
+<<<<<<< HEAD
   color: var(--color-gold); /* Gold */
+=======
+  color: var(--btn-bg-color);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
 }
 
 /* Paragraphs */
@@ -68,21 +173,35 @@ input, select, textarea {
   margin: 12px 0;
   border: none;
   border-radius: 8px;
+<<<<<<< HEAD
   background-color: var(--color-medium-grey); /* Medium Grey */
   color: var(--color-gold); /* Gold */
+=======
+  background-color: var(--color-medium-grey);
+  color: var(--color-gold);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   font-size: 16px;
   transition: background 0.3s;
 }
 
 input:focus, select:focus, textarea:focus {
+<<<<<<< HEAD
   background-color: #555; /* Keeping this as a fixed color for contrast */
+=======
+  background-color: var(--hover-color);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   outline: none;
 }
 
 /* Buttons */
 button {
+<<<<<<< HEAD
   background: linear-gradient(90deg, var(--color-navy), #0056b3); /* Dark Blue to a lighter blue */
   color: var(--color-white); /* White */
+=======
+  background: linear-gradient(90deg, var(--color-navy), #0056b3);
+  color: var(--color-white);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   padding: 16px 32px;
   border: none;
   border-radius: 8px;
@@ -94,7 +213,11 @@ button {
 }
 
 button:hover {
+<<<<<<< HEAD
   background: linear-gradient(90deg, #0056b3, var(--color-navy)); /* Lighter blue to Dark Blue */
+=======
+  background: linear-gradient(90deg, #0056b3, var(--color-navy));
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   transform: scale(1.05);
 }
 
@@ -103,7 +226,11 @@ button:hover {
   margin: 12px 0;
   padding: 16px;
   border-radius: 8px;
+<<<<<<< HEAD
   color: var(--color-white); /* White */
+=======
+  color: var(--color-white);
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
   font-size: 16px;
   font-weight: bold;
 }
@@ -133,11 +260,11 @@ label {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
   animation: sparkle 2s infinite alternate;
-  z-index: 0; /* Ensure diamonds are below content */
+  z-index: 0;
 }
 
 .diamond.orange {
-  background: rgba(255, 165, 0, 0.5); /* Orange diamond */
+  background: rgba(255, 165, 0, 0.5);
   box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
 }
 
@@ -145,4 +272,43 @@ label {
 .diamond:nth-child(1) { top: 10%; left: 10%; }
 .diamond:nth-child(2) { top: 20%; right: 15%; }
 .diamond:nth-child(3) { bottom: 15%; left: 20%; }
+<<<<<<< HEAD
 .diamond:nth-child(4) { bottom: 10%; right: 10%; }
+=======
+.diamond:nth-child(4) { bottom: 10%; right: 10%; }
+.diamond:nth-child(5) { top: 50%; left: 40%; }
+.diamond:nth-child(6) { top: 30%; left: 70%; }
+.diamond:nth-child(7) { top: 60%; right: 20%; }
+.diamond:nth-child(8) { bottom: 20%; left: 50%; }
+.diamond:nth-child(9) { bottom: 30%; right: 30%; }
+.diamond:nth-child(10) { top: 80%; left: 15%; }
+
+/* Sparkle Animation */
+@keyframes sparkle {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+>>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
