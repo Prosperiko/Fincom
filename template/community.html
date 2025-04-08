@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/logo.webp') }}">
+    <title>Communication App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background for the body */
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background: #333; /* Dark background for header */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin: 0 10px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            background: #ffcc00; /* Golden background for nav links */
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background: #ff9900; /* Darker gold on hover */
+        }
+        
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background for the container */
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Search bar styles */
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 100px); /* Adjust width to accommodate button */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd; /* Keep border light for contrast */
+            background: rgba(255, 255, 255, 0.1); /* Light transparent background for inputs */
+            color: white; /* White text for inputs */
+        }
+
+        .search-bar button {
+            background: #ff9900; /* Orange background for buttons */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #cc7a00; /* Darker orange on hover */
+        }
+
+        .post-container {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black for posts */
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-header h2 {
+            margin: 0;
+            color: #ffcc00; /* Golden color for post titles */
+        }
+        
+        .post-header small {
+            color: lightblue; /* Light blue for post metadata */
+        }
+        
+        .post p {
+            font-size: 16px;
+            color: #00aaff; /* Light blue for post content */
+            text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff; /* Shiny effect */
+        }
+        
+        .post-image, .post-video {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        form {
+            margin-top: 15px;
+        }
+        
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd; /* Keep border light for contrast */
+            background: rgba(255, 255, 255, 0.1); /* Light transparent background for inputs */
+            color: white; /* White text for inputs */
+        }
+        
+        button {
+            background: #ff9900; /* Orange background for buttons */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #cc7a00; /* Darker orange on hover */
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #333; /* Dark background for footer */
+            color: white;
+            margin-top: 20px;
+        }
+        
+        /* Light blue accents */
+        h1, h2, h3 {
+            color: #00aaff; /* Light blue for headings */
+            text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff; /* Shiny effect */
+        }
+        
+        /* Shining light blue for responses */
+        .responses p {
+            color: #00aaff; /* Light blue for responses */
+            text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff; /* Shiny effect */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">CommApp</div>
+        <nav>
+            <ul>
+                <button onclick="window.location.href='/chatbox'">CHAT</button>
+                <button onclick="window.location.href='/home1'">HOME</button>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>What's on your mind?</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search by content or username..." onkeyup="filterPosts()">
+            <button onclick="filterPosts()">Search</button>
+        </div>
+
+        <form action="{{ url_for('post') }}" method="POST" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Post Title" required>
+            <textarea name="content" placeholder="What's on your mind?" required></textarea>
+            
+            <label>Upload Media:</label>
+            <input type="file" name="media" accept="image/*,video/*">
+            
+            <button type="submit">Post</button>
+        </form>
+
+        <div class="posts" id="posts">
+            {% for post in posts %}
+                <div class="post-container" data-username="{{ post.username }}" data-content="{{ post.content }}">
+                    <div class="post-header">
+                        <h2>{{ post.title }}</h2>
+                        <small>by {{ post.username }} on {{ post.timestamp }}</small>
+                    </div>
+                    <p>{{ post.content }}</p>
+                    
+                    {% if post.media_filename %}
+                        {% if post.media_type == 'image' %}
+                            <img src="{{ url_for('static', filename='img/' + post.media_filename) }}" alt="Post Image" class="post-image">
+                        {% elif post.media_type == 'video' %}
+                            <video controls class="post-video">
+                                <source src="{{ url_for('static', filename='video/' + post.media_filename) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <form action="{{ url_for('respond', post_id=post.id) }}" method="POST">
+                        <textarea name="response" placeholder="Your response..." required></textarea>
+                        <button type="submit">Respond</button>
+                    </form>
+                    
+                    <div class="responses">
+                        <h3>Responses:</h3>
+                        {% for response in post.responses %}
+                            <p><strong>{{ response.username }}:</strong> {{ response.content }} 
+                               <small>on {{ response.timestamp }}</small></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <p>No posts found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CommApp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function filterPosts() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const posts = document.querySelectorAll('.post-container');
+
+            posts.forEach(post => {
+                const username = post.getAttribute('data-username').toLowerCase();
+                const content = post.getAttribute('data-content').toLowerCase();
+                
+                if (username.includes(filter) || content.includes(filter)) {
+                    post.style.display = ""; // Show post
+                } else {
+                    post.style.display = "none"; // Hide post
+                }
+            });
+        }
+    </script>
+</body>
+</html>

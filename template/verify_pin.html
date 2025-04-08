@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify PIN</title>
+    <link rel="stylesheet" href="../static/css/verify_pin.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+</head>
+<body>
+
+    <!-- Background Slideshow -->
+    <div class="background-slideshow"></div>
+
+    <div class="container">
+        <h1>Verify Your PIN</h1>
+        <p>Enter the PIN sent to your email to verify your account.</p>
+
+        <form action="/verify_pin" method="POST" onsubmit="return validatePin()">
+            <input type="text" id="pin" name="pin" placeholder="Enter your PIN" maxlength="6" required>
+            <p id="error-message" style="color: red; display: none;">PIN must be 6 digits!</p>
+            <button type="submit" class="btn">Verify</button>
+        </form>
+
+        <a href="/signup" class="back-link">Back to Signup</a>
+    </div>
+
+    <script>
+        // Background Slideshow
+        const images = [
+            '../static/img/bg1.jpg',
+            '../static/img/bg2.jpg',
+            '../static/img/bg3.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        function changeBackground() {
+            document.querySelector('.background-slideshow').style.backgroundImage = `url(${images[currentImageIndex]})`;
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+        }
+        setInterval(changeBackground, 5000); // Change every 5 seconds
+
+        // PIN Validation
+        function validatePin() {
+            const pinInput = document.getElementById("pin");
+            const errorMessage = document.getElementById("error-message");
+
+            if (!/^\d{6}$/.test(pinInput.value)) {
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            errorMessage.style.display = "none";
+            return true;
+        }
+    </script>
+
+</body>
+</html>
+
+

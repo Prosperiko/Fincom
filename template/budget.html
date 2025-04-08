@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budget.css') }}">
+    
+    
+    <h1>Set Your Budget</h1>
+
+    <form action="{{ url_for('budget') }}" method="POST" id="budget-form">
+        <label for="category">Budget Category:</label>
+        <input type="text" id="category" name="category" required>
+
+        <label for="amount">Budget Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Set Budget</button>
+    </form>
+
+    <h2>Your Budgets</h2>
+    <div class="budget-list">
+        {% for budget in budgets %}
+            <div class="budget-item">
+                <p>Category: {{ budget[2] }}</p> <!-- Assuming budget[2] is the category -->
+                <p>Amount: ${{ budget[3] }}</p> <!-- Assuming budget[3] is the amount -->
+                <p>Set on: {{ budget[4] }}</p> <!-- Assuming budget[4] is the created_at timestamp -->
+                <form action="{{ url_for('update_budget', budget_id=budget[0]) }}" method="POST" class="budget-update-form">
+                    <label for="update-amount-{{ budget[0] }}">Amount to Add/Reduce:</label>
+                    <input type="number" id="update-amount-{{ budget[0] }}" name="update_amount" required>
+                    <button type="submit">Update Budget</button>
+                </form>
+            </div>
+        {% else %}
+            <p>No budgets found.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        document.querySelectorAll('.budget-update-form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                const updateAmount = parseFloat(this.querySelector('input[name="update_amount"]').value);
+                if (isNaN(updateAmount) || updateAmount <= 0) {
+                    event.preventDefault(); // Prevent form submission if the amount is invalid
+                    alert("Please enter a valid amount to add or reduce.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
