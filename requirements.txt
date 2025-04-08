@@ -1,0 +1,8 @@
+Flask==2.3.2
+Flask-Bcrypt==1.0.1
+Flask-Mail==0.9.1
+Flask-SocketIO==5.3.2
+itsdangerous==2.1.2
+mysql-connector-python==8.0.33
+sqlite3==3.36.0  # (sqlite3 is built-in with Python, so you don't need to install it separately)
+Flask-WTF==1.0.1
