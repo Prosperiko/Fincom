@@ -417,6 +417,7 @@ def balances():
 
 
 
+
 def update_profit(user_id):
     """Calculate and update profit based on transactions for a user."""
     conn = get_db_connection()
@@ -453,95 +454,44 @@ def add_expenses(submitter_name, expense_type, payment_method, category, descrip
     if conn:
         cursor = conn.cursor()
         try:
-            # Check if the user is logged in
-            if 'email' in session:
-                # Fetch the user_id based on the username
-                cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
-                user_row = cursor.fetchone()
-                
-                if not user_row:
-                    flash("User  not found. Please log in again.", "error")
-                    return
-                
-                user_id = user_row[0]
-
-                # Check if the user is a worker
-                cursor.execute("""
-                    SELECT company_id
-                    FROM workers w
-                    JOIN users u ON w.user_id = u.id
-                    WHERE u.email = ?
-                """, (session['email'],))
-                company_row = cursor.fetchone()
-
-                # Calculate total amount
-                total_amount = amount * quantity  # Total amount is calculated here
-
-                if company_row:
-                    # User is a worker, use company_id
-                    company_id = company_row[0]
-
-                    # Insert expense with company_id
-                    cursor.execute("""
-                        INSERT INTO transactions (company_id, name, type, account, category, description, amount, quantity)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (company_id, submitter_name, expense_type, payment_method, category, description, total_amount, quantity))
-
-                    # Update company profit
-                    cursor.execute("""
-                        UPDATE companies
-                        SET profit = COALESCE(profit, 0) - ?,
-                            total_expenses = COALESCE(total_expenses, 0) + ?
-                        WHERE id = ?
-                    """, (total_amount, total_amount, company_id))
-
-                    # Update cash or card balance for the company
-                    if payment_method.lower() == 'cash':
-                        cursor.execute("""
-                            UPDATE companies
-                            SET cash_balance = COALESCE(cash_balance, 0) - ?
-                            WHERE id = ?
-                        """, (total_amount, company_id))
-                    elif payment_method.lower() == 'card':
-                        cursor.execute("""
-                            UPDATE companies
-                            SET card_balance = COALESCE(card_balance, 0) - ?
-                            WHERE id = ?
-                        """, (total_amount, company_id))
-
-                else:
-                    # User is not a worker, use user_id
-                    # Insert expense with user_id
-                    cursor.execute("""
-                        INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (user_id, submitter_name, expense_type, payment_method, category, description, total_amount, quantity))
-
-                    # Update user profit
-                    cursor.execute("""
-                        UPDATE users
-                        SET profit = COALESCE(profit, 0) - ?,
-                            total_expenses = COALESCE(total_expenses, 0) + ?
-                        WHERE id = ?
-                    """, (total_amount, total_amount, user_id))
-
-                    # Update cash or card balance for the user
-                    if payment_method.lower() == 'cash':
-                        cursor.execute("""
-                            UPDATE users
-                            SET cash_balance = COALESCE(cash_balance, 0) - ?
-                            WHERE id = ?
-                        """, (total_amount, user_id))
-                    elif payment_method.lower() == 'card':
-                        cursor.execute("""
-                            UPDATE users
-                            SET card_balance = COALESCE(card_balance, 0) - ?
-                            WHERE id = ?
-                        """, (total_amount, user_id))
-
-            else:
-                flash("You need to log in first!", "error")
+            # Fetch the user_id based on the username
+            cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
+            user_row = cursor.fetchone()
+            if not user_row:
+                flash("User  not found. Please log in again.", "error")
                 return
+            user_id = user_row[0]
+
+            # Calculate total amount
+            total_amount = amount * quantity  # Total amount is calculated here
+
+            # Insert expense with user_id
+            cursor.execute("""
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, expense_type, payment_method, category, description, total_amount, quantity))
+
+            # Update user profit
+            cursor.execute("""
+                UPDATE users
+                SET profit = COALESCE(profit, 0) - ?,
+                    total_expenses = COALESCE(total_expenses, 0) + ?
+                WHERE id = ?
+            """, (total_amount, total_amount, user_id))
+
+            # Update cash or card balance
+            if payment_method.lower() == 'cash':
+                cursor.execute("""
+                    UPDATE users
+                    SET cash_balance = COALESCE(cash_balance, 0) - ?
+                    WHERE id = ?
+                """, (total_amount, user_id))
+            elif payment_method.lower() == 'card':
+                cursor.execute("""
+                    UPDATE users
+                    SET card_balance = COALESCE(card_balance, 0) - ?
+                    WHERE id = ?
+                """, (total_amount, user_id))
 
             conn.commit()
             flash("Expense added successfully!", "success")
@@ -599,104 +549,49 @@ def sum_total_expenses():
 def total_expenses():
     return render_template('total_expenses.html', total=sum_total_expenses())
 
-# Function to add an income
 def add_income(submitter_name, income_type, payment_method, category, description, amount, quantity):
     conn = get_db_connection()
     if conn:
         cursor = conn.cursor()
         try:
-            # Check if the user is logged in as a worker or a regular user
-            if 'email' in session:
-                # Fetch the user_id based on the username
-                cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
-                user_row = cursor.fetchone()
-                
-                if not user_row:
-                    flash("User  not found. Please log in again.", "error")
-                    return
-                
-                user_id = user_row[0]
-
-                # Check if the user is a worker
-                cursor.execute("""
-                    SELECT company_id
-                    FROM workers w
-                    JOIN users u ON w.user_id = u.id
-                    WHERE u.email = ?
-                """, (session['email'],))
-                company_row = cursor.fetchone()
-
-                if company_row:
-                    # User is a worker, use company_id
-                    company_id = company_row[0]
-
-                    # Calculate total amount
-                    total_amount = amount * quantity  # Total amount is calculated here
-
-                    # Insert income with company_id
-                    cursor.execute("""
-                        INSERT INTO transactions (company_id, name, type, account, category, description, amount, quantity)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (company_id, submitter_name, income_type, payment_method, category, description, total_amount, quantity))
-
-                    # Update company profit
-                    cursor.execute("""
-                        UPDATE companies
-                        SET profit = COALESCE(profit, 0) + ?,
-                            total_income = COALESCE(total_income, 0) + ?
-                        WHERE id = ?
-                    """, (total_amount, total_amount, company_id))
-
-                    # Update cash or card balance for the company
-                    if payment_method.lower() == 'cash':
-                        cursor.execute("""
-                            UPDATE companies
-                            SET cash_balance = COALESCE(cash_balance, 0) + ?
-                            WHERE id = ?
-                        """, (total_amount, company_id))
-                    elif payment_method.lower() == 'card':
-                        cursor.execute("""
-                            UPDATE companies
-                            SET card_balance = COALESCE(card_balance, 0) + ?
-                            WHERE id = ?
-                        """, (total_amount, company_id))
-
-                else:
-                    # User is not a worker, use user_id
-                    # Calculate total amount
-                    total_amount = amount * quantity  # Total amount is calculated here
-
-                    # Insert income with user_id
-                    cursor.execute("""
-                        INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (user_id, submitter_name, income_type, payment_method, category, description, total_amount, quantity))
-
-                    # Update user profit
-                    cursor.execute("""
-                        UPDATE users
-                        SET profit = COALESCE(profit, 0) + ?,
-                            total_income = COALESCE(total_income, 0) + ?
-                        WHERE id = ?
-                    """, (total_amount, total_amount, user_id))
-
-                    # Update cash or card balance for the user
-                    if payment_method.lower() == 'cash':
-                        cursor.execute("""
-                            UPDATE users
-                            SET cash_balance = COALESCE(cash_balance, 0) + ?
-                            WHERE id = ?
-                        """, (total_amount, user_id))
-                    elif payment_method.lower() == 'card':
-                        cursor.execute("""
-                            UPDATE users
-                            SET card_balance = COALESCE(card_balance, 0) + ?
-                            WHERE id = ?
-                        """, (total_amount, user_id))
-
-            else:
-                flash("You need to log in first!", "error")
+            # Fetch the user_id based on the username
+            cursor.execute("SELECT id FROM users WHERE username = ?", (submitter_name,))
+            user_row = cursor.fetchone()
+            if not user_row:
+                flash("User  not found. Please log in again.", "error")
                 return
+            user_id = user_row[0]
+
+            # Calculate total amount
+            total_amount = amount * quantity  # Total amount is calculated here
+
+            # Insert income with user_id
+            cursor.execute("""
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, income_type, payment_method, category, description, total_amount, quantity))
+
+            # Update user profit
+            cursor.execute("""
+                UPDATE users
+                SET profit = COALESCE(profit, 0) + ?,
+                    total_income = COALESCE(total_income, 0) + ?
+                WHERE id = ?
+            """, (total_amount, total_amount, user_id))
+
+            # Update cash or card balance
+            if payment_method.lower() == 'cash':
+                cursor.execute("""
+                    UPDATE users
+                    SET cash_balance = COALESCE(cash_balance, 0) + ?
+                    WHERE id = ?
+                """, (total_amount, user_id))
+            elif payment_method.lower() == 'card':
+                cursor.execute("""
+                    UPDATE users
+                    SET card_balance = COALESCE(card_balance, 0) + ?
+                    WHERE id = ?
+                """, (total_amount, user_id))
 
             conn.commit()
             flash("Income added successfully!", "success")
@@ -707,7 +602,6 @@ def add_income(submitter_name, income_type, payment_method, category, descriptio
         finally:
             cursor.close()
             conn.close()
-
 @app.route('/income', methods=['GET', 'POST'])
 def income():
     if request.method == 'POST':
@@ -1453,19 +1347,34 @@ def get_db_connection():
 @app.route('/chatbox', methods=['GET'])
 def chatbox():
     search_query = request.args.get('search', '')  # Get search query from URL
+    profession_query = request.args.get('profession', '')  # Get profession query from URL
     conn = get_db_connection()
 
-    if search_query:
-        # Fetch users that match the search query
-        users = conn.execute("SELECT * FROM users WHERE username LIKE ?", ('%' + search_query + '%',)).fetchall()
-    else:
-        # Retrieve top 10 users if no search query is provided
-        users = conn.execute("SELECT * FROM users LIMIT 10").fetchall()
-    
-    conn.close()
-    return render_template('chatbox.html', users=users, search_query=search_query)  
+    # Build the SQL query dynamically based on search inputs
+    query = "SELECT * FROM users WHERE 1=1"
+    params = []
 
- 
+    if search_query:
+        query += " AND username LIKE ?"
+        params.append('%' + search_query + '%')
+
+    if profession_query:
+        query += " AND profession LIKE ?"
+        params.append('%' + profession_query + '%')
+
+    # Retrieve users based on the query
+    users = conn.execute(query, params).fetchall()
+
+    # Convert sqlite3.Row objects to dictionaries and add online status
+    users = [dict(user) for user in users]  # Convert rows to dictionaries
+    for user in users:
+        user['online'] = user['id'] % 2 == 0  # Example: Even IDs are online
+
+    # Simulate the active user (replace with actual logic)
+    active_user = {'username': 'JohnDoe', 'id': 1}
+
+    conn.close()
+    return render_template('chatbox.html', users=users, search_query=search_query, profession_query=profession_query, active_user=active_user)
 
 
 
@@ -1704,199 +1613,7 @@ from itsdangerous import URLSafeTimedSerializer
 # Serializer for generating secure tokens
 serializer = URLSafeTimedSerializer(app.secret_key)
 
-@app.route('/invite_worker', methods=['GET', 'POST'])
-def invite_worker():
-    if 'user_id' not in session:
-        flash("You need to log in first!", "error")
-        return redirect('/login')
 
-    if request.method == 'POST':
-        print("Form data received:", request.form)  # Debugging line
-        worker_email = request.form.get('email', '').strip()
-
-        if not worker_email:
-            flash("Email is required.", "error")
-            return redirect('/invite_worker')
-
-        # Validate the email format
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", worker_email):
-            flash("Invalid email address. Please enter a valid email.", "error")
-            return redirect('/invite_worker')
-
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        try:
-            # Check the max number of workers allowed
-            cursor.execute("SELECT number_of_workers FROM users WHERE id = ?", (session['user_id'],))
-            max_workers = cursor.fetchone()[0]
-
-            # Count current workers
-            cursor.execute("SELECT COUNT(*) FROM workers WHERE user_id = ?", (session['user_id'],))
-            current_workers = cursor.fetchone()[0]
-
-            if current_workers >= max_workers:
-                flash("You have reached the maximum number of workers allowed.", "error")
-                return redirect('/invite_worker')
-
-            # Generate a unique token for the invitation
-            token = serializer.dumps({'user_id': session['user_id'], 'email': worker_email}, salt='worker-invite')
-
-            # Create the invitation link
-            invite_link = f"http://127.0.0.1:5000/accept_invitation/{token}"
-
-            # Send the invitation email
-            msg = Message("You're Invited to Join FinCom", recipients=[worker_email])
-            msg.body = f"""
-            Hello,
-
-            You have been invited to join FinCom as a worker. Click the link below to accept the invitation:
-
-            {invite_link}
-
-            This link will expire in 24 hours.
-
-            Best regards,
-            FinCom Team
-            """
-            mail.send(msg)
-
-            # Add the worker to the database with "Pending" status
-            worker_name = f"Worker {current_workers + 1}"
-            cursor.execute("""
-                INSERT INTO workers (user_id, worker_name, email, status)
-                VALUES (?, ?, ?, 'Pending')
-            """, (session['user_id'], worker_name, worker_email))
-            conn.commit()
-
-            flash("Invitation sent successfully!", "success")
-        except sqlite3.Error as e:
-            flash(f"An error occurred while processing your request: {e}", "error")
-        except Exception as e:
-            flash(f"An unexpected error occurred: {e}", "error")
-        finally:
-            cursor.close()
-            conn.close()
-
-        return redirect('/invite_worker')
-
-    # For GET requests, fetch the current workers and render the invite_worker.html page
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            SELECT worker_name, email, status
-            FROM workers
-            WHERE user_id = ?
-        """, (session['user_id'],))
-        workers = cursor.fetchall()
-    except sqlite3.Error as e:
-        flash(f"An error occurred: {e}", "error")
-        workers = []
-    finally:
-        cursor.close()
-        conn.close()
-
-    return render_template('invite_worker.html', workers=workers)
-
-@app.route('/accept_invitation/<token>', methods=['GET', 'POST'])
-def accept_invitation(token):
-    try:
-        # Decode the token
-        data = serializer.loads(token, salt='worker-invite', max_age=86400)  # Token expires in 24 hours
-        company_user_id = data['user_id']  # The company that sent the invitation
-        worker_email = data['email']
-
-        if request.method == 'POST':
-            # Update the worker's status to "Accepted"
-            conn = sqlite3.connect("mydatabase.db")
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE workers
-                SET status = 'Accepted', user_id = ?
-                WHERE email = ? AND status = 'Pending'
-            """, (company_user_id, worker_email))
-            conn.commit()
-
-            if cursor.rowcount > 0:
-                # Store the worker's email in the session
-                session['email'] = worker_email
-                flash("You have successfully joined the company account!", "success")
-            else:
-                flash("Invalid or expired invitation link.", "error")
-            cursor.close()
-            conn.close()
-
-            return redirect('/worker_dashboard')
-
-        return render_template('accept_invitation.html', email=worker_email)
-    except Exception as e:
-        flash("The invitation link is invalid or has expired.", "error")
-        return redirect('/login')
-    
-@app.route('/manage_workers', methods=['GET', 'POST'])
-def manage_workers():
-    if 'user_id' not in session:
-        flash("You need to log in first!", "error")
-        return redirect('/login')
-
-    user_id = session['user_id']
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        # Fetch workers for the logged-in user
-        cursor.execute("""
-            SELECT worker_name, email, status
-            FROM workers
-            WHERE user_id = ?
-        """, (user_id,))
-        workers = cursor.fetchall()
-
-        # Render the manage_workers.html template with the workers data
-        return render_template('manage_workers.html', workers=workers)
-    except sqlite3.Error as e:
-        flash(f"An error occurred: {e}", "error")
-        return render_template('manage_workers.html', workers=[])  # Return an empty list if an error occurs
-    finally:
-        cursor.close()
-        conn.close()
-        
-        
-        
-@app.route('/worker_dashboard', methods=['GET'])
-def worker_dashboard():
-    # Check if the worker's email is already in the session
-    if 'email' not in session:
-        flash("You need to log in first!", "error")
-        return redirect('/login')
-
-    worker_email = session['email']  # Get the worker's email from the session
-    conn = sqlite3.connect("mydatabase.db")
-    cursor = conn.cursor()
-    
-    try:
-        # Fetch the company details associated with the worker
-        cursor.execute("""
-            SELECT u.fullname AS company_name, u.email AS company_email, u.profession AS company_profession
-            FROM workers w
-            JOIN users u ON w.user_id = u.id
-            WHERE w.email = ?
-        """, (worker_email,))
-        company = cursor.fetchone()
-
-        if not company:
-            flash("No associated company account found.", "error")
-            return redirect('/login')
-
-        # Automatically render the company dashboard for the worker
-        return render_template('worker_dashboard.html', company=company)
-
-    except sqlite3.Error as e:
-        flash(f"An error occurred while accessing the database: {e}", "error")
-        return redirect('/login')
-
-    finally:
-        cursor.close()
-        conn.close()
         
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail

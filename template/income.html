@@ -18,14 +18,13 @@
     
     <ul class="sidebar-menu">
         <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
-        <li><a href="/get_profit" onclick="changeBackground('img/cash.jpg')">Profit</a></li>
         <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
         <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
         <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-        <li><a href="/chatbot" onclick="changeBackground('img/chatbot-bg.jpg')">Talk to our AI</a></li>
-        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Talk to Millionaires</a></li>
+        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
+        <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">CHAT</a></li>
         <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
-        <li><a href="/worker_dashboard" onclick="changeBackground('img/community-bg.jpg')">View Company</a></li>
+        
   </ul>
   </div>
   <div class="container">
@@ -58,7 +57,7 @@
           <option value="" disabled selected>Select an account</option>
           <option value="cash">Cash</option> 
           <option value="card">Card</option>
-          <option value="bank">savings</option>
+          
       </select>
       
       <label for="category">Category:</label>
@@ -84,16 +83,7 @@
       <!-- Back button -->
     </form>
   </div>
-  <footer>
-    <div class="social-media">
-        <p>Contact Us:</p>
-        <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
-        <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/muhammed-tesleem-olatundun-551350335/?trk=opento_sprofile_goalscard" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-</footer>
+
   <script>
     document.getElementById('transaction-form').addEventListener('submit', function(event) {
         event.preventDefault();
