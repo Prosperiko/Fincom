@@ -1189,8 +1189,8 @@ import sqlite3
 
   
 
-UPLOAD_FOLDER_IMG = r"C:\Users\HP\Projecttime\Fincom-1\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\HP\Projecttime\Fincom-1\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\video"
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
