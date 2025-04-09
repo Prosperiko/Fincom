@@ -10,6 +10,9 @@ from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime
 import os
 from flask_socketio import SocketIO, emit
+import smtplib
+from email.mime.text import MIMEText
+
 
 
 app = Flask(__name__, template_folder='template', static_folder='static')
@@ -1894,6 +1897,53 @@ def worker_dashboard():
     finally:
         cursor.close()
         conn.close()
+        
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+load_dotenv()
+from flask import flash, redirect, url_for
+
+@app.route('/send-query', methods=['POST'])
+def send_query():
+    name = request.form['name']
+    user_email = request.form['email']
+    query = request.form['query']
+    topic = request.form['topic']
+
+    # Email content
+    subject = f"Query from {name} - Topic: {topic}"
+    body = f"Name: {name}\nEmail: {user_email}\n\nQuery:\n{query}"
+
+    # Email configuration
+    sender_email = "projectfinodido@gmail.com"  # Your email
+    sender_password = "csqv yavo jcwj bghz"  # Use the generated app password
+    recipient_email = "projectfinodido@gmail.com"  # Recipient email# Replace with the recipient email
+
+    # Create the email
+    message = MIMEMultipart()
+    message['From'] = sender_email
+    message['To'] = recipient_email
+    message['Subject'] = subject
+    message.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Connect to the Gmail SMTP server
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()  # Start TLS encryption
+            server.login(sender_email, sender_password)  # Log in to the SMTP server
+            server.sendmail(sender_email, recipient_email, message.as_string())  # Send the email
+        flash("Query sent successfully!", "success")  # Flash success message
+    except Exception as e:
+        flash(f"Failed to send query: {e}", "error")  # Flash error message
+
+    return redirect(url_for('index'))  # Redirect back to the contact page
+
+
 
 @app.route('/logout')
 def logout():

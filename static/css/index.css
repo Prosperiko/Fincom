@@ -25,6 +25,21 @@ body {
     transition: background-color 3s, color 3s;
     text-align: center;
 }
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.flashes .success {
+    color: green;
+    font-weight: bold;
+}
+
+.flashes .error {
+    color: red;
+    font-weight: bold;
+}
 
 @keyframes gradientMove {
     0% {
@@ -37,7 +52,139 @@ body {
         background-position: 0% 50%;
     }
 }
+.faq {
+    padding: 30px 0; /* Reduced padding */
+    background-color: var(--color-navy);
+    color: var(--color-navy);
+}
 
+.faq h2 {
+    text-align: center;
+    margin-bottom: 20px; /* Reduced margin */
+    font-size: 1.5rem; /* Reduced font size */
+    color: var(--color-gold);
+}
+
+.faq-item {
+    border: 1px solid var(--color-medium-grey);
+    border-radius: 5px;
+    margin-bottom: 10px; /* Reduced margin */
+    overflow: hidden;
+    background-color: var(--color-white);
+    box-shadow: 0 2px 4px var(--shadow-color); /* Reduced shadow size */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px; /* Reduced padding */
+    cursor: pointer;
+    background-color: var(--color-gold);
+    font-size: 1rem; /* Reduced font size */
+    color: var(--color-navy);
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: var(--highlight-gold);
+    color: var(--color-white);
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px 15px; /* Reduced padding */
+    font-size: 0.9rem; /* Reduced font size */
+    color: var(--color-medium-grey);
+    background-color: var(--color-light-grey);
+}
+
+.toggle-icon {
+    font-size: 1.2rem; /* Reduced icon size */
+    color: var(--color-navy);
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active .toggle-icon {
+    transform: rotate(45deg);
+    color: var(--color-white);
+}
+
+
+
+.contact-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-medium-grey);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--color-navy);
+    background-color: var(--color-white);
+}
+
+.contact-form select:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+.contact-form {
+    padding: 50px 0;
+    background-color: var(--color-navy);
+    color: var(--color-navy);
+}
+
+.contact-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--color-gold);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--color-navy);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-medium-grey);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--color-navy);
+    background-color: var(--color-white);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.contact-form .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form .btn:hover {
+    background-color: var(--highlight-gold);
+}
 /* Container */
 .container {
     width: 80%;
@@ -47,14 +194,24 @@ body {
 
 /* Navbar */
 header {
-    background-color: var(--color-navy);
-    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-navy); /* Adjust to match your theme */
+    z-index: 1000; /* Ensures the header stays above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px; /* Adjust padding as needed */
+}
+
+body {
+    padding-top: 80px; /* Add padding to prevent content from being hidden under the fixed header */
 }
 
 /* Logo */
