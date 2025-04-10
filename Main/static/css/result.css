@@ -7,7 +7,7 @@
     --color-medium-grey: #222;
     --highlight-gold: #f4b400;
     --shadow-color: rgba(0, 33, 71, 0.4);
-<<<<<<< HEAD
+
   
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
     --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
@@ -18,7 +18,7 @@ body {
     text-align: center;
     background-color: var(--color-medium-grey); /* Changed to variable */
     color: var(--color-white); /* Changed to variable */
-=======
+
 
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-light-grey), var(--color-gold));
     --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
@@ -28,7 +28,7 @@ body {
     text-align: center;
     background-color: var(--color-navy);
     color: var(--color-gold);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
     padding: 20px;
 }
 .sidebar {
@@ -85,11 +85,11 @@ body {
     width: 50%;
     margin: auto;
     padding: 20px;
-<<<<<<< HEAD
+
     background-color: var(--color-deep-blue); /* Changed to variable */
-=======
+
     background-color: var(--color-navy);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
     border-radius: 10px;
     box-shadow: 0px 0px 10px var(--color-gold);
 }
@@ -108,11 +108,11 @@ button {
     border-radius: 5px;
     background-color: var(--color-gold); /* Changed to variable */
     cursor: pointer;
-<<<<<<< HEAD
+
     color: var(--color-medium-grey); /* Changed to variable */
-=======
+
     color: var(--color-navy);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
+
     font-size: 16px;
 }
 
@@ -130,15 +130,14 @@ ul {
 }
 
 li {
-<<<<<<< HEAD
+
     margin: 20px 0;
     padding: 10px;
     background: var(--color-light-grey); /* Changed to variable */
-=======
+
     margin: 10px 0;
     padding: 5px;
     background: var(--color-medium-grey);
->>>>>>> da90b3801ec697cea865b2dcc5181e8dcc8dfefe
     border-radius: 5px;
 }
 
