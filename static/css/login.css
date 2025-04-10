@@ -1,12 +1,12 @@
 :root {
-    --color-navy: #002147; /* Dark Blue */
+    --color-navy: navy;
     --color-gold: #FFD700; /* Gold */
     --color-light-grey: #F5F5F5; /* Light Gray */
-    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-deep-blue: navy;
     --color-white: #fff; /* White */
-    --color-medium-grey: #222; /* Medium Grey */
+    --color-medium-grey: navy;
     --highlight-gold: #f4b400; /* Highlight Gold */
-    --shadow-color: rgba(0, 33, 71, 0.4);
+    --shadow-color: navy;
   
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
     --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
@@ -32,8 +32,8 @@ header {
     left: 0;
     right: 0;
     background-color: var(--color-navy); /* Dark Blue */
-    padding: 15px 0;
-    z-index: 1000;
+    padding: 5px 0;
+    z-index: 900;
     display: flex;
     justify-content: center;
 }
@@ -85,9 +85,9 @@ header h1 {
     width: 350px;
     margin: 50px auto; /* Added more margin for better spacing */
     padding: 25px;
-    background: rgba(255, 255, 255, 0.1);
+    background: orange 5, 255, 0.1;
     border-radius: 15px;
-    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    box-shadow: navy;
     display: flex;
     flex-direction: column;
     align-items: center;
