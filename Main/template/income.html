@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Add Expense</title>
-  <link rel="stylesheet" href="../static/css/expenses.css">
+  <title>Add Income</title>
+  <link rel="stylesheet" href="../static/css/income.css">
   <link rel="icon" type="image/webp" href="../static/img/logo.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
   <div class="sidebar">
@@ -17,18 +18,17 @@
     
     <ul class="sidebar-menu">
         <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
-        <li><a href="/get_profit" onclick="changeBackground('img/cash.jpg')">Profit</a></li>
-        <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+        <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
         <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
         <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-        <li><a href="/chatbot" onclick="changeBackground('img/chatbot-bg.jpg')">Talk to our AI</a></li>
-        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Talk to Millionaires</a></li>
+        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
+        <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">CHAT</a></li>
         <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
-        <li><a href="/worker_dashboard" onclick="changeBackground('img/community-bg.jpg')">View Company</a></li>
-    </ul>
+        
+  </ul>
   </div>
   <div class="container">
-    <h2>Add Expense</h2>
+    <h2>Add Income</h2>
     <!-- Display Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -44,34 +44,34 @@
           <button type="submit">Submit</button>
       </form>
       <div id="response"></div>
-  </div>
-    <form action="{{ url_for('expenses') }}" method="POST">
+    </div>
+    <form action="{{ url_for('income') }}" method="POST">
       <label for="name">Your Name:</label>
       <input type="text" name="name" id="name" required placeholder="Enter your name">
       
-      <label for="expense_type">Type:</label>
-      <input type="text" name="expense_type" id="expense_type" value="expense" readonly>
+      <label for="income_type">Type:</label>
+      <input type="text" name="income_type" id="income_type" value="income" readonly>
       
       <label for="account">Account:</label>
       <select name="account" id="account" required>
           <option value="" disabled selected>Select an account</option>
           <option value="cash">Cash</option> 
           <option value="card">Card</option>
-          <option value="bank">Savings</option>
+          
       </select>
       
       <label for="category">Category:</label>
       <select name="category" id="category" required>
           <option value="" disabled selected>Select a category</option>
-          <option value="food">Food</option>
-          <option value="transport">Transport</option>
-          <option value="utilities">Utilities</option>
-          <option value="entertainment">Entertainment</option>
+          <option value="salary">Salary</option>
+          <option value="wages">Wages</option>
+          <option value="investment">Investment</option>
+          <option value="freelance">Freelance</option>
           <option value="others">Others</option>
       </select>
       
       <label for="description">Description:</label>
-      <textarea name="description" id="description" placeholder="Describe your expense" rows="3" required></textarea>
+      <textarea name="description" id="description" placeholder="Describe your income" rows="3" required></textarea>
       
       <label for="amount">Amount (Naira):</label>
       <input type="number" name="amount" id="amount" step="0.01" placeholder="Enter amount" required>
@@ -79,21 +79,11 @@
       <label for="quantity">Quantity:</label>
       <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
       
-      <button type="submit">Add Expense</button>
-       <!-- Back button -->
+      <button type="submit">Add Income</button>
+      <!-- Back button -->
     </form>
-    
   </div>
-  <footer>
-    <div class="social-media">
-        <p>Contact Us:</p>
-        <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
-        <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/muhammed-tesleem-olatundun-551350335/?trk=opento_sprofile_goalscard" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-</footer>
+
   <script>
     document.getElementById('transaction-form').addEventListener('submit', function(event) {
         event.preventDefault();

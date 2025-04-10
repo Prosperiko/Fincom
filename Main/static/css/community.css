@@ -1,0 +1,244 @@
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #FFA500; /* Orange (changed from white) */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-navy); /* Navy blue background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: var(--color-white); /* Default text color */
+}
+
+header {
+    background: var(--color-light-grey); /* Light grey for header */
+    color: var(--color-navy);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-medium-grey);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left .logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header-right input {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid var(--color-medium-grey);
+    border-radius: 3px;
+    background: var(--color-light-grey);
+    color: var(--color-navy);
+}
+
+.header-right button {
+    background: var(--color-gold); /* Gold for buttons */
+    color: var(--color-navy);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.header-right button:hover {
+    background: var(--highlight-gold); /* Highlight gold on hover */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    padding-top: 60px; /* To account for fixed header */
+    box-shadow: 2px 0 5px var(--shadow-color);
+    z-index: 999;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header .logo {
+    width: 60px;
+    border-radius: 50%;
+}
+
+.sidebar h2 {
+    margin: 10px 0;
+    color: var(--color-gold);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin: 10px 0;
+}
+
+.sidebar-menu a {
+    color: var(--color-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.sidebar-menu a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--highlight-gold);
+    color: var(--color-navy);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 240px; /* To account for sidebar width */
+    padding: 80px 20px 20px; /* Add padding for fixed header */
+    flex: 1;
+    background-color: var(--color-navy); /* Navy blue background for content */
+    color: var(--color-white); /* White text for content */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.post-container {
+    background: var(--color-medium-grey); /* Medium grey for posts */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-header h2 {
+    margin: 0;
+    color: var(--color-gold); /* Gold for post titles */
+    font-size: 18px;
+}
+
+.post-header small {
+    color: var(--color-light-grey);
+}
+
+.post p {
+    font-size: 16px;
+    color: var(--color-white);
+    margin-top: 10px;
+}
+
+.post-image, .post-video {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+form {
+    margin-top: 15px;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--color-medium-grey);
+    background: var(--color-light-grey);
+    color: var(--color-navy);
+}
+
+button {
+    background: var(--color-gold); /* Gold for buttons */
+    color: var(--color-navy);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: var(--highlight-gold); /* Highlight gold on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--color-medium-grey);
+    color: var(--color-light-grey);
+    border-top: 1px solid var(--color-navy);
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+}

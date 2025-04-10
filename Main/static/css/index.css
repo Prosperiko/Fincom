@@ -414,26 +414,57 @@ nav ul li a:hover {
 
 /* Social Media Section */
 footer {
-    background-color: var(--color-accent);
-    padding: 70px 0; /* increase top & bottom padding */
+    background-color: var(--color-navy);
+    color: var(--color-gold); /* Changed text color to gold */
+    padding: 40px 20px;
     text-align: center;
-    color: var(--color-white);
-    font-size: 18px; /* optional: increase text size */
-}
-footer .social-media {
-    text-align: center;
-    margin-bottom: 10px;
+    border-top: 5px solid var(--color-gold); /* Add a yellow line at the top */
 }
 
-footer .social-media p {
-    font-size: 16px;
-    color: var(--color-white);
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+footer .footer-links,
+footer .social-media,
+footer .contact-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+footer h3 {
+    font-size: 1.2rem;
     margin-bottom: 10px;
+    color: var(--color-gold); /* Ensure headings are gold */
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    margin: 5px 0;
+}
+
+footer ul li a {
+    color: var(--color-gold); /* Changed links to gold */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: var(--highlight-gold);
 }
 
 footer .social-icon {
     color: var(--color-gold);
-    font-size: 20px;
+    font-size: 1.5rem;
     margin: 0 10px;
     text-decoration: none;
     transition: transform 0.3s, color 0.3s;
@@ -442,4 +473,109 @@ footer .social-icon {
 footer .social-icon:hover {
     color: var(--highlight-gold);
     transform: scale(1.2);
+}
+
+footer .contact-info p {
+    color: var(--color-gold); /* Changed contact info text to gold */
+    margin: 5px 0;
+}
+
+footer .footer-bottom {
+    border-top: 1px solid var(--color-light-grey);
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: var(--color-medium-grey);
+}
+/* Animation for fade-in effect */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Styling for the App Features Section Heading */
+/* App Features Section */
+/* App Features Section */
+.app-features {
+    background-color: var(--color-navy);
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    border-top: 5px solid var(--color-gold); /* Yellow line above */
+    border-bottom: 5px solid var(--color-gold); /* Yellow line below */
+}
+
+.app-features h2 {
+    font-size: 2rem;
+    color: orange; /* Changed color to orange */
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Optional: Make the text uppercase */
+    font-weight: bold;
+}
+
+/* Features Grid */
+.features-grid {
+    display: flex;
+    justify-content: center; /* Center the features */
+    align-items: center;
+    height: 200px; /* Fixed height for the feature area */
+    position: relative;
+    overflow: hidden; /* Hide elements outside the container */
+}
+
+/* Feature Item */
+.feature-item {
+    position: absolute; /* Stack all features in one position */
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+    animation: none; /* Animation will be triggered dynamically */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: var(--highlight-gold);
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    font-size: 1.2rem;
+    color: var(--color-navy);
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 0.9rem;
+    color: var(--color-medium-grey);
+}
+
+/* Keyframes for Scatter Animation */
+@keyframes scatterOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) translateY(-100px) rotate(20deg);
+    }
+}
+
+@keyframes scatterIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(100px) rotate(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }

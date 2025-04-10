@@ -1,0 +1,178 @@
+:root {
+    --color-navy: #002147; /* Dark Blue */
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: #1f2641; /* Deep Blue */
+    --color-white: #fff; /* White */
+    --color-medium-grey: #222; /* Medium Grey */
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-navy);
+    color: var(--highlight-gold); /* Orange text */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 30%;
+    background-color: var(--color-navy);
+    border-right: 1px solid var(--color-light-grey);
+    display: flex;
+    flex-direction: column;
+    color: var(--highlight-gold); /* Orange text */
+}
+
+.search-box {
+    padding: 10px;
+    border-bottom: 1px solid var(--color-light-grey);
+}
+
+.search-input {
+    width: calc(100% - 50px);
+    padding: 10px;
+    border: 1px solid var(--color-light-grey);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: var(--color-white);
+    color: var(--color-medium-grey);
+}
+
+.search-btn {
+    display: none;
+}
+
+.user-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.user-card {
+    padding: 15px;
+    border-bottom: 1px solid var(--color-light-grey);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--highlight-gold); /* Orange text */
+}
+
+.user-card:hover {
+    background-color: var(--color-light-grey);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column; /* Stack username and profession vertically */
+    align-items: flex-start; /* Align text to the left */
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 18px; /* Slightly larger font for the username */
+    font-weight: bold; /* Bold text for emphasis */
+    color: var(--highlight-gold); /* Orange text */
+}
+
+.user-info p {
+    margin: 5px 0 0; /* Add spacing between username and profession */
+    font-size: 14px; /* Smaller font for the profession */
+    color: var(--color-light-grey); /* Light grey text for subtlety */
+}
+
+.online-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.online {
+    background-color: var(--color-gold);
+}
+
+.offline {
+    background-color: var(--color-medium-grey);
+}
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-navy);
+    color: var(--highlight-gold); /* Orange text */
+}
+
+.chat-header {
+    padding: 15px;
+    background-color: var(--color-navy);
+    color: var(--highlight-gold); /* Orange text */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.message.sent {
+    background-color: var(--highlight-gold);
+    align-self: flex-end;
+    color: var(--color-navy);
+}
+
+.message.received {
+    background-color: var(--color-white);
+    align-self: flex-start;
+    color: var(--color-medium-grey);
+}
+
+/* Chat Input */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: var(--color-navy);
+    border-top: 1px solid var(--color-light-grey);
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--color-light-grey);
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: var(--color-white);
+    color: var(--color-medium-grey);
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    background-color: var(--highlight-gold); /* Orange button */
+    color: var(--color-navy); /* Navy text */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: var(--color-gold); /* Slightly lighter orange */
+}

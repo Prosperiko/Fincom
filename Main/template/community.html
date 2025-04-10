@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/community.css') }}">
+    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/logo.webp') }}">
+    <title>Communication App</title>
+</head>
+<body>
+    <!-- Header -->
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
+            <h2>Fincom</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/home1"><i class="icon">🏠</i> HOME</a></li>
+
+            <li><a href="/expenses"><i class="icon">💰</i> Add Expense</a></li>
+            <li><a href="/income"><i class="icon">📈</i> Add Income</a></li>
+            <li><a href="/ana"><i class="icon">📊</i> Analysis</a></li>
+            <li><a href="/Business_advice"><i class="icon">💼</i> Start a New Business</a></li>
+            <li><a href="/chatbox"><i class="icon">💬</i>CHAT</a></li>
+            
+            <li><a href="/budget"><i class="icon">📝</i> Create a Budget</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1>What's on your mind?</h1>
+
+            <!-- Post Form -->
+            <form action="{{ url_for('post') }}" method="POST" enctype="multipart/form-data" class="post-form">
+                <input type="text" name="title" placeholder="Post Title" required>
+                <textarea name="content" placeholder="What's on your mind?" required></textarea>
+                <label>Upload Media:</label>
+                <input type="file" name="media" accept="image/*,video/*">
+                <button type="submit">Post</button>
+            </form>
+
+            <!-- Posts Section -->
+            <div class="posts" id="posts">
+                {% for post in posts %}
+                    <div class="post-container" data-username="{{ post.username }}" data-content="{{ post.content }}">
+                        <div class="post-header">
+                            <h2>{{ post.title }}</h2>
+                            <small>by {{ post.username }} on {{ post.timestamp }}</small>
+                        </div>
+                        <p>{{ post.content }}</p>
+                        
+                        {% if post.media_filename %}
+                            {% if post.media_type == 'image' %}
+                                <img src="{{ url_for('static', filename='img/' + post.media_filename) }}" alt="Post Image" class="post-image">
+                            {% elif post.media_type == 'video' %}
+                                <video controls class="post-video">
+                                    <source src="{{ url_for('static', filename='video/' + post.media_filename) }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <form action="{{ url_for('respond', post_id=post.id) }}" method="POST" class="response-form">
+                            <textarea name="response" placeholder="Your response..." required></textarea>
+                            <button type="submit">Respond</button>
+                        </form>
+                        
+                        <div class="responses">
+                            <h3>Responses:</h3>
+                            {% for response in post.responses %}
+                                <p><strong>{{ response.username }}:</strong> {{ response.content }} 
+                                   <small>on {{ response.timestamp }}</small></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p>No posts found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        function filterPosts() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const posts = document.querySelectorAll('.post-container');
+
+            posts.forEach(post => {
+                const username = post.getAttribute('data-username').toLowerCase();
+                const content = post.getAttribute('data-content').toLowerCase();
+                
+                if (username.includes(filter) || content.includes(filter)) {
+                    post.style.display = ""; // Show post
+                } else {
+                    post.style.display = "none"; // Hide post
+                }
+            });
+        }
+    </script>
+</body>
+</html>

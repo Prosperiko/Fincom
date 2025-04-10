@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fincom</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes fade-in">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navbar -->
+    <header class="fade-in">
+        <div class="container">
+            <div class="logo">
+                <img src="../static/img/logo.webp" alt="Fincom Logo">
+            </div>
+            <h1>Fincom</h1>
+            <nav>
+                <ul>
+                    <li><a href="about">About</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in" id="home">
+        <div class="container">
+            <h2>Track your Finance</h2>
+            <p>Join millions of users and spend wisely</p>
+            <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+            <a href="{{ url_for('login') }}" class="btn">Login</a>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="image-gallery fade-in">
+        <div class="container">
+            <p>FinCom is designed to empower you with simple, yet powerful tools to track your daily expenses, identify wasteful spending, and create a smarter, more balanced financial life.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../static/img/mike.png" alt="User Analytics">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq fade-in" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>What is Fincom?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Fincom is a platform designed to help you track your finances, manage expenses, and gain insights into your spending habits.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>How do I sign up?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can sign up by clicking the "Get Started" button on the homepage, which will take you to the registration page.</p>
+                </div>
+            </div>
+            <!-- Add more FAQ items as needed -->
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Is my financial data secure?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we prioritize your privacy and security by using industry-standard encryption to protect your data.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Can I use Fincom for free?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, Fincom offers a free plan with essential features. Additional premium features are available with a subscription.</p>
+                </div>
+            </div>
+            <div class="faq-item fade-in">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>How can I contact support?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can reach out to our support team via the "Contact" page or through our social media channels linked in the footer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials fade-in">
+        <h2>Feedbacks From Our Users</h2>
+        <div class="testimonial-container">
+            <div class="testimonial fade-in">
+                <img src="../static/img/one.webp" alt="User 1">
+                <div class="text">
+                    <h3>Olatunji Sandra</h3>
+                    <p class="role">Software Engineer</p>
+                    <p>"This service completely changed my workflow. Highly recommended!"</p>
+                </div>
+            </div>
+            <div class="testimonial fade-in">
+                <img src="../static/img/two.webp" alt="User 2">
+                <div class="text">
+                    <h3>Jane Smith</h3>
+                    <p class="role">Product Manager</p>
+                    <p>"Amazing experience! I can't imagine going back to the old way."</p>
+                </div>
+            </div>
+            <!-- Add more testimonials as needed -->
+            <div class="testimonial fade-in">
+                <img src="../static/img/three.webp" alt="User 3">
+                <div class="text">
+                    <h3>Anita Johnson</h3>
+                    <p class="role">Freelancer</p>
+                    <p>"Simple, efficient, and powerful. Definitely worth trying!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user4.jpg" alt="User 4">
+                <div class="text">
+                    <h3>Lisa Brown</h3>
+                    <p class="role">UX Designer</p>
+                    <p>"An intuitive platform that has helped my team collaborate better!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user5.jpg" alt="User 5">
+                <div class="text">
+                    <h3>Chris Evans</h3>
+                    <p class="role">Entrepreneur</p>
+                    <p>"Highly effective and well-designed. The team support is great!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user6.jpg" alt="User 6">
+                <div class="text">
+                    <h3>Emma Wilson</h3>
+                    <p class="role">Data Scientist</p>
+                    <p>"Great tool for analysis. I use it daily in my workflow."</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user7.jpg" alt="User 7">
+                <div class="text">
+                    <h3>Michael Scott</h3>
+                    <p class="role">Business Analyst</p>
+                    <p>"Easy to use and extremely efficient. Highly recommended!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user8.jpg" alt="User 8">
+                <div class="text">
+                    <h3>Olivia Green</h3>
+                    <p class="role">Digital Marketer</p>
+                    <p>"A must-have tool for any marketing professional."</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user9.jpg" alt="User 9">
+                <div class="text">
+                    <h3>Robert King</h3>
+                    <p class="role">Project Manager</p>
+                    <p>"Helped us streamline our projects effectively!"</p>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <img src="user10.jpg" alt="User 10">
+                <div class="text">
+                    <h3>Sarah Lee</h3>
+                    <p class="role">Consultant</p>
+                    <p>"Innovative and powerful. I use it for all my projects!"</p>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <!-- App Features Section -->
+<section class="app-features scatter-animation" id="app-features">
+    <div class="container">
+        <h2>Explore Our App Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>Real-Time Analytics</h3>
+                <p>Track your financial data with real-time analytics and insights.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-wallet"></i>
+                <h3>Expense Tracking</h3>
+                <p>Monitor your expenses and stay on top of your budget effortlessly.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Data</h3>
+                <p>Your financial data is encrypted and stored securely.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bell"></i>
+                <h3>Custom Alerts</h3>
+                <p>Set up alerts to stay informed about your financial activities.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Friendly</h3>
+                <p>Access your financial data anytime, anywhere on your mobile device.</p>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Features Section -->
+    <section class="features fade-in" id="features">
+        <div class="container">
+            <h2>Why Choose Our Platform?</h2>
+            <div class="feature-grid">
+                <div class="feature fade-in">
+                    <img src="../static/img/graph2.jpg" alt="Tracking Finance">
+                    <h3>Helps in tracking your financial status</h3>
+                    <p>Our platform is reliable and helps you improve financially.</p>
+                </div>
+                <div class="feature fade-in">
+                    <img src="../static/img/graph3.jpg" alt="Fast Development">
+                    <h3>Fast Development</h3>
+                    <p>Start with a small amount and watch it grow.</p>
+                </div>
+                <div class="feature fade-in">
+                    <img src="../static/img/graph1.jpg" alt="Smart Insights">
+                    <h3>Smart Insights</h3>
+                    <p>Get AI-powered financial insights to optimize your spending.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form fade-in" id="contact">
+        <div class="container">
+            <h2>Have a Query? Contact Us!</h2>
+            <form action="/send-query" method="POST">
+                <div class="form-group fade-in">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group fade-in">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group fade-in">
+                    <label for="topic">Topic:</label>
+                    <select id="topic" name="topic" required>
+                        <option value="" disabled selected>Select a topic</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Billing">Billing</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group fade-in">
+                    <label for="query">Your Query:</label>
+                    <textarea id="query" name="query" rows="5" placeholder="Write your query here..." required></textarea>
+                </div>
+                <button type="submit" class="btn fade-in">Send Query</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fade-in">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Navigation Links -->
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                        <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <!-- Social Media Links -->
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/muhammed-tesleem-olatundun-551350335/?trk=opento_sprofile_goalscard" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@fincom.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                    <p>Address: 123 Finance Street, Money City, USA</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            document.querySelectorAll('.feature').forEach(feature => {
+                feature.style.backgroundColor = color;
+            });
+        }
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.toggle-icon');
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                icon.textContent = "+";
+            } else {
+                answer.style.display = "block";
+                icon.textContent = "−";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const fadeInElements = document.querySelectorAll(".fade-in");
+    
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    } else {
+                        entry.target.classList.remove("show"); // Remove the class when scrolling up
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+    
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+        
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const featureItems = document.querySelectorAll(".feature-item");
+            let currentIndex = 0;
+    
+            function showFeature() {
+                // Hide all features
+                featureItems.forEach((item) => {
+                    item.style.opacity = "0";
+                    item.style.transform = "scale(0.8) translateY(50px)";
+                });
+    
+                // Show the current feature
+                const currentFeature = featureItems[currentIndex];
+                currentFeature.style.opacity = "1";
+                currentFeature.style.transform = "scale(1) translateY(0)";
+    
+                // Move to the next feature
+                currentIndex = (currentIndex + 1) % featureItems.length; // Loop back to the first feature
+            }
+    
+            // Start the animation loop
+            setInterval(showFeature, 2000); // Change feature every 2 seconds
+        });
+        
+        
+    </script>
+</body>
+</html>
