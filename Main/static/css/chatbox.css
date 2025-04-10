@@ -9,170 +9,207 @@
     --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
 }
 
-body {
-    font-family: Arial, sans-serif;
+:root {
+    --color-navy: #002147;
+    --color-gold: #FFD700;
+    --color-light-grey: #F5F5F5;
+    --color-deep-blue: #1f2641;
+    --color-white: #fff;
+    --color-medium-grey: #222;
+    --highlight-gold: #f4b400;
+    --shadow-color: rgba(0, 33, 71, 0.4);
+  }
+  
+  * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .sidebar {
+    width: 250px;
     background-color: var(--color-navy);
-    color: var(--highlight-gold); /* Orange text */
-}
-
-.container {
-    display: flex;
+    color: var(--color-white);
     height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 30%;
-    background-color: var(--color-navy);
-    border-right: 1px solid var(--color-light-grey);
-    display: flex;
-    flex-direction: column;
-    color: var(--highlight-gold); /* Orange text */
-}
-
-.search-box {
-    padding: 10px;
-    border-bottom: 1px solid var(--color-light-grey);
-}
-
-.search-input {
-    width: calc(100% - 50px);
-    padding: 10px;
-    border: 1px solid var(--color-light-grey);
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: var(--color-white);
-    color: var(--color-medium-grey);
-}
-
-.search-btn {
-    display: none;
-}
-
-.user-list {
-    flex: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
     overflow-y: auto;
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow-color);
+  }
+  
+  .sidebar-header {
+    text-align: center;
+  }
+  
+  .sidebar-header .logo {
+    width: 60px;
+    border-radius: 50%;
+  }
+  
+  .sidebar h2 {
+    margin: 10px 0;
+    color: var(--color-gold);
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    margin: 15px 0;
+  }
+  
+  .sidebar-menu a {
+    color: var(--color-white);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: var(--color-medium-grey);
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  .sidebar-menu a:hover {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+  }
+  body {
+    background: var(--color-deep-blue);
+    color: var(--color-white);
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-gold);
+    font-size: 2rem;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .search-box {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .search-input {
+    padding: 0.7rem 1rem;
+    border-radius: 5px;
+    border: none;
+    width: 300px;
+    background-color: var(--color-light-grey);
+    color: var(--color-medium-grey);
+  }
+  
+  .search-btn,
+  .clear-btn {
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--color-deep-blue);
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-btn {
+    background-color: var(--color-gold);
+  }
+  
+  .search-btn:hover {
+    background-color: var(--highlight-gold);
+    color: var(--color-white);
+  }
+  
+  .clear-btn {
+    background-color: var(--color-light-grey);
+    color: var(--color-medium-grey);
+  }
+  
+  .clear-btn:hover {
+    background-color: var(--color-gold);
+    color: var(--color-deep-blue);
+  }
+  
+  .user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Reduced min-width for smaller cards */
+    gap: 1rem; /* Reduced gap between cards */
+    margin-left: 260px; /* Add margin to prevent overlap with the sidebar */
+    padding: 1rem;
 }
 
 .user-card {
-    padding: 15px;
-    border-bottom: 1px solid var(--color-light-grey);
-    cursor: pointer;
+    background: var(--color-white);
+    color: var(--color-medium-grey);
+    padding: 0.8rem; /* Reduced padding for smaller cards */
+    border-radius: 8px; /* Slightly smaller border radius */
+    box-shadow: 0 3px 6px var(--shadow-color); /* Reduced shadow */
     display: flex;
+    flex-direction: column; /* Stack content vertically */
     align-items: center;
-    color: var(--highlight-gold); /* Orange text */
+    transition: transform 0.2s ease;
+    font-size: 0.9rem; /* Reduced font size */
 }
 
 .user-card:hover {
-    background-color: var(--color-light-grey);
-}
-
-.user-info {
-    display: flex;
-    flex-direction: column; /* Stack username and profession vertically */
-    align-items: flex-start; /* Align text to the left */
+    transform: scale(1.02);
 }
 
 .user-info h3 {
-    margin: 0;
-    font-size: 18px; /* Slightly larger font for the username */
-    font-weight: bold; /* Bold text for emphasis */
-    color: var(--highlight-gold); /* Orange text */
+    color: var(--color-navy);
+    margin-bottom: 0.2rem; /* Reduced margin */
+    font-size: 1rem; /* Reduced font size */
 }
 
 .user-info p {
-    margin: 5px 0 0; /* Add spacing between username and profession */
-    font-size: 14px; /* Smaller font for the profession */
-    color: var(--color-light-grey); /* Light grey text for subtlety */
+    margin-bottom: 0.5rem; /* Reduced margin */
+    font-style: italic;
+    font-size: 0.9rem; /* Reduced font size */
+    text-align: center;
 }
 
-.online-status {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.online {
+.message-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem; /* Reduced padding */
     background-color: var(--color-gold);
-}
-
-.offline {
-    background-color: var(--color-medium-grey);
-}
-
-/* Chat Area */
-.chat-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-navy);
-    color: var(--highlight-gold); /* Orange text */
-}
-
-.chat-header {
-    padding: 15px;
-    background-color: var(--color-navy);
-    color: var(--highlight-gold); /* Orange text */
-    font-size: 18px;
+    color: var(--color-deep-blue);
+    border-radius: 5px;
     font-weight: bold;
+    font-size: 0.8rem; /* Reduced font size */
+    transition: background 0.3s ease;
 }
 
-.messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-}
-
-.message {
-    margin-bottom: 10px;
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-}
-
-.message.sent {
+.message-btn:hover {
     background-color: var(--highlight-gold);
-    align-self: flex-end;
-    color: var(--color-navy);
+    color: var(--color-white);
 }
 
-.message.received {
-    background-color: var(--color-white);
-    align-self: flex-start;
-    color: var(--color-medium-grey);
+/* Sidebar adjustments */
+.sidebar {
+    width: 240px; /* Slightly reduced width */
+    padding: 15px; /* Reduced padding */
 }
 
-/* Chat Input */
-.chat-input {
-    display: flex;
-    padding: 10px;
-    background-color: var(--color-navy);
-    border-top: 1px solid var(--color-light-grey);
+.sidebar-menu a {
+    padding: 8px; /* Reduced padding for links */
+    font-size: 0.9rem; /* Reduced font size */
 }
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid var(--color-light-grey);
-    border-radius: 20px;
-    margin-right: 10px;
-    background-color: var(--color-white);
-    color: var(--color-medium-grey);
-}
-
-.chat-input button {
-    padding: 10px 15px;
-    background-color: var(--highlight-gold); /* Orange button */
-    color: var(--color-navy); /* Navy text */
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.chat-input button:hover {
-    background-color: var(--color-gold); /* Slightly lighter orange */
-}
+  
+  i {
+    margin-right: 6px;
+    color: var(--highlight-gold);
+  }
+  

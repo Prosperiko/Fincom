@@ -23,6 +23,26 @@
   max-height: 100vh; /* Limit the height to 80% of the viewport */
   overflow-y: auto; /* Add scrolling if content exceeds the height */
 }
+.input-icon {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 10px;
+  top: 38px;
+  color: #555;
+}
+
+.input-icon input,
+.input-icon select,
+.input-icon textarea {
+  padding-left: 35px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* General Page Style */
 body {
   background-color: var(--color-navy); /* Updated to Gray */

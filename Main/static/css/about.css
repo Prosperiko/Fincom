@@ -28,14 +28,14 @@
     color: var(--color-navy);
   }
   
-  /* Header Styles */
-  header {
+header {
     background: var(--color-navy);
     color: var(--color-gold);
     padding: 20px;
     text-align: center;
     position: relative;
-  }
+    font-size: 1.5em; /* Ensure consistent size */
+}
   header h1 {
     font-size: 2.0em;
     margin-bottom: 10px;
@@ -64,27 +64,106 @@
   /* Main Content Styles */
   main {
     padding: 20px;
-    background: var(--color-light-grey);
+    background: var(--color-navy); /* Changed to navy blue */
     border-radius: 8px;
     box-shadow: 0 4px 8px var(--shadow-color);
     margin: 20px auto;
     max-width: 800px;
     position: relative;
-    
-  }
-  section {
-    margin-bottom: 30px;
-  }
-  section h2 {
+    color: var(--color-gold); /* Changed text color to yellow */
+}
+main h2 {
+  margin-bottom: 15px;
+  color: var(--color-gold); /* Changed to yellow */
+  font-size: 2.5em;
+}
+ 
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+.founders-section {
+  display: flex;
+  flex-direction: column; /* Stack heading above the cards */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.founders-section h2 {
+  margin-bottom: 15px;
+  color: var(--color-gold); /* Gold heading */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.0em; /* Match the global h2 size */
+  position: absolute; /* Position the heading above the cards */
+  top: 5px; /* Adjust the position to stay at the top */
+  z-index: 2; /* Ensure it stays above the animation cards */
+  background-color: var(--color-navy); /* Optional: Add background to avoid overlap */
+  padding: 10px 20px; /* Optional: Add padding for better visibility */
+  border-radius: 8px; /* Optional: Rounded corners for better design */
+}
+
+.founder {
+  width: 220px;
+  height: 280px;
+  margin: 0 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: absolute; /* Ensure the cards are positioned relative to the section */
+  opacity: 0;
+  transform: scale(0.8) translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  z-index: 1; /* Ensure the cards are below the heading */
+}
+.founder.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  z-index: 1;
+}
+
+.founder img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 20px;
+  border: 4px solid #ddd;
+}
+
+.profile {
+  padding: 20px;
+}
+
+.profile h3 {
+  margin: 10px 0 5px;
+}
+
+.profile p {
+  font-size: 14px;
+  color: #333;
+}
+
+section h2 {
     margin-bottom: 15px;
-    color: var(--color-navy);
+    color: var(--color-gold); /* Changed to yellow */
     font-size: 2.5em;
-  }
-  section p {
+}
+
+section p {
     margin-bottom: 15px;
     line-height: 1.8;
     font-size: 1.1em;
-  }
+    color: var(--color-gold); /* Changed to yellow */
+}
   
   /* Footer Styles */
   footer {
@@ -138,4 +217,3 @@
     75% { background-image: url('../img/slide4.jpg'); }
     100% { background-image: url('../img/slide1.png'); }
   }
-  

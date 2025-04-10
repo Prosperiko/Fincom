@@ -6,6 +6,7 @@
     <title>Login - CryptoWorld</title>
     <link rel="stylesheet" href="../static/css/login.css">
     <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
 </head>
 <body>
@@ -20,6 +21,7 @@
             </div>
         </div>
     </header>
+
     <!-- Color Switcher -->
     <div class="color-switcher">
         <button class="red" onclick="changeColor('#ff4c4c')"></button>
@@ -28,8 +30,8 @@
         <button class="yellow" onclick="changeColor('#ffcc00')"></button>
     </div>
 
-    <!-- Image Containers -->
-   
+    <!-- Feature Section -->
+
 
     <!-- Login Container -->
     <div class="login-container">
@@ -37,37 +39,78 @@
         <p>Sign in to your account</p>
         <form action="/login" method="POST">
             <div class="input-box">
-                <input type="username" id="username" name="username" placeholder="username" required>
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
             <div class="input-box">
+                <i class="fas fa-lock"></i>
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <p>Forgot password<a href="{{ url_for('forgot_password') }}" class="btn">forgot_password</a></p>
-        <p>don't have  an account? <a href="{{ url_for('signup') }}" class="btn">signup</a></p>
+        <p>Forgot password? <a href="{{ url_for('forgot_password') }}" class="btn">Forgot Password</a></p>
+        <p>Don't have an account? <a href="{{ url_for('signup') }}" class="btn">Sign Up</a></p>
     </div>
+    <section class="app-features scatter-animation" id="app-features">
+        <div class="container">
+            <h2>Explore Our App Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Track your financial data with real-time analytics and insights.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Expense Tracking</h3>
+                    <p>Monitor your expenses and stay on top of your budget effortlessly.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Data</h3>
+                    <p>Your financial data is encrypted and stored securely.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>Custom Alerts</h3>
+                    <p>Set up alerts to stay informed about your financial activities.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your financial data anytime, anywhere on your mobile device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        function changeColor(color) {
-            document.body.style.backgroundColor = color;
-            let textColor = (color === "#111" || color === "#222" || color === "#181818") ? "white" : "black";
+ // Show the first feature immediately
+ document.addEventListener("DOMContentLoaded", () => {
+    const featureItems = document.querySelectorAll(".feature-item");
+    let currentIndex = 0;
 
-            document.querySelectorAll('body, .login-container').forEach(element => {
-                element.style.backgroundColor = color;
-                element.style.color = textColor;
-            });
+    function showFeature() {
+        // Hide all features
+        featureItems.forEach((item) => {
+            item.style.opacity = "0";
+            item.style.transform = "scale(0.8) translateY(50px)";
+        });
 
-            document.querySelectorAll(".login-btn").forEach(btn => {
-                btn.style.backgroundColor = textColor === "white" ? "#f4b400" : "#222";
-                btn.style.color = textColor;
-            });
+        // Show the current feature
+        const currentFeature = featureItems[currentIndex];
+        currentFeature.style.opacity = "1";
+        currentFeature.style.transform = "scale(1) translateY(0)";
 
-            document.querySelectorAll(".login-link a").forEach(link => {
-                link.style.color = textColor === "white" ? "#f4b400" : "#222";
-            });
-        }
+        // Move to the next feature
+        currentIndex = (currentIndex + 1) % featureItems.length; // Loop back to the first feature
+    }
+
+    // Start the animation loop
+    setInterval(showFeature, 2000); // Change feature every 2 seconds
+});
+
+
     </script>
-
 </body>
 </html>

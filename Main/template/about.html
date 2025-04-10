@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About - FinCom</title>
-  <link rel="stylesheet" href="../static/css/about.css">
-  <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+  <link rel="stylesheet" href="../static/css/about.css" />
+  <link rel="icon" type="image/webp" href="../static/img/logo.webp" />
+
 </head>
 <body>
-  
   <!-- Background Slideshow -->
   <div class="background-slideshow"></div>
 
   <!-- Color Switcher -->
   <div class="color-switcher">
-      <button class="red" onclick="changeColor('#ff4c4c')"></button>
-      <button class="blue" onclick="changeColor('#4c9aff')"></button>
-      <button class="green" onclick="changeColor('#4caf50')"></button>
-      <button class="yellow" onclick="changeColor('#ffcc00')"></button>
+    <button class="red" onclick="changeColor('#ff4c4c')"></button>
+    <button class="blue" onclick="changeColor('#4c9aff')"></button>
+    <button class="green" onclick="changeColor('#4caf50')"></button>
+    <button class="yellow" onclick="changeColor('#ffcc00')"></button>
   </div>
 
   <!-- Header Section -->
   <header>
     <h1>FinCom</h1>
-    
     <p>Your trusted partner in achieving financial wellness</p>
   </header>
+
   <!-- Main Content -->
   <main>
-      <h2>About FinCom</h2>
-      <p>
-        FinCom is dedicated to empowering individuals to take control of their financial lives.
-        We provide innovative tools that help you track daily expenses, identify wasteful spending,
-        and make informed decisions for a balanced financial future.
-      </p>
-      <p>
-        Our platform is designed to simplify expense tracking so you can focus on what matters most—
-        building a secure and sustainable financial lifestyle.
-      </p>
-    </section>
+    <h2>About FinCom</h2>
+    <p>
+      FinCom is dedicated to empowering individuals to take control of their financial lives.
+      We provide innovative tools that help you track daily expenses, identify wasteful spending,
+      and make informed decisions for a balanced financial future.
+    </p>
+    <p>
+      Our platform is designed to simplify expense tracking so you can focus on what matters most—
+      building a secure and sustainable financial lifestyle.
+    </p>
 
     <section class="mission-section">
       <h2>Our Mission</h2>
@@ -47,13 +46,57 @@
         and user-friendly platform that supports you in understanding your spending habits and managing your budget effectively.
       </p>
     </section>
+
+    <!-- Founders Section -->
+    <section class="founders-section">
+      <h2>Meet Our Prestigious Founders</h2>
+      
+      <div class="founder feature-item">
+        <img src="../static/img/cash.webp" alt="Luka Bright - Founder 1" />
+        <div class="profile">
+          <h3>Luka Bright</h3>
+          <p>Web Developer</p>
+        </div>
+      </div>
+      
+      <div class="founder feature-item">
+        <img src="../static/img/founder2.jpg" alt="Ope - Founder 2" />
+        <div class="profile">
+          <h3>Ope</h3>
+          <p>Expert in Financial Planning and Analysis</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
   <footer>
     <button onclick="history.back()">Back</button>
     <section class="about-section">
-    <p>&copy; 2025 FinCom. All rights reserved.</p>
+      <p>&copy; 2025 FinCom. All rights reserved.</p>
+    </section>
   </footer>
+
+  <!-- Feature Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const featureItems = document.querySelectorAll(".feature-item");
+      let currentIndex = 0;
+
+      function showFeature() {
+        featureItems.forEach((item, index) => {
+          item.classList.remove("active");
+          if (index === currentIndex) {
+            item.classList.add("active");
+          }
+        });
+
+        currentIndex = (currentIndex + 1) % featureItems.length;
+      }
+
+      showFeature(); // show first immediately
+      setInterval(showFeature, 2000); // cycle every 2s
+    });
+  </script>
 </body>
 </html>

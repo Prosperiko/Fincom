@@ -28,45 +28,47 @@
         
             sendButton.addEventListener('click', async function () {
                 const userInput = userInputField.value.trim();
-                if (!userInput) return; // Prevent empty messages
-        
+                if (!userInput) return;
+            
                 // Append user message
                 const userMessage = document.createElement('div');
                 userMessage.className = 'message user';
                 userMessage.textContent = userInput;
                 messagesContainer.appendChild(userMessage);
-                userInputField.value = ''; // Clear input field
-        
+                userInputField.value = '';
+            
                 // Show loading indicator
                 const loadingIndicator = document.createElement('div');
                 loadingIndicator.className = 'loading';
                 loadingIndicator.id = 'loading';
                 loadingIndicator.textContent = 'Finbot is typing...';
                 messagesContainer.appendChild(loadingIndicator);
-        
+            
                 try {
                     // Send user input to the server
+                    console.log('Sending request to /generate:', userInput); // Debugging log
                     const response = await fetch('/generate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ user_input: userInput })
                     });
-        
+            
                     const data = await response.json();
-        
+                    console.log('Response from /generate:', data); // Debugging log
+            
                     // Remove loading indicator
                     loadingIndicator.remove();
-        
+            
                     // Append bot response
                     const botMessage = document.createElement('div');
                     botMessage.className = 'message bot';
-                    botMessage.textContent = data.response;
+                    botMessage.textContent = data.response || 'No response received.';
                     messagesContainer.appendChild(botMessage);
-        
+            
                     // Auto-scroll to the bottom
                     messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 } catch (error) {
-                    // Remove loading indicator and show error message
+                    console.error('Error in fetch:', error); // Debugging log
                     loadingIndicator.remove();
                     const errorMessage = document.createElement('div');
                     errorMessage.className = 'message bot';

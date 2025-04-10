@@ -4,34 +4,157 @@
     --color-light-grey: #F5F5F5;
     --color-deep-blue: navy;
     --color-white: #fff;
-    --color-medium-grey:navy;
+    --color-medium-grey: navy;
     --highlight-gold: #f4b400;
     --shadow-color: navy;
-  
+
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
     --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-medium-grey); /* Changed to variable */
-    color: var(--color-white); /* Changed to variable */
-    text-align: center;
-    transition: background-color 0.3s, color 0.3s;
+.faq-section {
+    padding: 15px 0; /* Further reduced padding */
+    background-color: var(--color-navy);
+    color: var(--color-navy);
+    max-width: 400px; /* Set a maximum width */
+    margin: 0 auto; /* Center the section horizontally */
 }
 
-/* ================= Header ================= */
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 10px; /* Further reduced margin */
+    font-size: 1rem; /* Further reduced font size */
+    color: var(--color-gold);
+}
+
+.faq-item {
+    border: 1px solid var(--color-medium-grey);
+    border-radius: 4px; /* Slightly smaller border radius */
+    margin-bottom: 6px; /* Further reduced margin */
+    overflow: hidden;
+    background-color: var(--color-white);
+    box-shadow: 0 1px 2px var(--shadow-color); /* Further reduced shadow */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px; /* Further reduced padding */
+    cursor: pointer;
+    background-color: var(--color-gold);
+    font-size: 0.8rem; /* Further reduced font size */
+    color: var(--color-navy);
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: var(--highlight-gold);
+    color: var(--color-white);
+}
+
+.faq-answer {
+    display: none;
+    padding: 6px 10px; /* Further reduced padding */
+    font-size: 0.7rem; /* Further reduced font size */
+    color: var(--color-medium-grey);
+    background-color: var(--color-light-grey);
+}
+
+.toggle-icon {
+    font-size: 0.8rem; /* Further reduced icon size */
+    color: var(--color-navy);
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active .toggle-icon {
+    transform: rotate(45deg);
+    color: var(--color-white);
+}
+/* Feature Animation Styles */
+.feature-box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 50px auto;
+    background-color: var(--color-navy);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.feature-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: featureAnimation 9s infinite;
+}
+
+.feature-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.feature-item:nth-child(2) {
+    animation-delay: 3s;
+}
+
+.feature-item:nth-child(3) {
+    animation-delay: 6s;
+}
+
+@keyframes featureAnimation {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 header {
-    background-color: var(--color-deep-blue); /* Changed to variable */
-    padding: 20px 0;
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-deep-blue); /* Ensure a consistent background */
+    padding: 10px 0; /* Add more padding for better spacing */
+    z-index: 900;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    border-bottom: 3px solid var(--color-gold); /* Yellow line to separate the header */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+    gap: 20px; /* Add spacing between elements */
+}
+
+header h1 {
+    font-size: 24px; /* Adjust font size for a compact look */
+    color: var(--highlight-gold); /* Gold */
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
 }
 
 /* Logo */
@@ -40,77 +163,122 @@ header .container {
     height: auto;
 }
 
-/* Navbar Title */
-header h1 {
-    font-size: 24px;
-    color: var(--highlight-gold); /* Changed to variable */
+/* Responsive Design for Header */
+@media (max-width: 600px) {
+    header {
+        padding: 8px 0; /* Adjust padding for smaller screens */
+    }
+
+    header h1 {
+        font-size: 18px; /* Reduce font size */
+    }
+}
+
+/* Logo */
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-medium-grey);
+    color: var(--color-white);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* ================= Signup Form ================= */
 .signup-container {
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto; /* Reduced margin to decrease vertical spacing */
+    padding: 15px; /* Reduced padding to make the container more compact */
     background: rgb(1, 37, 94);
     border-radius: 15px;
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 15px rgba(254, 247, 35, 0.863);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Ensure child elements stretch to fill the container */
+    gap: 10px; /* Reduced gap to minimize spacing between elements */
 }
 
 .signup-container h2 {
     margin-bottom: 10px;
     font-size: 20px;
-    color: var(--highlight-gold); /* Changed to variable */
+    color: var(--highlight-gold);
+    text-align: center;
 }
 
 /* Input Fields */
 .input-box {
-    width: 100%;
-    margin: 10px 0;
+    position: relative;
+    margin: 12px 0;
+    width: 100%; /* Ensure it takes full width of the container */
 }
 
 .input-box input,
 .input-box select {
-    width: 100%;
-    padding: 12px;
-    border: none;
+    width: 100%; /* Full width of the input box */
+    padding: 12px 40px; /* Add padding for the icon */
+    border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
     outline: none;
     background: rgba(255, 255, 255, 0.2);
-    color: var(--color-white); /* Changed to variable */
+    color: var(--color-white);
+    box-sizing: border-box; /* Include padding and border in width */
 }
-
+.input-box select option {
+    color: var(--color-navy);
+  }
 .input-box input::placeholder {
     color: rgba(255, 255, 255, 0.7);
+}
+
+/* Icons */
+.input-box i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #888;
+    animation: shake 1.5s infinite; /* Add shaking animation */
 }
 
 /* Signup Button */
 .signup-btn {
     width: 100%;
     padding: 12px;
-    background: var(--highlight-gold); /* Changed to variable */
+    background: var(--highlight-gold);
     border: none;
     border-radius: 8px;
     font-size: 18px;
-    color: var(--color-medium-grey); /* Changed to variable */
+    color: var(--color-medium-grey);
     cursor: pointer;
     transition: background 0.3s;
 }
 
 .signup-btn:hover {
-    background: var(--color-gold); /* Changed to variable */
+    background: var(--color-gold);
 }
 
 /* Error Message */
 .error-message {
-    color: red; /* This can remain as is, or you can define a variable for error colors */
+    color: red;
+    text-align: left;
+    font-size: 14px;
+    margin-top: -10px;
 }
 
 /* ================= Customer Type Selection ================= */
 .customer-type {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 15px;
     margin: 15px 0;
 }
@@ -120,7 +288,9 @@ header h1 {
 }
 
 .customer-type label {
-    background: var(--color-deep-blue); /* Changed to variable */
+    flex: 1; /* Make labels fill available space equally */
+    text-align: center;
+    background: var(--color-deep-blue);
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -128,21 +298,8 @@ header h1 {
 }
 
 .customer-type input:checked + label {
-    background: var(--highlight-gold); /* Changed to variable */
-    color: var(--color-medium-grey); /* Changed to variable */
-}
-
-/* ================= Background Slideshow ================= */
-.background-slideshow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-size: cover;
-    background-position: center;
-    animation: slide 10s infinite;
+    background: var(--highlight-gold);
+    color: var(--color-medium-grey);
 }
 
 /* ================= Responsive Design ================= */
@@ -150,11 +307,6 @@ header h1 {
     .signup-container {
         width: 90%;
         padding: 15px;
-    }
-
-    .input-box input,
-    .input-box select {
-        width: 100%;
     }
 
     .signup-btn {
@@ -166,28 +318,27 @@ header h1 {
         align-items: center;
     }
 }
-select {
-    color: black; /* Ensures the text is visible */
-    background-color: var(--color-accent); /* Sets a clear background */
-    border: 1px solid var(--color-gold); /* Adds a light border */
-    padding: 5px;
+/* Shaking Animation */
+@keyframes shake {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    25% {
+        transform: translateY(-50%) translateX(-2px);
+    }
+    50% {
+        transform: translateY(-50%) translateX(2px);
+    }
+    75% {
+        transform: translateY(-50%) translateX(-2px);
+    }
 }
-option {
-    color: black; /* Ensures the options are visible */
+@media (max-width: 600px) {
+    header {
+        padding: 8px 0; /* Adjust padding for smaller screens */
+    }
+
+    header h1 {
+        font-size: 18px; /* Reduce font size */
+    }
 }
- 
-.signup {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-    background-color: #f1f1f1;
-    padding: 0 20px; /* horizontal only */
-    border-radius: 8px;
-    margin-top: 15px;
-  }
-  
-  /* When active, show full content */
-  .signup.active {
-    max-height: 500px; /* Adjust depending on form height */
-    padding: 20px;
-  }  

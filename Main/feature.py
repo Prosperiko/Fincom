@@ -1383,73 +1383,181 @@ from flask import Flask, render_template, request, jsonify
 import google.generativeai as genai
 
 # Setting up the API key and model
-genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")
-model = genai.GenerativeModel("gemini-1.5-flash")
 
+from flask import Flask, render_template, request, jsonify, session
+import google.generativeai as genai
+import sqlite3
+
+# Initialize the Generative AI model
+genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")  # Replace with your actual API key
+model = genai.GenerativeModel("gemini-1.5-flash")  # Replace with the correct model name
 
 def generate_response(prompt):
-    # Prepend context about FinCom and finance
-    context = "You are FinBot, a financial assistant for FinCom. Provide concise and relevant responses to user queries."
-    
-    # Check if the user is logged in
-    if 'user_id' not in session:
-        return "Please log in to use FinBot's services."
+    """
+    Generate a response using the AI model based on the user's prompt.
+    Fetch relevant data from the database for specific features.
+    """
+    try:
+        # Prepend context about FinCom and finance
+        context = "You are FinBot, a financial assistant for FinCom. Provide concise and relevant responses to user queries."
 
-    user_id = session['user_id']  # Get the logged-in user's ID
+        # Check if the user is logged in
+        if 'user_id' not in session:
+            return "Please log in to use FinBot's services."
 
-    # Keywords to trigger financial information retrieval
-    keywords = ["financial summary", "financial information", "my finances", "income", "expenses", "profit", "balance", "business"]
+        user_id = session['user_id']  # Get the logged-in user's ID
 
-    # Check if the user's prompt contains any of the keywords
-    if any(keyword in prompt.lower() for keyword in keywords):
-        # Connect to the database and retrieve user-specific data
-        conn = sqlite3.connect("mydatabase.db")
-        conn.row_factory = sqlite3.Row  # Access columns by name
-        cursor = conn.cursor()
-        
-        try:
-            # Fetch data for the logged-in user
-            cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
-            user = cursor.fetchone()
-            
-            if user:
-                # Format user data into a brief summary
-                user_data = f"User: {user['fullname']} (Username: {user['username']})\n" \
-                            f"Profit: {user['profit']}, Income: {user['total_income']}, Expenses: {user['total_expenses']}\n" \
-                            f"Cash Balance: {user['cash_balance']}, Card Balance: {user['card_balance']}, Savings: {user['savings_balance']}"
-                context += f"\nHere is your financial summary:\n{user_data}\n"
-            else:
-                context += "\nNo financial data found for your account.\n"
-        except sqlite3.Error as e:
-            print(f"Database error: {e}")
-            context += "\nUnable to retrieve financial data due to a database error.\n"
-        finally:
-            cursor.close()
-            conn.close()
-    else:
-        # If no keywords are detected, provide a brief generic response
+        # Keywords to trigger specific features
+        keywords = {
+            "regional trends": fetch_regional_trends,
+            "renegotiate bills": fetch_bill_negotiation_tips,
+            "better deals": fetch_better_deals,
+            "investment opportunities": fetch_investment_opportunities,
+            "expense reduction": fetch_expense_reduction_tips
+        }
+
+        # Check if the user's prompt matches any feature
+        for keyword, feature_function in keywords.items():
+            if keyword in prompt.lower():
+                return feature_function(user_id)
+
+        # Default response for generic queries
         context += "\nHow can I assist you today? Please ask specific questions about your finances or business ideas."
 
-    # Combine the context with the user's prompt
-    full_prompt = context + "\n" + prompt
+        # Combine the context with the user's prompt
+        full_prompt = context + "\n" + prompt
+
+        # Generate a response using the AI model
+        response = model.generate_content(full_prompt)
+
+        # Limit the response length to keep it concise
+        return response.text[:500] if response and response.text else "Sorry, I couldn't generate a response."
+    except Exception as e:
+        print(f"Error in generate_response: {e}")
+        return "Sorry, something went wrong while processing your request."
     
-    # Generate a response using the AI model
-    response = model.generate_content(full_prompt)
-    
-    # Limit the response length to keep it concise
-    return response.text[:500]  # Truncate response to 500 characters
+def fetch_regional_trends(user_id):
+    # Example: Fetch regional trends from an external API or database
+    trends = [
+        "Fuel prices have increased by 5% this week.",
+        "Electricity tariffs are expected to rise by 10% next month.",
+        "Local food prices have stabilized after recent fluctuations."
+    ]
+    return "Here are the latest regional economic trends:\n" + "\n".join(trends)
+
+def fetch_bill_negotiation_tips(user_id):
+    tips = [
+        "1. Contact your service provider and request a payment plan for overdue bills.",
+        "2. Ask for discounts or promotions on your current subscription.",
+        "3. Highlight your loyalty as a long-term customer to negotiate better terms."
+    ]
+    return "Here are some tips for renegotiating your bills:\n" + "\n".join(tips)
+
+def fetch_better_deals(user_id):
+    conn = sqlite3.connect("mydatabase.db")
+    cursor = conn.cursor()
+
+    try:
+        # Fetch top recurring expenses
+        cursor.execute("""
+            SELECT category, SUM(amount) AS total_spent
+            FROM transactions
+            WHERE user_id = ? AND type = 'expense'
+            GROUP BY category
+            ORDER BY total_spent DESC
+            LIMIT 5
+        """, (user_id,))
+        expenses = cursor.fetchall()
+
+        # Suggest alternatives for the top expenses
+        suggestions = []
+        for category, total_spent in expenses:
+            suggestions.append(f"For {category}, consider switching to a more affordable option.")
+
+        return "Here are some suggestions for finding better deals:\n" + "\n".join(suggestions)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return "Sorry, I couldn't fetch better deal suggestions."
+    finally:
+        cursor.close()
+        conn.close()
+def fetch_investment_opportunities(user_id):
+    conn = sqlite3.connect("mydatabase.db")
+    cursor = conn.cursor()
+
+    try:
+        # Fetch user's savings balance
+        cursor.execute("SELECT savings_balance FROM users WHERE id = ?", (user_id,))
+        user = cursor.fetchone()
+        savings = user[0] if user else 0
+
+        # Suggest investments based on savings
+        if savings < 1000:
+            return "Consider low-risk investments like treasury bills or fixed deposits."
+        elif savings < 5000:
+            return "You can explore mutual funds or high-interest savings accounts."
+        else:
+            return "With your savings, you can consider real estate or tech stocks for higher returns."
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return "Sorry, I couldn't fetch investment suggestions."
+    finally:
+        cursor.close()
+        conn.close()
+        
+def fetch_expense_reduction_tips(user_id):
+    conn = sqlite3.connect("mydatabase.db")
+    cursor = conn.cursor()
+
+    try:
+        # Fetch user's top expenses
+        cursor.execute("""
+            SELECT category, SUM(amount) AS total_spent
+            FROM transactions
+            WHERE user_id = ? AND type = 'expense'
+            GROUP BY category
+            ORDER BY total_spent DESC
+            LIMIT 3
+        """, (user_id,))
+        expenses = cursor.fetchall()
+
+        # Suggest alternatives for costly habits
+        suggestions = []
+        for category, total_spent in expenses:
+            suggestions.append(f"Consider switching from {category} to a more affordable alternative.")
+
+        return "Here are some expense reduction insights:\n" + "\n".join(suggestions)
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return "Sorry, I couldn't fetch expense reduction insights."
+    finally:
+        cursor.close()
+        conn.close()
+@app.route('/generate', methods=['POST'])
+def generate():
+    """
+    API endpoint to handle chatbot requests and generate responses.
+    """
+    try:
+        data = request.get_json()  # Parse JSON data from the request
+        if not data or 'user_input' not in data:
+            return jsonify({'error': 'user_input is required'}), 400
+
+        user_input = data['user_input']
+        print(f"Received user input: {user_input}")  # Debugging log
+
+        # Generate a response
+        response = generate_response(user_input)
+        print(f"Generated response: {response}")  # Debugging log
+
+        return jsonify({'response': response})
+    except Exception as e:
+        print(f"Error in /generate route: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
-@app.route('/generate', methods=['POST'])
-def generate():
-    data = request.get_json()  # Parse JSON data from the request
-    if not data or 'user_input' not in data:
-        return jsonify({'error': 'user_input is required'}), 400
 
-    user_input = data['user_input']
-    response = generate_response(user_input)
-    return jsonify({'response': response})
 
 
 def get_db_connection():
@@ -1671,4 +1779,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug='True')
+   socketio.run(app, host='0.0.0.0', port=5000)

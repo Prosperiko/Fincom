@@ -6,6 +6,8 @@
     <title>Fincom - Sign Up</title>
     <link rel="stylesheet" href="../static/css/signup.css">
     <link rel="icon" type="image/webp" href="../static/img/logo.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+
 </head>
 <body>
     <!-- Background Slideshow -->
@@ -25,26 +27,31 @@
         <p>Create an Account</p>
         <form id="signupForm" action="{{ url_for('signup') }}" method="POST" onsubmit="return validateForm()">
             <div class="input-box">
+                <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username or Company username" required aria-label="Username or Company username">
             </div>
             <div class="input-box">
+                <i class="fas fa-id-card"></i>
                 <input type="text" name="fullname" placeholder="FullName or Company Name" required aria-label="FullName or Company Name">
             </div>
-
             <div class="input-box">
+                <i class="fas fa-briefcase"></i>
                 <input type="text" name="profession" placeholder="Profession or Industry" required aria-label="Profession or Industry">
             </div>
             <div class="input-box">
+                <i class="fas fa-envelope"></i>
                 <input type="email" name="email" placeholder="Email Address" required aria-label="Email">
             </div>
             <div class="input-box">
+                <i class="fas fa-lock"></i>
                 <input type="password" id="password" name="password" placeholder="Password" required aria-label="Password">
             </div>
             <div class="input-box">
+                <i class="fas fa-lock"></i>
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required aria-label="Confirm Password">
             </div>
-            <p class="error-message" id="error-message">Passwords do not match!</p>
             <div class="input-box">
+                <i class="fas fa-globe"></i>
                 <select name="nationality" required>
                     <option value="" disabled selected>Select Nationality</option>
                     <option value="American">American</option>
@@ -55,9 +62,7 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-           
             <div class="customer-type">
-        
                 <input type="radio" id="company" name="customer_type" value="company" required onclick="toggleWorkerInput()">
                 <label for="company">Company</label>
                 <input type="radio" id="individual" name="customer_type" value="individual" required onclick="toggleWorkerInput()">
@@ -66,6 +71,7 @@
 
             <!-- Number of Workers Dropdown -->
             <div class="input-box" id="workers-input" style="display: none;">
+                <i class="fas fa-users"></i>
                 <select name="number_of_workers" aria-label="Number of Workers">
                     <option value="" disabled selected>Select Number of Workers</option>
                     <option value="2">2</option>
@@ -80,40 +86,137 @@
         <p>Already have an account? <a href="{{ url_for('login') }}" class="btn">Login</a></p>
     </div>
 
+    <!-- FAQ Section -->
+    
+<div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <div class="faq-question">
+            Why should I sign up?
+            <span class="toggle-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Signing up allows you to access exclusive features, manage your account, and receive personalized support.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            Is my data safe with you?
+            <span class="toggle-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Yes, we prioritize your privacy and security. Your data is encrypted and stored securely.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            What benefits do I get from signing up?
+            <span class="toggle-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            As a registered user, you will receive updates, special offers, and access to premium features.
+        </div>
+    </div>
+</div>
+<div class="feature-box">
+    <div class="feature-item">Feature 1: Easy Financial Management</div>
+    <div class="feature-item">Feature 2: Secure Transactions</div>
+    <div class="feature-item">Feature 3: Real-Time Insights</div>
+</div>
     <script>
         function validateForm() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
             const errorMessage = document.getElementById('error-message');
-
+    
             const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-
+    
             if (!passwordRegex.test(password)) {
                 errorMessage.innerText = "Password must be at least 8 characters, include a number and a special character!";
                 errorMessage.style.display = 'block';
                 return false;
             }
-
+    
             if (password !== confirmPassword) {
                 errorMessage.innerText = "Passwords do not match!";
                 errorMessage.style.display = 'block';
                 return false;
             }
-
+    
             errorMessage.style.display = 'none';
             return true;
         }
-
+    
         function toggleWorkerInput() {
             const companyRadio = document.getElementById('company');
             const workersInput = document.getElementById('workers-input');
-
+    
             if (companyRadio.checked) {
                 workersInput.style.display = 'block';
             } else {
                 workersInput.style.display = 'none';
             }
         }
+    
+        // FAQ Animation Logic
+        const faqSection = document.getElementById('faqSection');
+        const faqHeaders = document.querySelectorAll('.faq h3');
+    
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const faq = this.parentElement;
+                faq.classList.toggle('active');
+            });
+        });
+    
+        // Ensure FAQ section only animates when in view
+        window.addEventListener('scroll', function() {
+            const faqSectionTop = faqSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+    
+            if (faqSectionTop < windowHeight && faqSectionTop > 0) {
+                faqSection.classList.add('active');
+            } else {
+                faqSection.classList.remove('active');
+            }
+        });
+    
+        // Initial animation for FAQ section
+        window.addEventListener('load', function() {
+            const faqSectionTop = faqSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+    
+            if (faqSectionTop < windowHeight && faqSectionTop > 0) {
+                faqSection.classList.add('active');
+            }
+        });
+    
+        // Feature Animation for Left Part of the Page
+        const featureSection = document.createElement('div');
+        featureSection.classList.add('feature-section');
+        featureSection.innerHTML = `
+            <h2>Welcome to Fincom</h2>
+            <p>Discover the best way to manage your finances and grow your business.</p>
+        `;
+        document.body.prepend(featureSection);
+    
+        // Add animation to the feature section
+        window.addEventListener('load', function() {
+            featureSection.classList.add('slide-in');
+        });
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.toggle-icon');
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                icon.textContent = icon.textContent === '+' ? '-' : '+';
+            });
+        });
     </script>
+    
+
 </body>
 </html>
+           
+           

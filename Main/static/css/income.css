@@ -13,6 +13,25 @@
 }
 /* Main Container */
 /* Main Container */
+.input-icon {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 10px;
+  top: 38px;
+  color: #555;
+}
+
+.input-icon input,
+.input-icon select,
+.input-icon textarea {
+  padding-left: 30px; /* Adjust if needed */
+  width: 100%;
+}
+
 .container {
   max-width: 350px; /* Reduced width to make it smaller */
   margin: 15px auto; /* Reduced vertical margin for a more compact fit */

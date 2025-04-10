@@ -39,49 +39,63 @@
     {% endwith %}
     <div>
       <h2>Chatbot for Transactions</h2>
-      <form id="transaction-form">
-          <input type="text" id="user-input" placeholder="Type your transaction (e.g., I spent $500 on entertainment)" required>
-          <button type="submit">Submit</button>
+      <form action="{{ url_for('income') }}" method="POST">
+        <div class="input-icon">
+          <label for="name">Your Name:</label>
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" id="name" required placeholder="Enter your name">
+        </div>
+      
+        <div class="input-icon">
+          <label for="income_type">Type:</label>
+          <i class="fas fa-tag"></i>
+          <input type="text" name="income_type" id="income_type" value="income" readonly>
+        </div>
+      
+        <div class="input-icon">
+          <label for="account">Account:</label>
+          <i class="fas fa-wallet"></i>
+          <select name="account" id="account" required>
+              <option value="" disabled selected>💳 Select an account</option>
+              <option value="cash">💵 Cash</option> 
+              <option value="card">💳 Card</option>
+          </select>
+        </div>
+      
+        <div class="input-icon">
+          <label for="category">Category:</label>
+          <i class="fas fa-list"></i>
+          <select name="category" id="category" required>
+              <option value="" disabled selected>📂 Select a category</option>
+              <option value="salary">💼 Salary</option>
+              <option value="wages">🧾 Wages</option>
+              <option value="investment">📈 Investment</option>
+              <option value="freelance">🛠️ Freelance</option>
+              <option value="others">📦 Others</option>
+          </select>
+        </div>
+      
+        <div class="input-icon">
+          <label for="description">Description:</label>
+          <i class="fas fa-align-left"></i>
+          <textarea name="description" id="description" placeholder="Describe your income" rows="3" required></textarea>
+        </div>
+      
+        <div class="input-icon">
+          <label for="amount">Amount (Naira):</label>
+          <i class="fas fa-money-bill-wave"></i>
+          <input type="number" name="amount" id="amount" step="0.01" placeholder="Enter amount" required>
+        </div>
+      
+        <div class="input-icon">
+          <label for="quantity">Quantity:</label>
+          <i class="fas fa-sort-numeric-up"></i>
+          <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
+        </div>
+      
+        <button type="submit"><i class="fas fa-plus-circle"></i> Add Income</button>
       </form>
-      <div id="response"></div>
-    </div>
-    <form action="{{ url_for('income') }}" method="POST">
-      <label for="name">Your Name:</label>
-      <input type="text" name="name" id="name" required placeholder="Enter your name">
       
-      <label for="income_type">Type:</label>
-      <input type="text" name="income_type" id="income_type" value="income" readonly>
-      
-      <label for="account">Account:</label>
-      <select name="account" id="account" required>
-          <option value="" disabled selected>Select an account</option>
-          <option value="cash">Cash</option> 
-          <option value="card">Card</option>
-          
-      </select>
-      
-      <label for="category">Category:</label>
-      <select name="category" id="category" required>
-          <option value="" disabled selected>Select a category</option>
-          <option value="salary">Salary</option>
-          <option value="wages">Wages</option>
-          <option value="investment">Investment</option>
-          <option value="freelance">Freelance</option>
-          <option value="others">Others</option>
-      </select>
-      
-      <label for="description">Description:</label>
-      <textarea name="description" id="description" placeholder="Describe your income" rows="3" required></textarea>
-      
-      <label for="amount">Amount (Naira):</label>
-      <input type="number" name="amount" id="amount" step="0.01" placeholder="Enter amount" required>
-      
-      <label for="quantity">Quantity:</label>
-      <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
-      
-      <button type="submit">Add Income</button>
-      <!-- Back button -->
-    </form>
   </div>
 
   <script>
