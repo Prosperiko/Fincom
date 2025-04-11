@@ -23,7 +23,20 @@ body {
     color: var(--color-navy); /* Adjusted text color for better contrast */
 }
 
-
+.show-more-btn {
+    display: inline-block;
+    margin: 5px 0; /* Reduced margin */
+    padding: 5px 10px; /* Reduced padding for smaller height */
+    background-color: var(--color-gold); /* Gold background */
+    color: var(--color-navy); /* Dark Blue text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 3px; /* Slightly smaller rounded corners */
+    font-size: 14px; /* Reduced font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+.show-more-btn:hover {
+    background-color: var(--hover-color); /* Change color on hover */
+}
 
 /* Sidebar */
 .sidebar {

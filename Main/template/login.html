@@ -10,7 +10,13 @@
 
 </head>
 <body>
-    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}  
+  {% endwith %}
     <!-- Background Slideshow -->
     <div class="background-slideshow"></div>
 
@@ -83,6 +89,13 @@
             </div>
         </div>
     </section>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}  
+  {% endwith %}
 
     <script>
  // Show the first feature immediately

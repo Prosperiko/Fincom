@@ -12,7 +12,33 @@
   --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
+/* Table Styles */
+table {
+  width: 80%; /* Set the width of the table */
+  margin: 20px auto; /* Center the table */
+  border-collapse: collapse; /* Collapse borders */
+  background-color: var(--color-navy); /* Background color */
+  color: var(--color-white); /* Text color */
+}
 
+th, td {
+  padding: 8px 12px; /* Reduce padding for smaller cells */
+  text-align: left; /* Align text to the left */
+  border: 1px solid var(--color-gold); /* Border color */
+}
+
+th {
+  background-color: var(--color-gold); /* Header background color */
+  color: var(--color-navy); /* Header text color */
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1); /* Light background for even rows */
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Highlight on hover */
+}
 body {
   background: linear-gradient(135deg, #000000, #1a1a1a);
   color: var(--color-navy); /* Dark Blue */

@@ -10,7 +10,6 @@
 <body>
     <!-- Header -->
 
-
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -19,13 +18,11 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="/home1"><i class="icon">🏠</i> HOME</a></li>
-
             <li><a href="/expenses"><i class="icon">💰</i> Add Expense</a></li>
             <li><a href="/income"><i class="icon">📈</i> Add Income</a></li>
-            <li><a href="/ana"><i class="icon">📊</i> Analysis</a></li>
+            <li><a href="/Analysis"><i class="icon">📊</i> Analysis</a></li>
             <li><a href="/Business_advice"><i class="icon">💼</i> Start a New Business</a></li>
-            <li><a href="/chatbox"><i class="icon">💬</i>CHAT</a></li>
-            
+            <li><a href="/chatbox"><i class="icon">💬</i> CHAT</a></li>
             <li><a href="/budget"><i class="icon">📝</i> Create a Budget</a></li>
         </ul>
     </div>
@@ -34,6 +31,14 @@
     <div class="main-content">
         <div class="container">
             <h1>What's on your mind?</h1>
+
+            <!-- Search Bar -->
+           <!-- Search Bar -->
+<div class="search-bar">
+    <input type="text" id="search" placeholder="Search posts based on post title, username and content">
+    <button id="search-button"><i class="icon">🔍</i></button>
+    <button id="clear-button"><i class="icon">❌</i></button>
+</div>
 
             <!-- Post Form -->
             <form action="{{ url_for('post') }}" method="POST" enctype="multipart/form-data" class="post-form">
@@ -47,7 +52,7 @@
             <!-- Posts Section -->
             <div class="posts" id="posts">
                 {% for post in posts %}
-                    <div class="post-container" data-username="{{ post.username }}" data-content="{{ post.content }}">
+                    <div class="post-container" data-username="{{ post.username }}" data-content="{{ post.content }}" data-post-title="{{ post.title }}">
                         <div class="post-header">
                             <h2>{{ post.title }}</h2>
                             <small>by {{ post.username }} on {{ post.timestamp }}</small>
@@ -79,31 +84,49 @@
                         </div>
                     </div>
                 {% else %}
-                    <p>No posts found.</p>
+                <p>No posts found.</p>
                 {% endfor %}
             </div>
         </div>
     </div>
 
-    
-
-    <script>
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        // Function to filter posts based on search input
         function filterPosts() {
             const input = document.getElementById('search');
             const filter = input.value.toLowerCase();
             const posts = document.querySelectorAll('.post-container');
-
+    
             posts.forEach(post => {
                 const username = post.getAttribute('data-username').toLowerCase();
                 const content = post.getAttribute('data-content').toLowerCase();
+                const title = post.getAttribute('data-post-title').toLowerCase();
                 
-                if (username.includes(filter) || content.includes(filter)) {
+                // Check if the filter matches the username, content, or title
+                if (username.includes(filter) || content.includes(filter) || title.includes(filter)) {
                     post.style.display = ""; // Show post
                 } else {
                     post.style.display = "none"; // Hide post
                 }
             });
         }
-    </script>
+    
+        // Function to clear the search input and reset post visibility
+        function clearSearch() {
+            const input = document.getElementById('search');
+            input.value = ''; // Clear the input field
+            filterPosts(); // Call filterPosts to reset the visibility of posts
+        }
+    
+        // Attach event listeners to the search input and buttons
+        const searchInput = document.getElementById('search');
+        const searchButton = document.getElementById('search-button'); // Select by ID
+        const clearButton = document.getElementById('clear-button'); // Select by ID
+    
+        searchInput.addEventListener('keyup', filterPosts); // Filter posts on keyup
+        searchButton.addEventListener('click', filterPosts); // Filter posts on search button click
+        clearButton.addEventListener('click', clearSearch); // Clear search on clear button click
+    });</script>
+
 </body>
 </html>

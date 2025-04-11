@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Transactions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all_transactions.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>All Transactions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction['id'] }}</td>
+                    <td>{{ transaction['type'] }}</td>
+                    <td>{{ transaction['category'] }}</td>
+                    <td>${{ transaction['amount'] }}</td>
+                    <td>{{ transaction['date'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="export-buttons">
+            <a href="{{ url_for('export_csv') }}" class="btn btn-primary">Download CSV</a>
+            <a href="{{ url_for('export_excel') }}" class="btn btn-success">Download Excel</a>
+
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.export-btn').forEach(button => {
+            button.addEventListener('click', function(event) {
+                const confirmation = confirm("Are you sure you want to export the transactions?");
+                if (!confirmation) {
+                    event.preventDefault(); // Prevent the default action if the user cancels
+                }
+            });
+        });
+    </script>
+</body>
+</html>

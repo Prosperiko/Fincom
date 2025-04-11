@@ -18,7 +18,7 @@
     <ul class="sidebar-menu">
         <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
         <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-        <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+        <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
         <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
         <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
         <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">CHAT</a></li>
@@ -106,27 +106,39 @@
 
   <script>
     document.getElementById('transaction-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const userInput = document.getElementById('user-input').value;
-
-        fetch('/chatbot_transaction', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                'user_input': userInput
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('response').innerText = data.success || data.error;
-            document.getElementById('user-input').value = ''; // Clear input
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    });
+      event.preventDefault();
+      const userInput = document.getElementById('user-input').value;
+  
+      fetch('/chatbot_transaction', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+              'user_input': userInput
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          const responseDiv = document.getElementById('response');
+          responseDiv.style.display = 'block'; // Show the response box
+          if (data.success) {
+              responseDiv.className = 'success'; // Apply success styling
+              responseDiv.innerText = data.success;
+          } else {
+              responseDiv.className = 'error'; // Apply error styling
+              responseDiv.innerText = data.error;
+          }
+          document.getElementById('user-input').value = ''; // Clear input
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          const responseDiv = document.getElementById('response');
+          responseDiv.style.display = 'block';
+          responseDiv.className = 'error';
+          responseDiv.innerText = 'An error occurred. Please try again.';
+      });
+  });
 </script>
 </body>
 </html>

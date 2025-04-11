@@ -20,9 +20,9 @@
         <ul class="sidebar-menu">
             <li><a href="/expenses" onclick="changeBackground('img/bank.jpg')">Add Expense</a></li>
             <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-            <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+            <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
             <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">chat </a></li>
+            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat</a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
             <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
         </ul>
@@ -52,6 +52,7 @@
         <!-- Recent Transactions Section -->
         <div class="recent-transactions">
             <h3>Recent Transactions</h3>
+            <a href="/all_transactions" class="show-more-btn">Transaction History</a> <!-- Show More Button -->
             <ul>
                 {% for transaction in recent_transactions %}
                 <li>
@@ -68,7 +69,7 @@
         <p>Welcome! I'm here to help you with your finance-related questions. How can I assist you today?</p>
         <div id="messages" class="chatbot-messages"></div>
         <div class="chatbot-input">
-            <input type="text" id="user_input" placeholder="Type your message here..." aria-label="User input" />
+            <input type="text" id="user_input" placeholder="Type your message here..." aria-label="User  input" />
             <button id="send">Send</button>
         </div>
     </div>
@@ -148,9 +149,6 @@
                 }
             });
         });
-
-                // Append user message
-
     </script>
 
 </body>

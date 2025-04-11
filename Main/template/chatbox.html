@@ -11,69 +11,70 @@
 <body>
     <h2><i class="fas fa-users"></i> Users</h2>
 
-<form class="search-box" method="GET" action="/chatbox">
-  <input type="text" id="search-input" name="search" class="search-input" 
-         placeholder="Search users..." value="{{ request.args.get('search', '') }}">
-  <button type="submit" id="search-btn" class="search-btn">
-    <i class="fas fa-search"></i> Search
-  </button>
-  <button type="button" id="clear-btn" class="clear-btn">
-    <i class="fas fa-times-circle"></i> Clear
-  </button>
-</form>
-<div class="sidebar">
-    <div class="sidebar-header">
-        <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
-        <h2>Fincom</h2>
-    </div>
-    
-    <ul class="sidebar-menu">
-        <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
-        <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
-        <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-        <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
-        <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
-        
-        <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
-        
-    </ul>
-  </div>
-<div class="user-list">
-  {% for user in users %}
-  <div class="user-card">
-    <div class="user-info">
-      <h3><i class="fas fa-user-circle"></i> {{ user.username }}</h3>
-      <p><i class="fas fa-briefcase"></i> {{ user.profession }}</p>
-      <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">
-        <i class="fas fa-comment-dots"></i> Message
-      </a>
-    </div>
-  </div>
-  {% else %}
-  <p><i class="fas fa-exclamation-circle"></i> No users found.</p>
-  {% endfor %}
-</div>
+    <form class="search-box" method="GET" action="/chatbox">
+        <input type="text" id="search-input" name="search" class="search-input" 
+               placeholder="Search by username..." value="{{ request.args.get('search', '') }}">
+        <input type="text" id="profession-input" name="profession" class="search-input" 
+               placeholder="Search by profession..." value="{{ request.args.get('profession', '') }}">
+        <button type="submit" id="search-btn" class="search-btn">
+            <i class="fas fa-search"></i> Search
+        </button>
+        <button type="button" id="clear-btn" class="clear-btn">
+            <i class="fas fa-times-circle"></i> Clear
+        </button>
+    </form>
 
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
+            <h2>Fincom</h2>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">HOME</a></li>
+            <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
+            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+            <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+            <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
+            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
+        </ul>
+    </div>
 
+    <div class="user-list">
+        {% for user in users %}
+        <div class="user-card">
+            <div class="user-info">
+                <h3><i class="fas fa-user-circle"></i> {{ user.username }}</h3>
+                <p><i class="fas fa-briefcase"></i> {{ user.profession }}</p>
+                <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">
+                    <i class="fas fa-comment-dots"></i> Message
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <p><i class="fas fa-exclamation-circle"></i> No users found.</p>
+        {% endfor %}
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.getElementById("search-input");
+            const professionInput = document.getElementById("profession-input");
             const clearBtn = document.getElementById("clear-btn");
 
-            // Function to clear the search input and reload the page without query parameters
+            // Function to clear the search inputs and reload the page without query parameters
             function clearSearch() {
                 window.location.href = window.location.pathname; // Reloads without search query
             }
 
             // Handle "Enter" key press to trigger search
-            searchInput.addEventListener("keypress", function (event) {
-                if (event.key === "Enter") {
-                    if (searchInput.value.trim() === "") {
+            [searchInput, professionInput].forEach(input => {
+                input.addEventListener("keypress", function (event) {
+                    if (event.key === "Enter" && input.value.trim() === "") {
                         event.preventDefault(); // Prevent empty search
                     }
-                }
+                });
             });
 
             // Attach event listener for clear button

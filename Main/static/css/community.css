@@ -234,11 +234,23 @@ footer {
 
 @media (max-width: 576px) {
     .sidebar {
-        display: none;
+        display: none; /* Hide sidebar on small screens */
     }
 
     .main-content {
         margin-left: 0;
         padding: 20px;
+    }
+
+    header {
+        padding: 10px; /* Adjust header padding for smaller screens */
+    }
+
+    .header-right input {
+        width: 70%; /* Adjust input width */
+    }
+
+    .header-right button {
+        width: 25%; /* Adjust button width */
     }
 }

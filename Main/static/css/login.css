@@ -68,6 +68,7 @@ header h1 {
     height: auto;
 }
 
+  
 /* ================= Login Container ================= */
 .login-container {
     width: 100%; /* Make it responsive */
@@ -161,6 +162,20 @@ header h1 {
     width: 30px;
     height: 30px;
 }
+.flash-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    color: var(--color-white);
+  }
+  
+  .flash-success {
+    background-color: green; /* Green */
+  }
+  
+  .flash-error {
+    background-color: var(--color-gold); /* Red */
+  }
 
 /* ================= Image Container ================= */
 .image-container {

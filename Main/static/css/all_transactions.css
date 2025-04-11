@@ -1,0 +1,76 @@
+:root {
+    --color-navy: navy;
+    --color-gold: #FFD700; /* Gold */
+    --color-light-grey: #F5F5F5; /* Light Gray */
+    --color-deep-blue: navy;
+    --color-white: #fff; /* White */
+    --color-medium-grey: navy;
+    --highlight-gold: #f4b400; /* Highlight Gold */
+    --shadow-color: navy;
+
+    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+}
+
+body {
+    background: var(--color-light-grey);
+    color: var(--color-navy);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+h1 {
+    text-align: center;
+    color: var(--color-navy);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--color-navy);
+}
+
+th {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.export-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.export-btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.export-btn:hover {
+    background-color: var(--highlight-gold);
+}

@@ -50,6 +50,29 @@ body {
   margin: 0;
   padding: 0;
 }
+#response {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-navy); /* Default text color */
+  background-color: #4caf50; /* Default success background color */
+  display: none; /* Initially hidden */
+}
+
+/* Error styling */
+#response.error {
+  background-color: #f44336; /* Red background for errors */
+  color: #ffffff; /* White text for errors */
+}
+
+/* Success styling */
+#response.success {
+  background-color: var(--color-gold); /* Green background for success */
+  color: var(--color-white); /* White text for success */
+}
 
 /* Sidebar */
 .sidebar {

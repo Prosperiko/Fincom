@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash, jsonify, redirect, url_for
+from flask import Flask, render_template, request, redirect, session, flash, jsonify, redirect, url_for, send_file
 import mysql.connector
 from mysql.connector import Error
 from flask_bcrypt import Bcrypt
@@ -12,6 +12,8 @@ import os
 from flask_socketio import SocketIO, emit
 import smtplib
 from email.mime.text import MIMEText
+import pandas as pd
+
 
 
 
@@ -1333,7 +1335,8 @@ def community():
         posts = [
             post for post in posts
             if search_query.lower() in post['content'].lower() or
-               search_query.lower() in post['username'].lower()
+               search_query.lower() in post['username'].lower() or
+               search_query.lower() in post['title'].lower()
         ]
 
     conn.close()
@@ -1346,8 +1349,8 @@ def get_db_connection():
 
 @app.route('/chatbox', methods=['GET'])
 def chatbox():
-    search_query = request.args.get('search', '')  # Get search query from URL
-    profession_query = request.args.get('profession', '')  # Get profession query from URL
+    search_query = request.args.get('search', '').strip()  # Get search query from URL
+    profession_query = request.args.get('profession', '').strip()  # Get profession query from URL
     conn = get_db_connection()
 
     # Build the SQL query dynamically based on search inputs
@@ -1356,17 +1359,17 @@ def chatbox():
 
     if search_query:
         query += " AND username LIKE ?"
-        params.append('%' + search_query + '%')
+        params.append(f'%{search_query}%')
 
     if profession_query:
         query += " AND profession LIKE ?"
-        params.append('%' + profession_query + '%')
+        params.append(f'%{profession_query}%')
 
     # Retrieve users based on the query
     users = conn.execute(query, params).fetchall()
 
     # Convert sqlite3.Row objects to dictionaries and add online status
-    users = [dict(user) for user in users]  # Convert rows to dictionaries
+    users = [dict(user) for user in users]
     for user in users:
         user['online'] = user['id'] % 2 == 0  # Example: Even IDs are online
 
@@ -1375,7 +1378,6 @@ def chatbox():
 
     conn.close()
     return render_template('chatbox.html', users=users, search_query=search_query, profession_query=profession_query, active_user=active_user)
-
 
 
 
@@ -1392,49 +1394,97 @@ import sqlite3
 genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")  # Replace with your actual API key
 model = genai.GenerativeModel("gemini-1.5-flash")  # Replace with the correct model name
 
+import sqlite3
+
 def generate_response(prompt):
-    """
-    Generate a response using the AI model based on the user's prompt.
-    Fetch relevant data from the database for specific features.
-    """
-    try:
-        # Prepend context about FinCom and finance
-        context = "You are FinBot, a financial assistant for FinCom. Provide concise and relevant responses to user queries."
+    # Prepend context about FinCom and finance
+    context = "You are FinBot, a financial assistant for FinCom. You can provide financial insights and also engage in general conversation. Please provide concise and relevant responses to user queries."
+    
+    # Check if the user is logged in
+    if 'user_id' not in session:
+        return "Please log in to use FinBot's services."
 
-        # Check if the user is logged in
-        if 'user_id' not in session:
-            return "Please log in to use FinBot's services."
+    user_id = session['user_id']  # Get the logged-in user's ID
 
-        user_id = session['user_id']  # Get the logged-in user's ID
+    # Keywords to trigger financial information retrieval and analysis
+    keywords = ["financial summary", "financial information", "my finances", "income", "expenses", "profit", "balance", "business", "analysis", "breakdown", "insights"]
 
-        # Keywords to trigger specific features
-        keywords = {
-            "regional trends": fetch_regional_trends,
-            "renegotiate bills": fetch_bill_negotiation_tips,
-            "better deals": fetch_better_deals,
-            "investment opportunities": fetch_investment_opportunities,
-            "expense reduction": fetch_expense_reduction_tips
-        }
+    # Check if the user's prompt contains any of the keywords
+    if any(keyword in prompt.lower() for keyword in keywords):
+        # Connect to the database and retrieve user-specific data
+        conn = sqlite3.connect("mydatabase.db")
+        conn.row_factory = sqlite3.Row  # Access columns by name
+        cursor = conn.cursor()
+        
+        try:
+            # Fetch data for the logged-in user
+            cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+            user = cursor.fetchone()
+            
+            if user:
+                # Format user data into a brief summary
+                user_data = f":User  {user['fullname']} (Username: {user['username']})\n" \
+                            f"Profit: {user['profit']}, Income: {user['total_income']}, Expenses: {user['total_expenses']}\n" \
+                            f"Cash Balance: {user['cash_balance']}, Card Balance: {user['card_balance']}, Savings: {user['savings_balance']}"
+                
+                context += f"\nHere is your financial summary:\n{user_data}\n"
+                
+                # Perform financial analysis and insights
+                analysis = perform_financial_analysis(user)
+                context += f"\nFinancial Analysis:\n{analysis}\n"
+            else:
+                context += "\nNo financial data found for your account.\n"
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+            context += "\nUnable to retrieve financial data due to a database error.\n"
+        finally:
+            cursor.close()
+            conn.close()
+    else:
+        # If no keywords are detected, provide a general chat response
+        context += "\nHow can I assist you today? Feel free to ask me anything, whether it's about finances or general topics."
 
-        # Check if the user's prompt matches any feature
-        for keyword, feature_function in keywords.items():
-            if keyword in prompt.lower():
-                return feature_function(user_id)
+    # Combine the context with the user's prompt
+    full_prompt = context + "\n" + prompt
+    
+    # Generate a response using the AI model
+    response = model.generate_content(full_prompt)
+    
+    # Limit the response length to keep it concise
+    return response.text[:500]
 
-        # Default response for generic queries
-        context += "\nHow can I assist you today? Please ask specific questions about your finances or business ideas."
-
-        # Combine the context with the user's prompt
-        full_prompt = context + "\n" + prompt
-
-        # Generate a response using the AI model
-        response = model.generate_content(full_prompt)
-
-        # Limit the response length to keep it concise
-        return response.text[:500] if response and response.text else "Sorry, I couldn't generate a response."
-    except Exception as e:
-        print(f"Error in generate_response: {e}")
-        return "Sorry, something went wrong while processing your request."
+def perform_financial_analysis(user):
+    # This function will perform various analyses based on user data
+    analysis = []
+    
+    # Example calculations
+    income = user['total_income']
+    expenses = user['total_expenses']
+    profit = user['profit']
+    cash_balance = user['cash_balance']
+    
+    # Profit margin
+    if income > 0:
+        profit_margin = (profit / income) * 100
+        analysis.append(f"Profit Margin: {profit_margin:.2f}%")
+    else:
+        analysis.append("No income recorded to calculate profit margin.")
+    
+    # Expense ratio
+    if income > 0:
+        expense_ratio = (expenses / income) * 100
+        analysis.append(f"Expense Ratio: {expense_ratio:.2f}%")
+    else:
+        analysis.append("No income recorded to calculate expense ratio.")
+    
+    # Cash flow insights
+    if cash_balance < 0:
+        analysis.append("Warning: Your cash balance is negative. Consider reviewing your expenses.")
+    else:
+        analysis.append("Your cash balance is healthy.")
+    
+    # Add more analyses as needed
+    return "\n".join(analysis)
     
 def fetch_regional_trends(user_id):
     # Example: Fetch regional trends from an external API or database
@@ -1769,6 +1819,53 @@ def send_query():
     return redirect(url_for('index'))  # Redirect back to the contact page
 
 
+def get_db_connection():
+    conn = sqlite3.connect('mydatabase.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+@app.route('/all_transactions')
+def all_transactions():
+    if 'username' not in session:
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+
+    username = session['username']
+    conn = get_db_connection()
+    transactions = conn.execute('SELECT * FROM transactions WHERE username = ?', (username,)).fetchall()
+    conn.close()
+    return render_template('all_transactions.html', transactions=transactions)
+
+
+@app.route('/export/csv')
+def export_csv():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    conn = get_db_connection()
+    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE username = ?', conn, params=(username,))
+    conn.close()
+
+    csv_file = 'transactions.csv'
+    transactions.to_csv(csv_file, index=False)
+
+    return send_file(csv_file, as_attachment=True)
+
+
+@app.route('/export/excel')
+def export_excel():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    conn = get_db_connection()
+    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE username = ?', conn, params=(username,))
+    conn.close()
+
+    excel_file = 'transactions.xlsx'
+    transactions.to_excel(excel_file, index=False)
+
+    return send_file(excel_file, as_attachment=True)
 
 @app.route('/logout')
 def logout():
@@ -1779,4 +1876,4 @@ def logout():
 
 
 if __name__ == '__main__':
-   socketio.run(app, host='0.0.0.0', port=5000)
+   socketio.run(app, debug=True)
