@@ -1191,8 +1191,8 @@ import sqlite3
 
   
 
-UPLOAD_FOLDER_IMG = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\fincom1\Fincom\Main\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\fincom1\Fincom\Main\static\video"
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
@@ -1726,7 +1726,7 @@ def chatbot_transaction():
 
 def parse_transaction_input(input_string):
     """Parse the transaction input string to extract amount, category, and transaction type."""
-    
+    user_input = request.form.get('user_input', '')
     # Regular expression to find the amount
     amount_match = re.search(r'\$?(\d+(\.\d{1,2})?)', input_string)
     
@@ -1735,24 +1735,40 @@ def parse_transaction_input(input_string):
     else:
         return None, None, None  # Return None if no amount is found
 
-    # Determine transaction type and category
-    transaction_type = None
-    category = None
-    payment_method = 'Cash'  # Default payment method
-
-    # Check for keywords to determine transaction type
+     # determine transaction type 
+    input_string = input_string.lower()
     if 'spent' in input_string or 'expense' in input_string or 'from' in input_string:
         transaction_type = 'expense'
     elif 'gained' in input_string or 'earned' in input_string or 'through' in input_string:
         transaction_type = 'income'
-
-    # Check for payment method
-    if 'card' in input_string.lower():
+ # simple keyword-based for category 
+    categories = ['food', 'transport', 'shopping', 'bills', 'salary', 'investment']
+    category = None
+    for cat in categories:
+        if cat in input_string:
+            category = cat
+            break
+    if not category:
+        category = 'other'  # Default if no known category found
+ # Define payment methods
+    payment_methods = {
+    'cash': 'Cash',
+    'card': 'Card',
+    'credit': 'Card',
+    'debit': 'Card'
+}
+    #check for payement method 
+    payment_method = payment_methods.get(input_string, 'None')
+    if 'cash' in input_string or 'card' in input_string:
+        payment_method = 'Card' if 'card' in input_string else 'Cash'
+    elif 'credit' in input_string or 'debit' in input_string:
         payment_method = 'Card'
-    elif 'cash' in input_string.lower():
-        payment_method = 'Cash'
+    else:
+        payment_method = "None"  # Return None if no payment method is found
+    
+    return amount, category, transaction_type, payment_method
 
-    # Extract the category based on common phrases
+    
     # This regex captures everything after the amount and any keywords
     category_match = re.split(r'\$?\d+(\.\d{1,2})?|\b(spent|gained|earned|from|through|on|as)\b', input_string, flags=re.IGNORECASE)
     

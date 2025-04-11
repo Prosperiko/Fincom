@@ -11,6 +11,7 @@
 <body>
     <h2><i class="fas fa-users"></i> Users</h2>
 
+<<<<<<< HEAD
     <form class="search-box" method="GET" action="/chatbox">
         <input type="text" id="search-input" name="search" class="search-input" 
                placeholder="Search by username..." value="{{ request.args.get('search', '') }}">
@@ -23,6 +24,50 @@
             <i class="fas fa-times-circle"></i> Clear
         </button>
     </form>
+=======
+<form class="search-box" method="GET" action="/chatbox">
+  <input type="text" id="search-input" name="search" class="search-input" 
+         placeholder="Search users..." value="{{ request.args.get('search', '') }}">
+  <button type="submit" id="search-btn" class="search-btn">
+    <i class="fas fa-search"></i> Search
+  </button>
+  <button type="button" id="clear-btn" class="clear-btn">
+    <i class="fas fa-times-circle"></i> Clear
+  </button>
+</form>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
+        <h2>Fincom</h2>
+    </div>
+    
+    <ul class="sidebar-menu">
+        <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+        <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
+        <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+        <li><a href="/ana" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+        <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
+        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+        <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
+        
+    </ul>
+  </div>
+<div class="user-list">
+  {% for user in users %}
+  <div class="user-card">
+    <div class="user-info">
+      <h3><i class="fas fa-user-circle"></i> {{ user.username }}</h3>
+      <p><i class="fas fa-briefcase"></i> {{ user.profession }}</p>
+      <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">
+        <i class="fas fa-comment-dots"></i> Message
+      </a>
+    </div>
+  </div>
+  {% else %}
+  <p><i class="fas fa-exclamation-circle"></i> No users found.</p>
+  {% endfor %}
+</div>
+>>>>>>> 58dd15c03e2ab4457d0a8931982769405303aefa
 
     <div class="sidebar">
         <div class="sidebar-header">
