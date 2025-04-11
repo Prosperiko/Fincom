@@ -10,9 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
 </head>
 <body>
+    <!-- Sidebar Toggle Icon -->
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+    </div>
+
+    <!-- Chat Toggle Icon -->
+    <div class="chat-toggle" onclick="toggleChat()">
+        <i class="fas fa-comments"></i> <!-- Font Awesome icon for chat -->
+    </div>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" class="logo">
             <h2>Fincom</h2>
@@ -22,17 +31,23 @@
             <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
             <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
             <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-<<<<<<< HEAD
-            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat</a></li>
-            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">MAKE A POST ABOUT YOUR BUSINESS</a></li>
+            
+            
             <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
-=======
             <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session </a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
->>>>>>> 58dd15c03e2ab4457d0a8931982769405303aefa
+            
         </ul>
     </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}  
+    {% endwith %}
 
     <!-- Main Content -->
     <div class="container">
@@ -70,7 +85,7 @@
         </div>
     </div>
 
-    <div id="chat" class="chatbot-container">
+    <div id="chat" class="chatbot-container" style="display: none;">
         <div class="chatbot-header">TALK TO FINBOT</div>
         <p>Welcome! I'm here to help you with your finance-related questions. How can I assist you today?</p>
         <div id="messages" class="chatbot-messages"></div>
@@ -96,6 +111,16 @@
     <script>
         function changeBackground(image) {
             document.body.style.backgroundImage = `url({{ url_for('static', filename='${image}') }})`;
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Toggle the active class
+        }
+
+        function toggleChat() {
+            const chat = document.getElementById('chat');
+            chat.style.display = chat.style.display === 'none' ? 'block' : 'none'; // Toggle chat visibility
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -155,6 +180,15 @@
                 }
             });
         });
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Toggle the active class
+        }
+        
+        function toggleChat() {
+            const chat = document.getElementById('chat');
+            chat.style.display = chat.style.display === 'none' ? 'block' : 'none'; // Toggle chat visibility
+        }
     </script>
 
 </body>

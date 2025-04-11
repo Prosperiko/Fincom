@@ -27,6 +27,9 @@
         
   </ul>
   </div>
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+  </div>
   <div class="container">
     <h2>Add Income</h2>
     <!-- Display Flash Messages -->
@@ -92,7 +95,11 @@
           <i class="fas fa-sort-numeric-up"></i>
           <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
         </div>
-      
+        <div class="input-icon">
+          <label for="date">Date:</label>
+          <i class="fas fa-calendar-alt"></i>
+          <input type="date" name="date" id="date" required>
+      </div>
         <button type="submit"><i class="fas fa-plus-circle"></i> Add Income</button>
       </form>
       
@@ -133,6 +140,21 @@
           responseDiv.innerText = 'An error occurred. Please try again.';
       });
   });
-</script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    sidebarToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('active'); // Toggle the active class
+        overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none'; // Show or hide overlay
+    });
+
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('active'); // Remove active class to hide sidebar
+        overlay.style.display = 'none'; // Hide overlay
+    });
+});
+  </script>
 </body>
 </html>

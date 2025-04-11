@@ -10,7 +10,8 @@
   
     --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
     --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
-  }
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -23,6 +24,7 @@ body {
     color: var(--color-navy); /* Adjusted text color for better contrast */
 }
 
+/* Show More Button */
 .show-more-btn {
     display: inline-block;
     margin: 5px 0; /* Reduced margin */
@@ -34,10 +36,12 @@ body {
     font-size: 14px; /* Reduced font size */
     transition: background-color 0.3s; /* Smooth transition */
 }
+
 .show-more-btn:hover {
-    background-color: var(--hover-color); /* Change color on hover */
+    background-color: var(--highlight-gold); /* Change color on hover */
 }
 
+/* Sidebar */
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -46,10 +50,16 @@ body {
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -300px; /* Hide sidebar off-screen */
     overflow-y: auto;
     padding: 20px;
     box-shadow: 2px 0 5px var(--shadow-color);
+    transition: left 0.3s ease; /* Smooth transition */
+}
+
+/* Active class to show sidebar */
+.sidebar.active {
+    left: 0; /* Bring sidebar into view */
 }
 
 .sidebar-header {
@@ -90,10 +100,9 @@ body {
     color: var(--color-navy);
 }
 
-
 /* Main Content */
 .container {
-    margin-left: 220px;
+    margin-left: 250px; /* Adjusted for sidebar width */
     padding: 20px;
     flex: 1;
     background-color: var(--color-navy);
@@ -192,6 +201,8 @@ h1, h2, h3 {
     color: var(--color-gold); /* Gold for better contrast */
     margin-bottom: 20px;
 }
+
+/* Chatbot Section */
 .chatbot-container {
     position: fixed;
     top: 0; /* Align it to the top of the page */
@@ -226,12 +237,14 @@ h1, h2, h3 {
     margin: 10px;
     box-shadow: 0 2px 4px var(--shadow-color);
 }
+
 .chatbot-container p {
     font-size: 0.9rem; /* Reduced size */
     color: yellow; /* Changed color to yellow */
     margin-bottom: 15px;
     text-align: center;
 }
+
 .chatbot-messages .message {
     margin-bottom: 10px;
     padding: 10px;
@@ -259,7 +272,7 @@ h1, h2, h3 {
     display: flex;
     padding: 10px;
     background-color: var(--color-medium-grey);
-    border-top: 2px solid var(--shadow-color); /* Add a border above the input section */
+    border-top: 2px solid var(--shadow-color)    /* Add a border above the input section */
 }
 
 .chatbot-input input {
@@ -285,6 +298,7 @@ h1, h2, h3 {
 .chatbot-input button:hover {
     background-color: var(--highlight-gold);
 }
+
 /* Footer */
 footer {
     position: fixed;
@@ -316,14 +330,54 @@ footer {
     color: var(--color-navy);
 }
 
+/* Flash Messages */
+.flash-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    color: var(--color-white);
+    margin-top: 100px; /* Adjust this value based on your header height */
+}
+
+.flash-success {
+    background-color: green; /* Green */
+}
+
+.flash-error {
+    background-color: var(--color-gold); /* Red */
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-navy); /* Dark Blue */
+    padding: 10px 0; /* Adjusted padding */
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid var(--color-gold); /* Yellow line to separate the header */
+}
+
+/* Spacer for Header */
+.header-spacer {
+    height: 60px; /* Adjust this to match the height of your header */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
-        width: 200px;
+        width: 200px; /* Adjust sidebar width for smaller screens */
     }
 
     .container {
-        margin-left: 220px;
+        margin-left: 220px; /* Adjust for sidebar width */
+    }
+
+    .chatbot-container {
+        width: 280px; /* Adjust chatbot width for smaller screens */
     }
 
     .dashboard-video {
@@ -341,8 +395,13 @@ footer {
     }
 
     .container {
-        margin-left: 0;
-        padding-top: 100px;
+        margin-left: 0; /* Remove margin for full-width layout */
+        padding-top: 100px; /* Space for fixed header */
+    }
+
+    .chatbot-container {
+        width: 100%; /* Full width for mobile */
+        height: auto; /* Adjust height for mobile */
     }
 
     .dashboard-video {
@@ -350,7 +409,6 @@ footer {
         max-height: 150px;
     }
 }
-/* Chatbot Section */
 
 /* Social Media Section */
 footer .social-media {
@@ -376,5 +434,26 @@ footer .social-icon:hover {
     color: var(--highlight-gold);
     transform: scale(1.2);
 }
+/* Sidebar Toggle Icon */
+.sidebar-toggle, .chat-toggle {
+    position: fixed;
+    bottom: 20px; /* Position from the bottom */
+    right: 20px; /* Position from the right */
+    background-color: var(--color-gold); /* Gold background */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above other elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
 
-/* Financial Summary Section */
+/* Sidebar Toggle Icon */
+.sidebar-toggle {
+    bottom: 80px; /* Position above the chat toggle */
+}
+
+/* Chat Toggle Icon */
+.chat-toggle {
+    background-color: var(--highlight-gold); /* Highlight gold background */
+}

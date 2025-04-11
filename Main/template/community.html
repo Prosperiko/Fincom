@@ -22,14 +22,15 @@
             <li><a href="/income"><i class="icon">📈</i> Add Income</a></li>
             <li><a href="/Analysis"><i class="icon">📊</i> Analysis</a></li>
             <li><a href="/Business_advice"><i class="icon">💼</i> Start a New Business</a></li>
-<<<<<<< HEAD
             <li><a href="/chatbox"><i class="icon">💬</i> CHAT</a></li>
             <li><a href="/budget"><i class="icon">📝</i> Create a Budget</a></li>
-=======
             <li><a href="/chatbox"><i class="icon">💬</i>Chat-Session</a></li>
-            <li><a href="/budget"><i class="icon">📝</i> Create-Budget</a></li>
->>>>>>> 58dd15c03e2ab4457d0a8931982769405303aefa
+            
+
         </ul>
+    </div>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
     </div>
 
     <!-- Main Content -->
@@ -131,7 +132,23 @@
         searchInput.addEventListener('keyup', filterPosts); // Filter posts on keyup
         searchButton.addEventListener('click', filterPosts); // Filter posts on search button click
         clearButton.addEventListener('click', clearSearch); // Clear search on clear button click
-    });</script>
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+    
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active'); // Toggle the active class
+            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none'; // Show or hide overlay
+        });
+    
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active'); // Remove active class to hide sidebar
+            overlay.style.display = 'none'; // Hide overlay
+        });
+    });
+    </script>
 
 </body>
 </html>

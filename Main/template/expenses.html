@@ -23,9 +23,11 @@
         <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
         <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
         <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
-        
     </ul>
   </div>
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+</div>
   <div class="container">
     <h2>Add Expense</h2>
     <!-- Display Flash Messages -->
@@ -36,6 +38,7 @@
         {% endfor %}
       {% endif %}  
     {% endwith %}
+    
     <div>
       <h2>Chatbot for Transactions</h2>
       <form id="transaction-form">
@@ -43,65 +46,71 @@
           <button type="submit">Submit</button>
       </form>
       <div id="response"></div>
-  </div>
-  <form action="{{ url_for('expenses') }}" method="POST">
-    <div class="input-icon">
-      <label for="name">Your Name:</label>
-      <i class="fas fa-user"></i>
-      <input type="text" name="name" id="name" required placeholder="Enter your name">
     </div>
-  
-    <div class="input-icon">
-      <label for="expense_type">Type:</label>
-      <i class="fas fa-tag"></i>
-      <input type="text" name="expense_type" id="expense_type" value="expense" readonly>
-    </div>
-  
-    <div class="input-icon">
-      <label for="account">Account:</label>
-      <i class="fas fa-wallet"></i>
-      <select name="account" id="account" required>
-        <option value="" disabled selected>💳 Select an account</option>
-        <option value="cash">💵 Cash</option> 
-        <option value="card">💳 Card</option>
-      </select>
-    </div>
-  
-    <div class="input-icon">
-      <label for="category">Category:</label>
-      <i class="fas fa-list"></i>
-      <select name="category" id="category" required>
-        <option value="" disabled selected>📂 Select a category</option>
-        <option value="food">🍔 Food</option>
-        <option value="transport">🚌 Transport</option>
-        <option value="utilities">💡 Utilities</option>
-        <option value="entertainment">🎮 Entertainment</option>
-        <option value="others">📦 Others</option>
-      </select>
-    </div>
-  
-    <div class="input-icon">
-      <label for="description">Description:</label>
-      <i class="fas fa-align-left"></i>
-      <textarea name="description" id="description" placeholder="Describe your expense" rows="3" required></textarea>
-    </div>
-  
-    <div class="input-icon">
-      <label for="amount">Amount (Naira):</label>
-      <i class="fas fa-money-bill-wave"></i>
-      <input type="number" name="amount" id="amount" step="0.01" placeholder="Enter amount" required>
-    </div>
-  
-    <div class="input-icon">
-      <label for="quantity">Quantity:</label>
-      <i class="fas fa-sort-numeric-up"></i>
-      <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
-    </div>
-  
-    <button type="submit"><i class="fas fa-plus-circle"></i> Add Expense</button>
-  </form>
-  
     
+    <form action="{{ url_for('expenses') }}" method="POST">
+      <div class="input-icon">
+        <label for="name">Your Name:</label>
+        <i class="fas fa-user"></i>
+        <input type="text" name="name" id="name" required placeholder="Enter your name">
+      </div>
+    
+      <div class="input-icon">
+        <label for="expense_type">Type:</label>
+        <i class="fas fa-tag"></i>
+        <input type="text" name="expense_type" id="expense_type" value="expense" readonly>
+      </div>
+    
+      <div class="input-icon">
+        <label for="account">Account:</label>
+        <i class="fas fa-wallet"></i>
+        <select name="account" id="account" required>
+          <option value="" disabled selected>💳 Select an account</option>
+          <option value="cash">💵 Cash</option> 
+          <option value="card">💳 Card</option>
+        </select>
+      </div>
+    
+      <div class="input-icon">
+        <label for="category">Category:</label>
+        <i class="fas fa-list"></i>
+        <select name="category" id="category" required>
+          <option value="" disabled selected>📂 Select a category</option>
+          <option value="food">🍔 Food</option>
+          <option value="transport">🚌 Transport</option>
+          <option value="utilities">💡 Utilities</option>
+          <option value="entertainment">🎮 Entertainment</option>
+          <option value="others">📦 Others</option>
+        </select>
+      </div>
+    
+      <div class="input-icon">
+        <label for="description">Description:</label>
+        <i class="fas fa-align-left"></i>
+        <textarea name="description" id="description" placeholder="Describe your expense" rows="3" required></textarea>
+      </div>
+    
+      <div class="input-icon">
+        <label for="amount">Amount (Naira):</label>
+        <i class="fas fa-money-bill-wave"></i>
+        <input type="number" name="amount" id="amount" step="0.01" placeholder="Enter amount" required>
+      </div>
+    
+      <div class="input-icon">
+        <label for="quantity">Quantity:</label>
+        <i class="fas fa-sort-numeric-up"></i>
+        <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required>
+      </div>
+
+      <!-- Date Picker -->
+      <div class="input-icon">
+        <label for="date">Date:</label>
+        <i class="fas fa-calendar-alt"></i>
+        <input type="date" name="date" id="date" required>
+      </div>
+    
+      <button type="submit"><i class="fas fa-plus-circle"></i> Add Expense</button>
+    </form>
   </div>
 
   <script>
@@ -139,6 +148,21 @@
           responseDiv.innerText = 'An error occurred. Please try again.';
       });
   });
-</script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    sidebarToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('active'); // Toggle the active class
+        overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none'; // Show or hide overlay
+    });
+
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('active'); // Remove active class to hide sidebar
+        overlay.style.display = 'none'; // Hide overlay
+    });
+});
+  </script>
 </body>
 </html>

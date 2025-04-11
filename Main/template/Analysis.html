@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Overview</title>
-    <link rel="stylesheet" href="../static/css/analysics2.css">
+    <link rel="stylesheet" href="../static/css/Analysis.css">
     <link rel="icon" type="image/webp" href="../static/img/logo.webp">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,6 +12,10 @@
 
 </head>
 <body>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+    </div>
+
 
     <div class="sidebar">
         <div class="sidebar-header">
@@ -28,6 +32,9 @@
           <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')"><i class="fas fa-calculator"></i> Create-Budget</a></li> 
            
         </ul>
+    </div>
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
     </div>
 
     <h1>Financial Overview</h1>
@@ -350,6 +357,23 @@
             await drawExpensesTrendChart();
             await drawIncomeTrendChart();
         });
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector(".sidebar");
+            const toggleButton = document.querySelector(".sidebar-toggle");
+            const overlay = document.querySelector(".sidebar-overlay");
+        
+            // Toggle sidebar on button click
+            toggleButton.addEventListener("click", function () {
+              sidebar.classList.toggle("active");
+              overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+            });
+        
+            // Hide sidebar when overlay is clicked
+            overlay.addEventListener("click", function () {
+              sidebar.classList.remove("active");
+              overlay.style.display = "none";
+            });
+          });
     </script>
     
 </body>

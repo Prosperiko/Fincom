@@ -46,17 +46,59 @@
     padding: 2rem;
   }
   .sidebar {
-  width: 250px;
-  background-color: var(--color-navy);
-  color: var(--color-white);
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
-  padding: 20px;
-  box-shadow: 2px 0 5px var(--shadow-color);
-}
+    width: 250px;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide sidebar off-screen */
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow-color);
+    transition: left 0.3s ease; /* Smooth transition */
+    z-index: 1001; /* Ensure it's above other elements */
+  }
+  
+  /* Active class to show sidebar */
+  .sidebar.active {
+    left: 0; /* Bring sidebar into view */
+  }
+  
+  /* Overlay */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Below the sidebar but above other content */
+    display: none; /* Initially hidden */
+  }
+  
+  /* Show overlay when sidebar is active */
+  .sidebar.active + .sidebar-overlay {
+    display: block; /* Show overlay when sidebar is active */
+  }
+  .sidebar-toggle, .chat-toggle {
+    position: fixed;
+    bottom: 20px; /* Position from the bottom */
+    right: 20px; /* Position from the right */
+    background-color: var(--color-gold); /* Gold background */
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above other elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }
+  
+  /* Sidebar Toggle Icon */
+  .sidebar-toggle {
+    bottom: 80px; /* Position above the chat toggle */
+  }
+  
 
 .sidebar-header {
   text-align: center;

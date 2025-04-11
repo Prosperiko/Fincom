@@ -1,5 +1,4 @@
 :root {
-
   --color-navy: #002147; /* Dark Blue */
   --color-gold: #FFD700; /* Gold */
   --color-light-grey: #F5F5F5; /* Light Gray */
@@ -8,73 +7,74 @@
   --color-medium-grey: #222; /* Medium Grey */
   --highlight-gold: #f4b400; /* Highlight Gold */
   --shadow-color: rgba(0, 33, 71, 0.4); /* Shadow Color */
-
-  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
-  --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
-}
-/* Table Styles */
-table {
-  width: 80%; /* Set the width of the table */
-  margin: 20px auto; /* Center the table */
-  border-collapse: collapse; /* Collapse borders */
-  background-color: var(--color-navy); /* Background color */
-  color: var(--color-white); /* Text color */
-}
-
-th, td {
-  padding: 8px 12px; /* Reduce padding for smaller cells */
-  text-align: left; /* Align text to the left */
-  border: 1px solid var(--color-gold); /* Border color */
-}
-
-th {
-  background-color: var(--color-gold); /* Header background color */
-  color: var(--color-navy); /* Header text color */
-}
-
-tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1); /* Light background for even rows */
-}
-
-tr:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Highlight on hover */
-}
-body {
-  background: linear-gradient(135deg, #000000, #1a1a1a);
-  color: var(--color-navy); /* Dark Blue */
-
-  --primary-color: #002147; /* Dark Blue */
-  --secondary-color: #FFD700; /* Gold */
-  --accent-color: rgba(255, 255, 255, 0.441); /* Light Transparent White */
-  --background-color: #f8f8f8; /* Light Gray */
-  --hover-color: #ffcc00; /* Lighter Gold */
-  --text-color: #002147; /* Navy Blue */
-  --btn-text-color: #002147; /* Navy Blue */
-  --btn-bg-color: #FFD700; /* Gold */
-  --btn-hover-bg: #645f4b; /* Darker Gold */
-  --shadow-color: rgba(0, 33, 71, 0.4); /* Navy Shadow */
-  --color-navy: #002147; /* Navy Blue */
-  --color-white: #fff; /* White */
-  --color-medium-grey: #222; /* Medium Grey */
-  --color-gold: #FFD700; /* Gold */
 }
 
 body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
   background: var(--color-navy);
-  color: var(--secondary-color);
+  color: var(--color-gold);
+}
 
-  font-family: "Poppins", Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  position: relative;
+.chart-container {
+  max-width: 600px;
+  margin: auto;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: 20px;
+  margin-bottom: 40px; /* Add space below the graph */
+}
+
+canvas {
+  max-width: 80%; /* Reduced from 100% to 80% */
+  height: 200px; /* Set a fixed height for smaller graphs */
+}
+
+table {
+  width: 80%; /* Reduce the table width */
+  margin: 0 auto 20px auto; /* Center the table and add space below */
+  border-collapse: collapse;
+  background: var(--color-white);
+  color: var(--color-medium-grey);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border-radius: 12px;
   overflow: hidden;
 }
 
-/* Sidebar */
+th, td {
+  border: 1px solid var(--color-light-grey);
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  font-weight: bold;
+}
+
+#financialAdvice {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: var(--highlight-gold);
+}
+
+.small-card {
+  width: 40px;
+  padding: 15px;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: var(--color-light-grey);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--color-medium-grey);
+}
+
+.small-card canvas {
+  display: block;
+  margin: 0 auto;
+}
 .sidebar {
   width: 250px;
   background-color: var(--color-navy);
@@ -124,210 +124,4 @@ body {
 .sidebar-menu a:hover {
   background-color: var(--color-gold);
   color: var(--color-navy);
-}
-
-/* Main Container */
-.container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: var(--color-navy);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px var(--shadow-color);
-}
-
-h2 {
-  font-size: 24px;
-  color: var(--color-gold);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Full-Screen Container for Content */
-.container {
-  width: 100vw;
-  min-height: 100vh;
-  padding: 40px;
-  background: var(--color-accent); /* Use accent color */
-  border-radius: 0;
-  box-shadow: 0 12px 24px var(--shadow-color); /* Use shadow color */
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-.main-content {
-  margin-left: 250px; /* Matches the sidebar width */
-  padding: 20px;
-  flex: 1;
-  background: var(--accent-color);
-  overflow: auto;
-}
-/* Headings */
-h1 {
-  font-size: 3em;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-  color: var(--color-navy); /* Dark Blue */
-
-  color: var(--color-navy);
-
-}
-
-h2 {
-  font-size: 2em;
-  margin: 20px 0 10px;
-
-  color: var(--color-gold),var(--btn-bg-color);
-
-
-/* Paragraphs */
-p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-/* Input Fields */
-input, select, textarea {
-  width: 100%;
-  padding: 16px;
-  margin: 12px 0;
-  border: none;
-  border-radius: 8px;
-
-  background-color: var(--color-medium-grey); /* Medium Grey */
-  color: var(--color-gold); /* Gold */
-
-  background-color: var(--color-medium-grey);
-  color: var(--color-gold);
-  font-size: 16px;
-  transition: background 0.3s;
-}
-
-input:focus, select:focus, textarea:focus {
-
-  background-color: #555; /* Keeping this as a fixed color for contrast */
-
-  background-color: var(--hover-color);
-
-  outline: none;
-}
-
-/* Buttons */
-button {
-
-  background: linear-gradient(90deg, var(--color-navy), #0056b3); /* Dark Blue to a lighter blue */
-  color: var(--color-white); /* White */
-
-  background: linear-gradient(90deg, var(--color-navy), #0056b3);
-  color: var(--color-white);
-
-  padding: 16px 32px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background 0.3s, transform 0.2s;
-  margin-top: 12px;
-  box-shadow: 0 4px 8px var(--shadow-color); /* Use shadow color */
-}
-
-button:hover {
-
-  background: linear-gradient(90deg, #0056b3, var(--color-navy)); /* Lighter blue to Dark Blue */
-
-  background: linear-gradient(90deg, #0056b3, var(--color-navy));
-
-  transform: scale(1.05);
-}
-
-/* Flash Messages */
-.flash-message {
-  margin: 12px 0;
-  padding: 16px;
-  border-radius: 8px;
-  color: var(--color-white); /* White */
-
-  color: var(--color-white);
-
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.flash-success {
-  background-color: #4caf50; /* Keeping this as a fixed color for success messages */
-}
-
-.flash-error {
-  background-color: #f44336; /* Keeping this as a fixed color for error messages */
-}
-
-/* Labels */
-label {
-  font-weight: bold;
-  font-size: 18px;
-  display: block;
-  margin-bottom: 8px;
-}
-
-/* Diamond Effect */
-.diamond {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.1);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-  animation: sparkle 2s infinite alternate;
-  z-index: 0;
-}
-
-.diamond.orange {
-  background: rgba(255, 165, 0, 0.5);
-  box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
-}
-
-/* Positioning Diamonds */
-.diamond:nth-child(1) { top: 10%; left: 10%; }
-.diamond:nth-child(2) { top: 20%; right: 15%; }
-.diamond:nth-child(3) { bottom: 15%; left: 20%; }
-.diamond:nth-child(4) { bottom: 10%; right: 10%; }
-.diamond:nth-child(4) { bottom: 10%; right: 10%; }
-.diamond:nth-child(5) { top: 50%; left: 40%; }
-.diamond:nth-child(6) { top: 30%; left: 70%; }
-.diamond:nth-child(7) { top: 60%; right: 20%; }
-.diamond:nth-child(8) { bottom: 20%; left: 50%; }
-.diamond:nth-child(9) { bottom: 30%; right: 30%; }
-.diamond:nth-child(10) { top: 80%; left: 15%; }
-
-/* Sparkle Animation */
-@keyframes sparkle {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-  }
-  h1 {
-    font-size: 2em;
-  }
-  h2 {
-    font-size: 1.5em;
-  }
-  button {
-    padding: 12px 24px;
-    font-size: 16px;
-  }
-}
 }

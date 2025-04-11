@@ -32,18 +32,7 @@ body {
 }
 
 /* ================= Header ================= */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--color-navy); /* Dark Blue */
-    padding: 5px 0;
-    z-index: 900;
-    display: flex;
-    justify-content: center;
-    border-bottom: 3px solid var(--color-gold); /* Yellow line to separate the header */
-}
+
 
 header .container {
     display: flex;
@@ -162,12 +151,41 @@ header h1 {
     width: 30px;
     height: 30px;
 }
+/* Flash Message Styles */
 .flash-message {
     margin: 10px 0;
     padding: 10px;
     border-radius: 4px;
     color: var(--color-white);
-  }
+    margin-top: 100px; /* Adjust this value based on your header height */
+}
+
+.flash-success {
+    background-color: green; /* Green */
+}
+
+.flash-error {
+    background-color: var(--color-gold); /* Red */
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-navy); /* Dark Blue */
+    padding: 10px 0; /* Adjusted padding */
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid var(--color-gold); /* Yellow line to separate the header */
+}
+
+/* Spacer for Header */
+.header-spacer {
+    height: 60px; /* Adjust this to match the height of your header */
+}
   
   .flash-success {
     background-color: green; /* Green */

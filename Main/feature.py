@@ -451,7 +451,7 @@ def update_profit(user_id):
             cursor.close()
             conn.close()
 
-def add_expenses(submitter_name, expense_type, payment_method, category, description, amount, quantity):
+def add_expenses(submitter_name, expense_type, payment_method, category, description, amount, quantity, date):
     conn = get_db_connection()
     if conn:
         cursor = conn.cursor()
@@ -467,11 +467,11 @@ def add_expenses(submitter_name, expense_type, payment_method, category, descrip
             # Calculate total amount
             total_amount = amount * quantity  # Total amount is calculated here
 
-            # Insert expense with user_id
+            # Insert expense with user_id and date
             cursor.execute("""
-                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (user_id, submitter_name, expense_type, payment_method, category, description, total_amount, quantity))
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, expense_type, payment_method, category, description, total_amount, quantity, date))
 
             # Update user profit
             cursor.execute("""
@@ -511,7 +511,7 @@ def expenses():
         try:
             submitter_name = session.get('username')
             if not submitter_name:
-                flash("User not logged in. Please log in to add expenses.", "error")
+                flash("User  not logged in. Please log in to add expenses.", "error")
                 return redirect('/login')
 
             expense_type = request.form['expense_type']
@@ -520,18 +520,23 @@ def expenses():
             description = request.form['description']
             amount = float(request.form['amount'])
             quantity = float(request.form['quantity'])
+            date = request.form['date']  # Capture the date from the form
 
-            add_expenses(submitter_name, expense_type, account, category, description, amount, quantity)
+            add_expenses(submitter_name, expense_type, account, category, description, amount, quantity, date)
             update_profit(session.get('user_id'))  # Update user profit
 
-            return redirect(url_for('expenses')) 
+            return redirect('/expenses') # Redirect after successful POST
 
         except (KeyError, ValueError):
             flash("Please fill in all fields correctly.", "error")
         except Exception as e:
             flash(f"An error occurred: {str(e)}", "error")
 
-    return render_template('expenses.html')
+    # Handle GET request
+    return render_template('expenses.html')  # Ensure this returns a valid response
+
+    # Handle GET request
+ 
 # Function to calculate total expenses
 def sum_total_expenses():
     conn = get_db_connection()
@@ -551,7 +556,7 @@ def sum_total_expenses():
 def total_expenses():
     return render_template('total_expenses.html', total=sum_total_expenses())
 
-def add_income(submitter_name, income_type, payment_method, category, description, amount, quantity):
+def add_income(submitter_name, income_type, payment_method, category, description, amount, quantity, date):
     conn = get_db_connection()
     if conn:
         cursor = conn.cursor()
@@ -567,11 +572,11 @@ def add_income(submitter_name, income_type, payment_method, category, descriptio
             # Calculate total amount
             total_amount = amount * quantity  # Total amount is calculated here
 
-            # Insert income with user_id
+            # Insert income with user_id and created_at
             cursor.execute("""
-                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (user_id, submitter_name, income_type, payment_method, category, description, total_amount, quantity))
+                INSERT INTO transactions (user_id, name, type, account, category, description, amount, quantity, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user_id, submitter_name, income_type, payment_method, category, description, total_amount, quantity, date))
 
             # Update user profit
             cursor.execute("""
@@ -604,13 +609,14 @@ def add_income(submitter_name, income_type, payment_method, category, descriptio
         finally:
             cursor.close()
             conn.close()
+            
 @app.route('/income', methods=['GET', 'POST'])
 def income():
     if request.method == 'POST':
         try:
             submitter_name = session.get('username')
             if not submitter_name:
-                flash("User not logged in. Please log in to add income.", "error")
+                flash("User  not logged in. Please log in to add income.", "error")
                 return redirect('/login')
 
             income_type = request.form['income_type']
@@ -619,11 +625,12 @@ def income():
             description = request.form['description']
             amount = float(request.form['amount'])
             quantity = float(request.form['quantity'])
+            date = request.form['date']  # Capture the date from the form
 
-            add_income(submitter_name, income_type, account, category, description, amount, quantity)
+            add_income(submitter_name, income_type, account, category, description, amount, quantity, date)
             update_profit(session.get('user_id'))  # Update user profit
 
-            return redirect('/home1')
+            return redirect('/income')
 
         except (KeyError, ValueError):
             flash("Please fill in all fields correctly.", "error")
@@ -1191,8 +1198,8 @@ import sqlite3
 
   
 
-UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\fincom1\Fincom\Main\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\fincom1\Fincom\Main\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 24\Desktop\fincom1\Fincom\Main\static\video"
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
@@ -1847,39 +1854,81 @@ def all_transactions():
 
     username = session['username']
     conn = get_db_connection()
-    transactions = conn.execute('SELECT * FROM transactions WHERE username = ?', (username,)).fetchall()
+    
+    # Fetch transactions for the logged-in user
+    transactions = conn.execute('SELECT type, category, amount, created_at FROM transactions WHERE name = ?', (username,)).fetchall()
     conn.close()
-    return render_template('all_transactions.html', transactions=transactions)
+    
+    # Debugging: Print the transactions to see their structure
+    print(transactions)  # This will show you the structure of the data
 
+    # Add a numbering column to the transactions
+    transactions_with_numbering = []
+    for i, transaction in enumerate(transactions):
+        try:
+            # Accessing by key if using sqlite3.Row
+            transactions_with_numbering.append((
+                i + 1, 
+                transaction['type'], 
+                transaction['category'], 
+                transaction['amount'], 
+                transaction['created_at']
+            ))
+        except KeyError as e:
+            print(f"KeyError: {e} - Transaction: {transaction}")  # Print the error and the transaction causing it
 
-@app.route('/export/csv')
+    return render_template('all_transactions.html', transactions=transactions_with_numbering)
+
+import os
+import tempfile
+
+@app.route('/export/csv', methods=['GET'])
 def export_csv():
     if 'username' not in session:
         return redirect(url_for('login'))
 
     username = session['username']
     conn = get_db_connection()
-    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE username = ?', conn, params=(username,))
+    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE name = ?', conn, params=(username,))
     conn.close()
 
-    csv_file = 'transactions.csv'
-    transactions.to_csv(csv_file, index=False)
+    # Add a numbering column to the DataFrame
+    transactions['Number'] = range(1, len(transactions) + 1)
+    transactions = transactions[['type', 'category', 'amount', 'created_at']]  # Reorder columns
+
+    # Use a temporary file to save the CSV
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.csv') as tmp_file:
+        csv_file = tmp_file.name
+        transactions.to_csv(csv_file, index=False)
+
+    # Check if the file was created successfully
+    if not os.path.exists(csv_file):
+        return "Error: File not created", 500
 
     return send_file(csv_file, as_attachment=True)
 
-
-@app.route('/export/excel')
+@app.route('/export/excel', methods=['GET'])
 def export_excel():
     if 'username' not in session:
         return redirect(url_for('login'))
 
     username = session['username']
     conn = get_db_connection()
-    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE username = ?', conn, params=(username,))
+    transactions = pd.read_sql_query('SELECT * FROM transactions WHERE name = ?', conn, params=(username,))
     conn.close()
 
-    excel_file = 'transactions.xlsx'
-    transactions.to_excel(excel_file, index=False)
+    # Add a numbering column to the DataFrame
+    transactions['Number'] = range(1, len(transactions) + 1)
+    transactions = transactions[['Number', 'type', 'category', 'amount', 'created_at']]  # Reorder columns
+
+    # Use a temporary file to save the Excel file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx') as tmp_file:
+        excel_file = tmp_file.name
+        transactions.to_excel(excel_file, index=False)
+
+    # Check if the file was created successfully
+    if not os.path.exists(excel_file):
+        return "Error: File not created", 500
 
     return send_file(excel_file, as_attachment=True)
 
@@ -1892,4 +1941,4 @@ def logout():
 
 
 if __name__ == '__main__':
-   socketio.run(app, debug=True)
+   socketio.run(app, host='0.0.0.0', port=5000, debug=True)
