@@ -5,5 +5,11 @@ Flask-SocketIO==5.3.2
 itsdangerous==2.1.2
 mysql-connector-python==8.0.33
 Flask-WTF==1.0.1
-gunicorn==21.2.0  # or similar version
-
+gunicorn==21.2.0
+pandas==1.5.3
+openpyxl==3.1.2
+Flask-Session==0.4.0
+python-dotenv==0.21.0
+sendgrid==6.9.1
+Flask-Login==0.6.2  # If you're using Flask-Login for session management
+Flask-Uploads==1.0.2  # If file upload support is added
