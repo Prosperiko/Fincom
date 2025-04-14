@@ -6,3 +6,4 @@ itsdangerous==2.1.2
 mysql-connector-python==8.0.33
 Flask-WTF==1.0.1
 gunicorn==21.2.0  # or similar version
+eventlet==0.33.3  # or higher
