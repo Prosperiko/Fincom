@@ -12,5 +12,6 @@ Flask-Session==0.4.0
 python-dotenv==0.21.0
 sendgrid==6.9.1
 Flask-Login==0.6.2  # If you're using Flask-Login for session management
-eventlet==0.33.3
+eventlet>=0.33.0
 setuptools>=65.0.0
+greenlet>=2.0.0
