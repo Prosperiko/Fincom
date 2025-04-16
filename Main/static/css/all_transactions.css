@@ -70,7 +70,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: grid;
     margin: auto;
     padding: 20px;
     background-color: var(--color-white);
@@ -124,7 +124,7 @@ tr:nth-child(even) {
     background-color: var(--highlight-gold);
 }
 .sidebar {
-    width: 250px;
+    width: grid;
     background-color: var(--color-navy);
     color: var(--color-white);
     height: 100vh;

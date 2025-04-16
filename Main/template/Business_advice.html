@@ -45,6 +45,57 @@
             <p class="error">{{ error }}</p>
         {% endif %}
     </div>
+    <script>
+        document.getElementById('transaction-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const userInput = document.getElementById('user-input').value;
+      
+          fetch('/chatbot_transaction', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: new URLSearchParams({
+                  'user_input': userInput
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              const responseDiv = document.getElementById('response');
+              responseDiv.style.display = 'block'; // Show the response box
+              if (data.success) {
+                  responseDiv.className = 'success'; // Apply success styling
+                  responseDiv.innerText = data.success;
+              } else {
+                  responseDiv.className = 'error'; // Apply error styling
+                  responseDiv.innerText = data.error;
+              }
+              document.getElementById('user-input').value = ''; // Clear input
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              const responseDiv = document.getElementById('response');
+              responseDiv.style.display = 'block';
+              responseDiv.className = 'error';
+              responseDiv.innerText = 'An error occurred. Please try again.';
+          });
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+    
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active'); // Toggle the active class
+            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none'; // Show or hide overlay
+        });
+    
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active'); // Remove active class to hide sidebar
+            overlay.style.display = 'none'; // Hide overlay
+        });
+    });
+      </script>
 </body>
 </html>
 

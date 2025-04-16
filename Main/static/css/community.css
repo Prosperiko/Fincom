@@ -17,7 +17,7 @@ body {
     background-color: var(--color-navy); /* Navy blue background */
     margin: 0;
     padding: 0;
-    display: flex;
+    display: grid;
     color: var(--color-white); /* Default text color */
 }
 
@@ -95,7 +95,7 @@ header {
 }
 
 .sidebar h2 {
-    margin: 10px 0;
+    margin: grid;
     color: var(--color-gold);
 }
 

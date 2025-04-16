@@ -19,6 +19,7 @@ body {
     background-color: var(--color-medium-grey); /* Dark background */
     color: var(--color-white); /* White text */
     transition: background-color 0.3s, color 0.3s;
+    display: grid;
 }
 
 /* Container */

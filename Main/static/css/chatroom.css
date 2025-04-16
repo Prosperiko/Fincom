@@ -19,7 +19,7 @@
   
   /* Sidebar styling */
   .sidebar {
-    width: 250px;
+    width: grid;
     background-color: var(--color-navy);
     color: var(--color-white);
     height: 100vh;

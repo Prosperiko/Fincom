@@ -23,7 +23,7 @@ body {
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: grid;
     padding: 20px;
     background: var(--color-white); /* White */
     border-radius: 10px;
@@ -59,7 +59,7 @@ h1 {
 }
 
 footer {
-    margin-top: 20px;
+    margin-top: grid;
     padding: 10px 0;
     background-color: var(--color-navy); /* Dark Blue */
     color: var(--color-white); /* White */
