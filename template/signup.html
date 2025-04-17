@@ -35,11 +35,11 @@
         <form id="signupForm" action="{{ url_for('signup') }}" method="POST" onsubmit="return validateForm()">
             <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Username or Company username" required aria-label="Username or Company username">
+                <input type="text" name="username" placeholder="Username" required aria-label="Username">
             </div>
             <div class="input-box">
                 <i class="fas fa-id-card"></i>
-                <input type="text" name="fullname" placeholder="FullName or Company Name" required aria-label="FullName or Company Name">
+                <input type="text" name="fullname" placeholder="FullName" required aria-label="FullName">
             </div>
             <div class="input-box">
                 <i class="fas fa-briefcase"></i>
@@ -69,12 +69,7 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-            <div class="customer-type">
-                <input type="radio" id="company" name="customer_type" value="company" required onclick="toggleWorkerInput()">
-                <label for="company">Company</label>
-                <input type="radio" id="individual" name="customer_type" value="individual" required onclick="toggleWorkerInput()">
-                <label for="individual">Individual</label>
-            </div>
+            
 
             <!-- Number of Workers Dropdown -->
             <div class="input-box" id="workers-input" style="display: none;">

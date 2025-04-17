@@ -308,7 +308,7 @@ def login():
 
 def generate_welcome_message(username, customer_type):
     if customer_type.lower() == "individual":
-        return f"Hi {{ username }}, take control of your finances with your dashboard."
+        return f"Hi { username }, take control of your finances with your dashboard."
     else:
         return f"Welcome, {username}! Manage your business transactions efficiently."
 
@@ -1195,12 +1195,10 @@ def connect_db():
     return sqlite3.connect('video_db.db')
 
 
+UPLOAD_FOLDER_IMG = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\video"
 
 
-  
-
-UPLOAD_FOLDER_IMG = r"C:\Users\USER 24\Desktop\fincom1\Fincom\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 24\Desktop\fincom1\Fincom\static\video"
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
