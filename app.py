@@ -1193,7 +1193,7 @@ def fetch_expense_trends():
 
 def connect_db():
     return sqlite3.connect('video_db.db')
-print(2)
+
 
 UPLOAD_FOLDER_IMG = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\video"
