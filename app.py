@@ -1196,16 +1196,12 @@ def connect_db():
 
 
 
-
-<<<<<<< HEAD
 UPLOAD_FOLDER_IMG = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\video"
-=======
-  
 
 UPLOAD_FOLDER_IMG = r"C:\Users\USER 24\Desktop\fincom1\Fincom\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 24\Desktop\fincom1\Fincom\static\video"
->>>>>>> 9e864a23e454cf02346660a97eeb0353392a9c39
+
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
