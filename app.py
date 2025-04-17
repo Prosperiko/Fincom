@@ -13,8 +13,21 @@ from flask_socketio import SocketIO, emit
 import smtplib
 from email.mime.text import MIMEText
 import pandas as pd
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+load_dotenv()
+import os
+from werkzeug.utils import secure_filename
+from datetime import datetime, timezone
+import tempfile
 
+# Setting up the API key and model
 
+import google.generativeai as genai
 
 
 app = Flask(__name__, template_folder='template', static_folder='static')
@@ -161,7 +174,6 @@ def verify_pin():
     return render_template('verify_pin.html')  # Ensure you return a valid response here
 
 
-from itsdangerous import URLSafeTimedSerializer
 
 # Flask-Mail Configuration (Already in your code)
 app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'
@@ -1175,24 +1187,13 @@ def fetch_expense_trends():
 # In-memory storage for posts
 
 
-
-
 #Create folder if it doesn't exist
-
 
 # In-memory storage for posts
 
-
-
-
-import os
 def connect_db():
     return sqlite3.connect('video_db.db')
 
-from werkzeug.utils import secure_filename
-from datetime import datetime, timezone
-import os
-import sqlite3
 
 
 
@@ -1387,21 +1388,11 @@ def chatbox():
     return render_template('chatbox.html', users=users, search_query=search_query, profession_query=profession_query, active_user=active_user)
 
 
-
-from flask import Flask, render_template, request, jsonify
-import google.generativeai as genai
-
-# Setting up the API key and model
-
-from flask import Flask, render_template, request, jsonify, session
-import google.generativeai as genai
-import sqlite3
-
 # Initialize the Generative AI model
 genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")  # Replace with your actual API key
 model = genai.GenerativeModel("gemini-1.5-flash")  # Replace with the correct model name
 
-import sqlite3
+
 
 def generate_response(prompt):
     # Prepend context about FinCom and finance
@@ -1789,22 +1780,12 @@ def parse_transaction_input(input_string):
     else:
         return None, None, None, None  # Return None if no category is found # Return None if no category is found
 
-from itsdangerous import URLSafeTimedSerializer
 
 # Serializer for generating secure tokens
 serializer = URLSafeTimedSerializer(app.secret_key)
 
 
-        
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from dotenv import load_dotenv
-load_dotenv()
-from flask import flash, redirect, url_for
+    
 
 @app.route('/send-query', methods=['POST'])
 def send_query():
@@ -1878,9 +1859,6 @@ def all_transactions():
             print(f"KeyError: {e} - Transaction: {transaction}")  # Print the error and the transaction causing it
 
     return render_template('all_transactions.html', transactions=transactions_with_numbering)
-
-import os
-import tempfile
 
 @app.route('/export/csv', methods=['GET'])
 def export_csv():
