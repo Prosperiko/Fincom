@@ -308,7 +308,7 @@ def login():
 
 def generate_welcome_message(username, customer_type):
     if customer_type.lower() == "individual":
-        return f"Hi {{ username }}, take control of your finances with your dashboard."
+        return f"Hi { username }, take control of your finances with your dashboard."
     else:
         return f"Welcome, {username}! Manage your business transactions efficiently."
 
