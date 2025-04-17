@@ -1197,10 +1197,8 @@ def connect_db():
 
 
 
-  
-
-UPLOAD_FOLDER_IMG = r"C:\Users\HP\Projecttime\Fincom-1\Main\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\HP\Projecttime\Fincom-1\Main\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\User 22\Projecttime\Fincom-1\Main\static\video"
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
 
 posts = []
