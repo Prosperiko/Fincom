@@ -9,6 +9,15 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
 </head>
+<header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}  
+    {% endwith %}
+</header>
 <body>
     <!-- Sidebar Toggle Icon -->
     <div class="sidebar-toggle" onclick="toggleSidebar()">
@@ -41,13 +50,7 @@
     </div>
 
     <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="flash-message flash-{{ category }}">{{ message }}</div>
-      {% endfor %}
-    {% endif %}  
-    {% endwith %}
+}
 
     <!-- Main Content -->
     <div class="container">

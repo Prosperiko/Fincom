@@ -332,11 +332,13 @@ footer {
 
 /* Flash Messages */
 .flash-message {
-    margin: 10px 0;
+    position: relative; /* Change to relative since it's now in the header */
+    margin: 10px 0; /* Margin for spacing */
     padding: 10px;
     border-radius: 4px;
     color: var(--color-white);
-    margin-top: 100px; /* Adjust this value based on your header height */
+    z-index: 1000; /* Ensure it appears above other elements */
+    text-align: center; /* Center the text */
 }
 
 .flash-success {
@@ -357,9 +359,11 @@ header {
     padding: 10px 0; /* Adjusted padding */
     z-index: 900;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align content */
     border-bottom: 3px solid var(--color-gold); /* Yellow line to separate the header */
 }
+/* Header Styles */
 
 /* Spacer for Header */
 .header-spacer {
