@@ -1190,7 +1190,7 @@ def fetch_expense_trends():
 # In-memory storage for posts
 
 def connect_db():
-    return sqlite3.connect('mydatabase.db')
+    return sqlite3.connect('video_db.db')
 
 
 
@@ -1262,7 +1262,7 @@ def post():
     return redirect(url_for('community'))
 
 def connect_db():
-    return sqlite3.connect('mydatabase.db')
+    return sqlite3.connect('video_db.db')
 
 @app.route('/respond/<int:post_id>', methods=['POST','GET'])
 def respond(post_id):
