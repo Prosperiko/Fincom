@@ -1194,13 +1194,13 @@ def connect_db():
     return sqlite3.connect('mydatabase.db')
 
 
-<<<<<<< HEAD
+
 UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\video"
-=======
+
 UPLOAD_FOLDER_IMG = r"C:\Users\USER 22\Projecttime\Fincom\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 22\Projecttime\Fincom\static\video"
->>>>>>> 0d7c7d0a197e5f9b4baaaa2354194a5caf59cc47
+
 
 
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
