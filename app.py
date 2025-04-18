@@ -10,10 +10,9 @@ from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime
 import os
 from flask_socketio import SocketIO, emit
-from email.mime.text import MIMEText
+
 import pandas as pd
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -37,12 +36,12 @@ app.secret_key = "your_secret_key"
 
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'projectfinodido@gmail.com'  # email address
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'projectfinodido@gmail.com'
 app.config['MAIL_PASSWORD'] = 'csqv yavo jcwj bghz'  # email password
-app.config['MAIL_DEFAULT_SENDER'] = 'FINCOM'  # 
+app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'  # 
  
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -414,7 +413,7 @@ def balances():
 
         # Determine home page dynamically
         customer_type = session.get("customer_type", "individual").lower()
-        user_home = "home1" if customer_type == "individual" else "home"
+        user_home = "home1" if customer_type == "individual" else "home1"
 
         return render_template('balances.html', balance=balance_dict, user_home=user_home)
 
@@ -1194,15 +1193,11 @@ def connect_db():
     return sqlite3.connect('mydatabase.db')
 
 
-<<<<<<< HEAD
+
 UPLOAD_FOLDER_IMG = r"C:\Users\USER-PC\FINCOM\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\USER-PC\FINCOM\static\video"
-=======
 
-UPLOAD_FOLDER_IMG = r"C:\Users\USER12\Projecttime\Fincom\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER12\Projecttime\Fincom\static\video"
 
->>>>>>> d38d4cab35b017bd90a9ec655e71613ba302f9b4
 
 
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
@@ -1217,7 +1212,7 @@ os.makedirs(UPLOAD_FOLDER_VIDEO, exist_ok=True)
 
 # Function to connect to the database
 
-@app.route('/post', methods=['POST'])
+@app.route('/post', methods=['POST','GET'])
 def post():
     if 'username' not in session:
         return redirect(url_for('login'))
@@ -1269,7 +1264,7 @@ def post():
 def connect_db():
     return sqlite3.connect('mydatabase.db')
 
-@app.route('/respond/<int:post_id>', methods=['POST'])
+@app.route('/respond/<int:post_id>', methods=['POST','GET'])
 def respond(post_id):
     if 'username' not in session:
         return redirect(url_for('login'))
@@ -1585,7 +1580,7 @@ def fetch_expense_reduction_tips(user_id):
     finally:
         cursor.close()
         conn.close()
-@app.route('/generate', methods=['POST'])
+@app.route('/generate', methods=['POST','GET'])
 def generate():
     """
     API endpoint to handle chatbot requests and generate responses.

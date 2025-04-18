@@ -39,7 +39,7 @@
             </div>
             <div class="input-box">
                 <i class="fas fa-id-card"></i>
-                <input type="text" name="fullname" placeholder="FullName" required aria-label="FullName">
+                <input type="text" name="fullname" placeholder="Full Name" required aria-label="Full Name">
             </div>
             <div class="input-box">
                 <i class="fas fa-briefcase"></i>
@@ -69,8 +69,17 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-            
-
+        
+            <!-- Customer Type Dropdown -->
+            <div class="input-box">
+                <i class="fas fa-user-tag"></i>
+                <select name="customer_type" required>
+                    <option value="" disabled selected>Select Customer Type</option>
+                    <option value="individual">Individual</option>
+                    <option value="business">Business</option>
+                </select>
+            </div>
+        
             <!-- Number of Workers Dropdown -->
             <div class="input-box" id="workers-input" style="display: none;">
                 <i class="fas fa-users"></i>
@@ -82,7 +91,7 @@
                     <option value="5">5</option>
                 </select>
             </div>
-
+        
             <button type="submit" class="signup-btn">Sign Up</button>
         </form>
         <p>Already have an account? <a href="{{ url_for('login') }}" class="btn">Login</a></p>

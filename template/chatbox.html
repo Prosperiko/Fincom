@@ -25,26 +25,26 @@
     </form>
 
 
-<div class="sidebar">
-    <div class="sidebar-header">
-        <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo">
-        <h2>Fincom</h2>
-    </div>
-    
-    <ul class="sidebar-menu">
-        <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
-        <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
-        <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-        <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
-        <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')">Start a New Business</a></li>
-        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-        <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo">
+            <h2>Fincom</h2>
+        </div>
         
-    </ul>
-  </div>
-  <div class="sidebar-toggle" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
-</div>
+        <ul class="sidebar-menu">
+            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+            <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
+            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+            <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+            
+            <li><a href="/budget" onclick="changeBackground('img/chatbot-bg.jpg')">create a budget</a></li>
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+
+        </ul>
+      </div>
+      <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+    </div>
 <div class="user-list">
   {% for user in users %}
   <div class="user-card">

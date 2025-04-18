@@ -6,33 +6,28 @@
     <title>Financial Overview</title>
     <link rel="stylesheet" href="../static/css/Analysis.css">
     <link rel="icon" type="image/webp" href="../static/img/fincom_logo.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Updated Font Awesome version -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-
 </head>
 <body>
-    <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
-    </div>
-
 
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo">
+            <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo">
             <h2>Fincom</h2>
         </div>
+        
         <ul class="sidebar-menu">
-          <li><a href="/home1" onclick="changeBackground('img/bank.jpg')"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="/expenses" onclick="changeBackground('img/bank.jpg')"><i class="fas fa-wallet"></i> Add Expense</a></li>
-          <li><a href="/income" onclick="changeBackground('img/graph1.jpg')"><i class="fas fa-chart-line"></i> Add Income</a></li>
-          <li><a href="/Business_advice" onclick="changeBackground('img/business-bg.jpg')"><i class="fas fa-briefcase"></i> Start a New Business</a></li>
-          <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')"><i class="fas fa-comments"></i> Chat-Session</a></li>
-          <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-          <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')"><i class="fas fa-calculator"></i> Create-Budget</a></li> 
-           
+            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+            <li><a href="/expenses" onclick="changeBackground('img/analysis-bg.jpg')">Ad expense</a></li>
+            
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
+            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
         </ul>
     </div>
+
     <div class="sidebar-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
     </div>
@@ -123,9 +118,6 @@
     </section>
 
     <hr>
-
-    <!-- Total Expenses Section -->
-  
 
     <!-- Chart.js Script -->
     <script>
@@ -233,7 +225,7 @@
                     datasets: [{
                         label: 'Expense Categories',
                         data: Object.values(expenses),
-                        backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)']
+                        backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255),                        , 206, 86, 0.6)']
                     }]
                 },
                 options: {
@@ -357,24 +349,29 @@
             await drawExpensesTrendChart();
             await drawIncomeTrendChart();
         });
+
+        // Sidebar toggle functionality
         document.addEventListener("DOMContentLoaded", function () {
             const sidebar = document.querySelector(".sidebar");
             const toggleButton = document.querySelector(".sidebar-toggle");
             const overlay = document.querySelector(".sidebar-overlay");
-        
+
             // Toggle sidebar on button click
             toggleButton.addEventListener("click", function () {
-              sidebar.classList.toggle("active");
-              overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
+                sidebar.classList.toggle("active");
+                overlay.style.display = sidebar.classList.contains("active") ? "block" : "none";
             });
-        
+
             // Hide sidebar when overlay is clicked
             overlay.addEventListener("click", function () {
-              sidebar.classList.remove("active");
-              overlay.style.display = "none";
+                sidebar.classList.remove("active"); // Remove active class to hide sidebar
+                overlay.style.display = "none"; // Hide overlay
             });
-          });
+        });
     </script>
-    
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" style="display: none;"></div> <!-- Ensure this is included in the HTML -->
+
 </body>
 </html>

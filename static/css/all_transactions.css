@@ -1,179 +1,194 @@
 :root {
-    --color-navy: navy;
-    --color-gold: #FFD700; /* Gold */
-    --color-light-grey: #F5F5F5; /* Light Gray */
-    --color-deep-blue: navy;
-    --color-white: #fff; /* White */
-    --color-medium-grey: navy;
-    --highlight-gold: #f4b400; /* Highlight Gold */
-    --shadow-color: navy;
+  --color-navy: navy;
+  --color-gold: #FFD700; /* Gold */
+  --color-light-grey: #F5F5F5; /* Light Gray */
+  --color-deep-blue: navy;
+  --color-white: #fff; /* White */
+  --color-medium-grey: #333; /* Darker grey for better contrast */
+  --highlight-gold: #f4b400; /* Highlight Gold */
+  --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow color for depth */
 
-    --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
-    --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
+  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+  --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
-.sidebar {
-    width: 250px;
-    background-color: var(--color-navy);
-    color: var(--color-white);
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display : grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto 1fr;
-    overflow-y: auto;
-    padding: 20px;
-    box-shadow: 2px 0 5px var(--shadow-color);
-  }
-  
-  .sidebar-header {
-    text-align: center;
-  }
-  
-  .sidebar-header .logo {
-    width: 60px;
-    border-radius: 50%;
-  }
-  
-  .sidebar h2 {
-    margin: 10px 0;
-    color: var(--color-gold);
-  }
-  
-  .sidebar-menu {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar-menu li {
-    margin: 15px 0;
-  }
-  
-  .sidebar-menu a {
-    color: var(--color-white);
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    background-color: var(--color-medium-grey);
-    border-radius: 5px;
-    transition: 0.3s;
-  }
-  
-  .sidebar-menu a:hover {
-    background-color: var(--color-gold);
-    color: var(--color-navy);
-  }
+
 body {
-    background: var(--color-light-grey);
-    color: var(--color-navy);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: grid;
+  background: var(--color-light-grey);
+  color: var(--color-navy);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: grid;
 }
 
 .container {
-    max-width: grid;
-    margin: auto;
-    padding: 20px;
-    background-color: var(--color-white);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
+  max-width: 1200px; /* Set a max-width for better layout */
+  margin: auto;
+  padding: 20px;
+  background-color: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 h1 {
-    text-align: center;
-    color: var(--color-navy);
+  text-align: center;
+  color: var(--color-navy);
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
 }
 
 th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid var(--color-navy);
+  padding: 10px;
+  text-align: left;
+  border: 1px solid var(--color-navy);
 }
 
 th {
-    background-color: var(--color-gold);
-    color: var(--color-navy);
+  background-color: var(--color-gold);
+  color: var(--color-navy);
 }
 
 tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .export-buttons {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .export-btn {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px 15px;
-    background-color: var(--color-gold);
-    color: var(--color-navy);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .export-btn:hover {
-    background-color: var(--highlight-gold);
+  background-color: var(--highlight-gold);
 }
+
 .sidebar {
-    width: grid;
-    background-color: var(--color-navy);
-    color: var(--color-white);
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    padding: 20px;
-    box-shadow: 2px 0 5px var(--shadow-color);
+  width: 250px; /* Fixed width for sidebar */
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hide sidebar off-screen */
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 2px 0 5px var(--shadow-color);
+  transition: left 0.3s ease; /* Smooth transition */
+  z-index: 1001; /* Ensure it's above other elements */
+}
+
+/* Active class to show sidebar */
+.sidebar.active {
+  left: 0; /* Bring sidebar into view */
+}
+
+/* Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Below the sidebar but above other content */
+  display: none; /* Initially hidden */
+}
+
+/* Show overlay when sidebar is active */
+.sidebar.active + .sidebar-overlay {
+  display: block; /* Show overlay when sidebar is active */
+}
+
+.sidebar-header {
+  text-align: center;
+}
+
+.sidebar-header .logo {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.sidebar h2 {
+  margin: 10px 0;
+  color: var(--color-gold);
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  margin: 15px 0;
+}
+
+.sidebar-menu a {
+  color: var(--color-white);
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: var(--color-medium-grey);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.sidebar-toggle {
+  position: fixed;
+  bottom: 20px; /* Position from the bottom */
+  right: 20px; /* Position from the right */
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  z-index: 1002; /* Ensure it is above the sidebar and overlay */
+  transition: background-color 0.3s;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--highlight-gold);
+}
+
+.sidebar-toggle i {
+  font-size: 20px; /* Adjust icon size */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 200px; /* Adjust sidebar width for smaller screens */
   }
-  
-  .sidebar-header {
-    text-align: center;
+
+  .container {
+      padding: 15px; /* Reduce padding on smaller screens */
   }
-  
-  .sidebar-header .logo {
-    width: 60px;
-    border-radius: 50%;
+
+  .export-btn {
+      padding: 8px 12px; /* Adjust button size for smaller screens */
   }
-  
-  .sidebar h2 {
-    margin: 10px 0;
-    color: var(--color-gold);
+
+  .sidebar-toggle {
+      padding: 8px; /* Adjust toggle button size for smaller screens */
   }
-  
-  .sidebar-menu {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar-menu li {
-    margin: 15px 0;
-  }
-  
-  .sidebar-menu a {
-    color: var(--color-white);
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    background-color: var(--color-medium-grey);
-    border-radius: 5px;
-    transition: 0.3s;
-  }
-  
-  .sidebar-menu a:hover {
-    background-color: var(--color-gold);
-    color: var(--color-navy);
-  }
+}
