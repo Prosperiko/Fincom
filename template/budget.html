@@ -6,8 +6,15 @@
     <title>Set Your Budget</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/budget.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
     <div class="sidebar">
+
         <div class="sidebar-header">
             <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo">
             <h2>Fincom</h2>

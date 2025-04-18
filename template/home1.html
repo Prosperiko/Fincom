@@ -42,7 +42,7 @@
             
             
             
-            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create a Budget</a></li>
+            
             <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session </a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
             
@@ -61,15 +61,15 @@
         <div class="financial-summary">
             <div>
                 <h3>Profit</h3>
-                <p>${{ profit }}</p>
+                <p>{{ profit }}Naira</p>
             </div>
             <div>
                 <h3>Cash Balance</h3>
-                <p>${{ cash_balance }}</p>
+                <p>{{ cash_balance }}Naira</p>
             </div>
             <div>
                 <h3>Card Balance</h3>
-                <p>${{ card_balance }}</p>
+                <p>{{ card_balance }}Naira</p>
             </div>
         </div>
 
@@ -81,7 +81,7 @@
                 {% for transaction in recent_transactions %}
                 <li>
                     <span>{{ transaction['type'] }} - {{ transaction['category'] }}</span>
-                    <span class="amount">${{ transaction['amount'] }}</span>
+                    <span class="amount">{{ transaction['amount'] }}Naira</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -192,6 +192,7 @@
             const chat = document.getElementById('chat');
             chat.style.display = chat.style.display === 'none' ? 'block' : 'none'; // Toggle chat visibility
         }
+        
     </script>
 
 </body>

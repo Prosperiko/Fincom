@@ -1207,8 +1207,8 @@ posts = []
 
 
 # Ensure directories exist
-os.makedirs(UPLOAD_FOLDER_IMG, exist_ok=True)
-os.makedirs(UPLOAD_FOLDER_VIDEO, exist_ok=True)
+UPLOAD_FOLDER_IMG = os.path.join(app.root_path, 'static/img')
+UPLOAD_FOLDER_VIDEO = os.path.join(app.root_path, 'static/video')
 
 # Function to connect to the database
 
@@ -1699,85 +1699,70 @@ def update_budget(budget_id):
     return redirect(url_for('budget'))
 
 
+from flask import request, jsonify, session
+from datetime import datetime
+import re
+
+from datetime import datetime
+
 @app.route('/chatbot_transaction', methods=['POST'])
 def chatbot_transaction():
     if 'username' not in session:
         return jsonify({"error": "Unauthorized access"}), 401
 
-    user_id = session['user_id']
     user_input = request.form.get('user_input', '')
-
-    # Parse the transaction input
     amount, category, transaction_type, payment_method = parse_transaction_input(user_input)
 
     if amount is None or category is None or transaction_type is None:
         return jsonify({"error": "Invalid input format. Please specify the amount and category."}), 400
 
-    # Add the transaction to the database
+    # Get transaction date from form or use current timestamp
+    transaction_date = request.form.get('transaction_date')
+    if not transaction_date:
+        transaction_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
     if transaction_type == 'expense':
-        add_expenses(session['username'], transaction_type, payment_method, category, '', amount, 1)
+        add_expenses(session['username'], transaction_type, payment_method, category, amount, 1, transaction_date)
     elif transaction_type == 'income':
-        add_income(session['username'], transaction_type, payment_method, category, '', amount, 1)
+        add_income(session['username'], transaction_type, payment_method, category, amount, 1, transaction_date)
 
     return jsonify({"success": f"{transaction_type.capitalize()} of ${amount} added under category '{category}' using {payment_method}."})
 
+
+
 def parse_transaction_input(input_string):
-    """Parse the transaction input string to extract amount, category, and transaction type."""
-    user_input = request.form.get('user_input', '')
+    """Parse the transaction input string to extract amount, category, transaction type, and payment method."""
+
     # Regular expression to find the amount
     amount_match = re.search(r'\$?(\d+(\.\d{1,2})?)', input_string)
-    
     if amount_match:
-        amount = float(amount_match.group(1))  # Extract the amount
+        amount = float(amount_match.group(1))
     else:
-        return None, None, None  # Return None if no amount is found
+        return None, None, None, None
 
-     # determine transaction type 
-    input_string = input_string.lower()
-    if 'spent' in input_string or 'expense' in input_string or 'from' in input_string:
+    input_lower = input_string.lower()
+
+    # Determine transaction type
+    if any(word in input_lower for word in ['spent', 'expense', 'from']):
         transaction_type = 'expense'
-    elif 'gained' in input_string or 'earned' in input_string or 'through' in input_string:
+    elif any(word in input_lower for word in ['gained', 'earned', 'through']):
         transaction_type = 'income'
- # simple keyword-based for category 
+    else:
+        return None, None, None, None
+
+    # Determine category
     categories = ['food', 'transport', 'shopping', 'bills', 'salary', 'investment']
-    category = None
-    for cat in categories:
-        if cat in input_string:
-            category = cat
-            break
-    if not category:
-        category = 'other'  # Default if no known category found
- # Define payment methods
-    payment_methods = {
-    'cash': 'Cash',
-    'card': 'Card',
-    'credit': 'Card',
-    'debit': 'Card'
-}
-    #check for payement method 
-    payment_method = payment_methods.get(input_string, 'None')
-    if 'cash' in input_string or 'card' in input_string:
-        payment_method = 'Card' if 'card' in input_string else 'Cash'
-    elif 'credit' in input_string or 'debit' in input_string:
+    category = next((cat for cat in categories if cat in input_lower), 'other')
+
+    # Determine payment method
+    if 'cash' in input_lower:
+        payment_method = 'Cash'
+    elif any(word in input_lower for word in ['card', 'credit', 'debit']):
         payment_method = 'Card'
     else:
-        payment_method = "None"  # Return None if no payment method is found
-    
-    return amount, category, transaction_type, payment_method
+        payment_method = 'None'
 
-    
-    # This regex captures everything after the amount and any keywords
-    category_match = re.split(r'\$?\d+(\.\d{1,2})?|\b(spent|gained|earned|from|through|on|as)\b', input_string, flags=re.IGNORECASE)
-    
-    if len(category_match) > 1:
-        # Get the text after the amount and keywords, and clean it up
-        category = category_match[-1].strip()  # Get the last part after the split
-        if category:  # Check if category is not empty
-            return amount, category, transaction_type, payment_method
-        else:
-            return None, None, None, None  # Return None if category is empty
-    else:
-        return None, None, None, None  # Return None if no category is found # Return None if no category is found
+    return amount, category, transaction_type, payment_method
 
 
 # Serializer for generating secure tokens
