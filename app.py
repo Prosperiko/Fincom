@@ -1195,11 +1195,8 @@ def connect_db():
 
 
 
-UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\video"
-
-UPLOAD_FOLDER_IMG = r"C:\Users\USER 22\Projecttime\Fincom\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 22\Projecttime\Fincom\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\USER12\Projecttime\Fincom\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER12\Projecttime\Fincom\static\video"
 
 
 
