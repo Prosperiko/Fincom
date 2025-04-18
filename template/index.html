@@ -10,15 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul class="flashes fade-in">
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
+    <div class="flashes">
+        {% if get_flashed_messages(with_categories=true) %}
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
         {% endif %}
-    {% endwith %}
+    </div>
+    
     <!-- Navbar -->
     <header class="fade-in">
         <div class="container">

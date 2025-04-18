@@ -25,20 +25,32 @@ body {
     transition: background-color 3s, color 3s;
     text-align: center;
 }
+/* Flash Messages */
 .flashes {
+    position: fixed; /* Fix it to the top */
+    top: 80px; /* Adjust this value based on your header height */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it properly */
     list-style: none;
-    padding: 0;
+    padding: 10px;
     margin: 10px 0;
+    z-index: 1000; /* Ensure it appears above other elements */
 }
 
 .flashes .success {
-    color: green;
+    color: var(--color-gold);
     font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background for better visibility */
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .flashes .error {
-    color: red;
+    color: var(--color-deep-blue);
     font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background for better visibility */
+    padding: 10px;
+    border-radius: 5px;
 }
 
 @keyframes gradientMove {

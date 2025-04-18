@@ -8,14 +8,24 @@
   --highlight-gold: #f4b400;
   --shadow-color: rgba(0, 33, 71, 0.4);
 
-  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue), var(--color-gold));
+  --background-gradient: linear-gradient(290deg, var(--color-navy), var(--color-deep-blue),var(--color-gold));
   --color-accent: linear-gradient(to right, var(--color-navy), var(--color-gold));
 }
 /* Main Container */
 /* Main Container */
+.container {
+  max-width: 350px; /* Reduced width to make it smaller */
+  margin: 15px auto; /* Reduced vertical margin for a more compact fit */
+  padding: 20px; /* Reduced padding for a smaller layout */
+  background-color: var(--color-navy); /* Navy background */
+  border-radius: 8px; /* Slightly smaller border radius */
+  box-shadow: 0 3px 6px var(--color-gold); /* Adjusted shadow for a smaller look */
+  max-height: 100vh; /* Limit the height to 80% of the viewport */
+  overflow-y: auto; /* Add scrolling if content exceeds the height */
+}
 .input-icon {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .input-icon i {
@@ -28,20 +38,11 @@
 .input-icon input,
 .input-icon select,
 .input-icon textarea {
-  padding-left: 30px; /* Adjust if needed */
+  padding-left: 35px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 350px; /* Reduced width to make it smaller */
-  margin: 15px auto; /* Reduced vertical margin for a more compact fit */
-  padding: 20px; /* Reduced padding for a smaller layout */
-  background-color: var(--color-navy); /* Navy background */
-  border-radius: 8px; /* Slightly smaller border radius */
-  box-shadow: 0 3px 6px var(--color-gold); /* Adjusted shadow for a smaller look */
-  max-height: 100vh; /* Limit the height to 80% of the viewport */
-  overflow-y: auto; /* Add scrolling if content exceeds the height */
-}
 /* General Page Style */
 body {
   background-color: var(--color-navy); /* Updated to Gray */
@@ -50,66 +51,44 @@ body {
   margin: 0;
   padding: 0;
 }
-#response {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  color: var(--color-navy); /* Default text color */
-  background-color: #4caf50; /* Default success background color */
-  display: none; /* Initially hidden */
-}
-
-/* Error styling */
-#response.error {
-  background-color: #f44336; /* Red background for errors */
-  color: #ffffff; /* White text for errors */
-}
-
-/* Success styling */
-#response.success {
-  background-color: var(--color-gold); /* Green background for success */
-  color: var(--color-white); /* White text for success */
-}
 
 /* Sidebar */
+/* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: var(--color-navy);
-  color: var(--color-white);
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: -300px; /* Hide sidebar off-screen */
-  overflow-y: auto;
-  padding: 20px;
-  box-shadow: 2px 0 5px var(--shadow-color);
-  transition: left 0.3s ease; /* Smooth transition */
-  z-index: 1001; /* Ensure it's above other elements */
+    width: 250px;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -300px; /* Hide sidebar off-screen */
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow-color);
+    transition: left 0.3s ease; /* Smooth transition */
+    z-index: 1001; /* Ensure it's above other elements */
 }
 
 /* Active class to show sidebar */
 .sidebar.active {
-  left: 0; /* Bring sidebar into view */
+    left: 0; /* Bring sidebar into view */
 }
 
 /* Overlay */
 .sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* Below the sidebar but above other content */
-  display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Below the sidebar but above other content */
+    display: none; /* Initially hidden */
 }
 
 /* Show overlay when sidebar is active */
 .sidebar.active + .sidebar-overlay {
-  display: block; /* Show overlay when sidebar is active */
+    display: block; /* Show overlay when sidebar is active */
 }
 .sidebar-toggle, .chat-toggle {
   position: fixed;
@@ -230,6 +209,29 @@ button:hover {
 .flash-error {
   background-color: var(--color-deep-blue); /* Red */
 }
+#response {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-navy); /* Default text color */
+  background-color: #4caf50; /* Default success background color */
+  display: none; /* Initially hidden */
+}
+
+/* Error styling */
+#response.error {
+  background-color: #f44336; /* Red background for errors */
+  color: #ffffff; /* White text for errors */
+}
+
+/* Success styling */
+#response.success {
+  background-color: var(--color-gold); /* Green background for success */
+  color: var(--color-white); /* White text for success */
+}
 
 /* Labels */
 label {
@@ -342,7 +344,6 @@ footer {
   color: var(--color-white);
   box-shadow: 0 -2px 5px var(--shadow-color);
 }
-
 /* Animation for slideshow */
 @keyframes slideshow {
   0% { opacity: 0; }
@@ -350,26 +351,6 @@ footer {
   30% { opacity: 1; }
   40% { opacity: 0; }
 }
-
-.slideshow-background img {
-  animation: slideshow 20s infinite;
-}
-
-/* Adjust timing for each image */
-.slideshow-background img:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.slideshow-background img:nth-child(2) {
-  animation-delay: 10s;
-}
-
-.slideshow-background img:nth-child(3) {
-  animation-delay: 20s;
-}
-
-
-
 .logout-btn {
   color: var(--color-white);
   float: right;
@@ -385,6 +366,22 @@ footer {
 .logout-btn:hover {
   background-color: var(--highlight-gold);
   color: var(--color-navy);
+}
+.slideshow-background img {
+  animation: slideshow 20s infinite;
+}
+
+/* Adjust timing for each image */
+.slideshow-background img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.slideshow-background img:nth-child(2) {
+  animation-delay: 10s;
+}
+
+.slideshow-background img:nth-child(3) {
+  animation-delay: 20s;
 }
 
 footer .social-media {
