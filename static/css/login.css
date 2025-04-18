@@ -128,6 +128,7 @@ header h1 {
 .login-link {
     margin-top: 15px;
     font-size: 14px;
+   
 }
 
 .login-link a {
@@ -250,6 +251,7 @@ header {
 
     .login-container {
         width: 90%;
+        max-width: grid; 
     }
 }
 @keyframes dance {
@@ -305,7 +307,7 @@ header {
     opacity: 0;
     transform: scale(0.8) translateY(50px);
     animation: none; /* Animation will be triggered dynamically */
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 5s infinite ease;
 }
 
 .feature-item i {
@@ -375,4 +377,18 @@ nav {
         opacity: 1;
         transform: scale(1) translateY(0);
     }
+}
+.Forgot-password-btn, .Sign-up-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background: var(--highlight-gold); /* Gold background */
+    color: var(--color-medium-grey); /* Dark Grey Text */
+    transition: background 0.3s ease;
+}
+
+.Forgot-password-btn:hover, .Sign-up-btn:hover {
+    background: var(--color-gold); /* Darker Gold */
 }

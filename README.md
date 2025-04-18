@@ -1,2 +1,0 @@
-# Fincom
-Finance Tracker App
