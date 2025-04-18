@@ -10,7 +10,6 @@ from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime
 import os
 from flask_socketio import SocketIO, emit
-import smtplib
 from email.mime.text import MIMEText
 import pandas as pd
 from sendgrid import SendGridAPIClient
@@ -1192,11 +1191,16 @@ def fetch_expense_trends():
 # In-memory storage for posts
 
 def connect_db():
-    return sqlite3.connect('video_db.db')
+    return sqlite3.connect('mydatabase.db')
 
 
+<<<<<<< HEAD
 UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\img"
 UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\video"
+=======
+UPLOAD_FOLDER_IMG = r"C:\Users\USER 22\Projecttime\Fincom\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 22\Projecttime\Fincom\static\video"
+>>>>>>> 0d7c7d0a197e5f9b4baaaa2354194a5caf59cc47
 
 
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats
@@ -1261,7 +1265,7 @@ def post():
     return redirect(url_for('community'))
 
 def connect_db():
-    return sqlite3.connect('video_db.db')
+    return sqlite3.connect('mydatabase.db')
 
 @app.route('/respond/<int:post_id>', methods=['POST'])
 def respond(post_id):
