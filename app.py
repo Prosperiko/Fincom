@@ -1195,8 +1195,8 @@ def connect_db():
     return sqlite3.connect('video_db.db')
 
 
-UPLOAD_FOLDER_IMG = r"C:\Users\USER-PC\Desktop\Fincom-1\static\img"
-UPLOAD_FOLDER_VIDEO = r"C:\Users\USER-PC\Desktop\Fincom-1\static\video"
+UPLOAD_FOLDER_IMG = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\img"
+UPLOAD_FOLDER_VIDEO = r"C:\Users\USER 23\Desktop\FINCOM\Fincom\static\video"
 
 
 ALLOWED_VIDEO_EXTENSIONS = {'mp4', 'avi', 'mov', 'wmv'}  # Allowed video formats

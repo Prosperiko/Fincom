@@ -28,6 +28,7 @@
             <nav>
                 <ul>
                     <li><a href="about">About</a></li>
+
                     <li><a href="contact">Contact</a></li>
                 </ul>
             </nav>
@@ -60,7 +61,8 @@
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <p>Forgot password? <a href="{{ url_for('forgot_password') }}" class="btn">Forgot Password</a></p>
+        <p>Forgot password? <a href="{{ url_for('forgot_password') }}"style="display: inline-block; padding: 10px 16px; color: var(--color-gold); background-color: var(--color-navy);   text-decoration: none; font-size: 14px;">Forgot Password</a></p>
+
         <p>Don't have an account? <a href="{{ url_for('signup') }}" class="btn">Sign Up</a></p>
     </div>
     <section class="app-features scatter-animation" id="app-features">
