@@ -112,7 +112,7 @@
 
     <!-- JavaScript -->
     <script>
-        function changeBackground(image) {
+        function changeBackground(image) {   
             document.body.style.backgroundImage = `url({{ url_for('static', filename='${image}') }})`;
         }
 
