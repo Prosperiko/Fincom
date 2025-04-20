@@ -141,7 +141,7 @@
             </div>
 
             <div class="testimonial">
-                <img src="user4.jpg" alt="User 4">
+                <img src=static/img/IMG-20250416-WA0084.jpg alt="User 4">
                 <div class="text">
                     <h3>Lisa Brown</h3>
                     <p class="role">UX Designer</p>
@@ -150,7 +150,7 @@
             </div>
 
             <div class="testimonial">
-                <img src="user5.jpg" alt="User 5">
+                <img src=static/img/fincom_logo.png alt="User 5">
                 <div class="text">
                     <h3>Chris Evans</h3>
                     <p class="role">Entrepreneur</p>
@@ -301,14 +301,16 @@
         
         </div>
     </footer>
-
     <script>
+        // Function to change the background color
         function changeColor(color) {
             document.body.style.backgroundColor = color;
-            document.querySelectorAll('.feature').forEach(feature => {
+            document.querySelectorAll('.features').forEach(feature => {
                 feature.style.backgroundColor = color;
             });
         }
+    
+        // Function to toggle the answer visibility
         function toggleAnswer(element) {
             const answer = element.nextElementSibling;
             const icon = element.querySelector('.toggle-icon');
@@ -320,7 +322,25 @@
                 icon.textContent = "−";
             }
         }
-   
+    
+        // Function to observe the testimonials section for animation
+        function observeTestimonials() {
+            const testimonials = document.querySelector('.testimonials');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        testimonials.classList.add('animate'); // Add class to trigger animation
+                        observer.unobserve(entry.target); // Stop observing after animation
+                    }
+                });
+            });
+            observer.observe(testimonials);
+        }
+    
+        // Wait for the DOM to load before executing the observer function
+        document.addEventListener("DOMContentLoaded", function() {
+            observeTestimonials();
+        });
     </script>
 
 </body>

@@ -353,6 +353,17 @@ nav ul li a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-color);
     text-align: center;
+    opacity: 0; 
+    transform: translateY(20px); 
+    animation: fadeInUp 0.5s forwards; 
+}
+
+/* Keyframes for the animation */
+@keyframes fadeInUp {
+    to {
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .testimonials h2 {
