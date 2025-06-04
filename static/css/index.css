@@ -498,10 +498,152 @@ footer .social-icon:hover {
     transform: scale(1.2);
 }
 
+
 footer .contact-info p {
     color: var(--color-gold); /* Changed contact info text to gold */
     margin: 5px 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Social Media Container (optional styling) */
+footer .social-media {
+    color: var(--color-gold);
+    margin: 5px 0;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05); /* subtle default bg */
+}
+
+footer .social-media:hover {
+    transform: scale(1.03);
+    background-color: rgba(255, 215, 0, 0.1); /* soft gold highlight */
+}
+/* Social Icons Base Style */
+footer .social-icon {
+    color: var(--color-gold);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    border-radius: 50%;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.05); /* default subtle background */
+}
+
+/* Hover Effects */
+footer .social-icon:hover {
+    color: var(--highlight-gold);
+    transform: scale(1.2) rotate(5deg);
+    background-color: rgba(255, 215, 0, 0.1); /* gold-tinted background on hover */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); /* glowing effect */
+    
+}
+
+/* Pulse animation for the icon */
+footer .social-icon:hover i {
+    animation: pulseIcon 0.6s ease;
+}
+
+/* Pulse keyframes */
+@keyframes pulseIcon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+
+
+
+/* Contact Info Container */
+footer .contact-info {
+    color: var(--color-gold);
+    margin: 5px 0;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05); /* subtle default bg */
+}
+
+/* Zoom + Background Change on Hover */
+footer .contact-info:hover {
+    transform: scale(1.03);
+    background-color: rgba(255, 215, 0, 0.1); /* soft gold highlight */
+}
+
+/* Contact Links */
+footer .contact-info p a {
+    color: white;
+    margin: 5px 0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Link Hover Effects */
+footer .contact-info p a:hover {
+    color: gold;
+    text-shadow: 0 0 5px gold;
+}
+
+/* Animated Underline */
+footer .contact-info p a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: gold;
+    transition: width 0.3s ease;
+}
+
+footer .contact-info p a:hover::after {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 footer .footer-bottom {
     border-top: 1px solid var(--color-light-grey);
