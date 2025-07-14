@@ -26,9 +26,7 @@ import tempfile
 # Setting up the API key and model
 
 import google.generativeai as genai
-import threading
-import time
-import requests
+
 app = Flask(__name__, template_folder='template', static_folder='static')
 bcrypt = Bcrypt(app)
 
@@ -1901,21 +1899,6 @@ def logout():
     flash("You have been logged out.", "success")
     
     return redirect('/login')
-
-def keep_alive():
-    while True:
-        try:
-            url = "https://coinflux.onrender.com/" 
-            res = requests.get(url)
-            print(f"Pinged at {time.ctime()}: Status {res.status_code}")
-        except Exception as e:
-            print(f"Error pinging at {time.ctime()}: {e}")
-        time.sleep(60 * 9)  # Ping every 9 minutes
-
-# Create and start the background thread
-t = threading.Thread(target=keep_alive)
-t.daemon = True
-t.start()
 
 
 
