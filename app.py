@@ -42,7 +42,9 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'projectfinodido@gmail.com'
 app.config['MAIL_PASSWORD'] = 'csqv yavo jcwj bghz'  # email password
 app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'  # 
- 
+# Flask-Mail Configuration (Already in your code)
+app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "mydatabase.db")
@@ -173,8 +175,6 @@ def verify_pin():
 
 
 
-# Flask-Mail Configuration (Already in your code)
-app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'
 
 # Serializer for token generation
 serializer = URLSafeTimedSerializer(app.secret_key)
