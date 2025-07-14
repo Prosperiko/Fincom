@@ -1912,7 +1912,7 @@ def keep_alive():
             print(f"Pinged at {time.ctime()}: Status {res.status_code}")
         except Exception as e:
             print(f"Error pinging at {time.ctime()}: {e}")
-        time.sleep(60 * 13)  # Ping every 14 minutes
+        time.sleep(60 * 12)  # Ping every 14 minutes
 
 # Create and start the background thread
 t = threading.Thread(target=keep_alive)
