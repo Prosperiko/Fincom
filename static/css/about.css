@@ -182,12 +182,13 @@ section p {
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--color-gold);
-    color: var(--color-navy);
+    color: rgb(44, 43, 43);
     text-decoration: none;
     font-size: 16px;
     border-radius: 6px;
     margin-top: 10px;
-    transition: 3s;
+    transition: 1s;
+    border: none;
   }
   
   .btn:hover {

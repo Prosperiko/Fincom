@@ -74,7 +74,7 @@
 /* Feature Animation Styles */
 .feature-box {
     position: relative;
-    width: 300px;
+    max-width: 300px;
     height: 300px;
     margin: 50px auto;
     background-color: var(--color-navy);
@@ -205,7 +205,7 @@ header h1 {
 
 /* Logo */
 .logo img {
-    width: 120px;
+    width: 140px;
     height: auto;
 }
 
@@ -227,14 +227,16 @@ body {
     padding: 15px; /* Reduced padding to make the container more compact */
     background: rgb(1, 37, 94);
     border-radius: 15px;
+    background: var(--color-navy); /* Navy background */
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 15px rgba(254, 247, 35, 0.863);
     display: flex;
     flex-direction: column;
     align-items: stretch; /* Ensure child elements stretch to fill the container */
     gap: 10px; /* Reduced gap to minimize spacing between elements */
+    box-sizing: border-box;
+    border: 2px solid var(--color-gold); /* Gold border */
 }
-
 .signup-container h2 {
     margin-bottom: 10px;
     font-size: 20px;
@@ -278,7 +280,12 @@ body {
     color: #888;
     animation: shake 1.5s infinite; /* Add shaking animation */
 }
-
+.btn{
+    padding: .2rem;
+    background-color: rgba(255, 255, 255, 0.644);
+    border-radius: 3px;
+    color: rgb(12, 12, 236);
+}
 /* Signup Button */
 .signup-btn {
     width: 100%;

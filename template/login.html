@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - CryptoWorld</title>
     <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../static/css/mobile.css">
     <link rel="icon" type="image/webp" href="../static/img/fincom_logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
@@ -23,12 +24,11 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="../static/img/fincom_logo.png" alt="Fincom Logo">
+                <img src="../static/img/fincom_logo_rb.png" alt="Fincom Logo">
             </div>
             <nav>
                 <ul>
                     <li><a href="about">About</a></li>
-
                     <li><a href="contact">Contact</a></li>
                 </ul>
             </nav>
@@ -61,9 +61,9 @@
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <p>Forgot password? <a href="{{ url_for('forgot_password') }}"style="display: inline-block; padding: 10px 16px; color: var(--color-gold); background-color: var(--color-navy);   text-decoration: none; font-size: 14px;">Forgot Password</a></p>
+        <p>Forgot password? <a href="{{ url_for('forgot_password') }}"style="display: inline-block; padding: 10px 16px; color: var(--color-gold); background-color: var(--color-navy);   text-decoration: none; font-size: 14px;">Click Here</a></p>
 
-        <p>Don't have an account? <a href="{{ url_for('signup') }}" class="btn">Sign Up</a></p>
+        <p>Don't have an account? <a style="text-decoration: none;" href="{{ url_for('signup') }}" class="btn">Sign Up</a></p>
     </div>
     <section class="app-features scatter-animation" id="app-features">
         <div class="container">

@@ -217,9 +217,11 @@ header {
 
 header .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 20px; /* Adjust padding as needed */
+    padding: .4rem .7rem; /* Adjust padding as needed */
+    /* margin: .7rem; */
+    width: 100%;
 }
 
 body {
@@ -228,7 +230,7 @@ body {
 
 /* Logo */
 .logo img {
-    width: 120px;
+    width: 140px;
     height: auto;
 }
 
@@ -244,6 +246,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: space-between;
 }
 
 nav ul li {
@@ -506,7 +509,11 @@ footer .contact-info p {
 
 
 
-
+.footer-links ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
 
 
 
@@ -528,7 +535,9 @@ footer .contact-info p {
 
 
 /* Social Media Container (optional styling) */
-footer .social-media {
+footer .social-media, 
+footer .footer-links,
+footer .contact-info {
     color: var(--color-gold);
     margin: 5px 0;
     padding: 15px;
@@ -537,7 +546,9 @@ footer .social-media {
     background-color: rgba(255, 255, 255, 0.05); /* subtle default bg */
 }
 
-footer .social-media:hover {
+footer .social-media:hover,
+footer .footer-links:hover,
+footer .contact-info:hover {
     transform: scale(1.03);
     background-color: rgba(255, 215, 0, 0.1); /* soft gold highlight */
 }
@@ -579,23 +590,10 @@ footer .social-icon:hover i {
 
 
 /* Contact Info Container */
-footer .contact-info {
-    color: var(--color-gold);
-    margin: 5px 0;
-    padding: 15px;
-    border-radius: 10px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05); /* subtle default bg */
-}
-
-/* Zoom + Background Change on Hover */
-footer .contact-info:hover {
-    transform: scale(1.03);
-    background-color: rgba(255, 215, 0, 0.1); /* soft gold highlight */
-}
 
 /* Contact Links */
-footer .contact-info p a {
+footer .contact-info p a,
+footer .footer-links ul a {
     color: white;
     margin: 5px 0;
     text-decoration: none;
@@ -604,13 +602,15 @@ footer .contact-info p a {
 }
 
 /* Link Hover Effects */
-footer .contact-info p a:hover {
+footer .contact-info p a:hover,
+footer .footer-links ul li a:hover {
     color: gold;
     text-shadow: 0 0 5px gold;
 }
 
 /* Animated Underline */
-footer .contact-info p a::after {
+footer .contact-info p a::after,
+footer .footer-links ul li a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -621,36 +621,13 @@ footer .contact-info p a::after {
     transition: width 0.3s ease;
 }
 
-footer .contact-info p a:hover::after {
+footer .contact-info p a:hover::after,
+footer .footer-links ul a:hover::after {
     width: 100%;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-footer .footer-bottom {
-    border-top: 1px solid var(--color-light-grey);
-    padding-top: 10px;
-    font-size: 0.9rem;
-    color: var(--color-medium-grey);
-}
 /* Animation for fade-in effect */
 .fade-in {
     opacity: 0;

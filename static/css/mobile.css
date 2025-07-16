@@ -1,0 +1,43 @@
+@media screen and (max-width:600px) {
+    .logo img {
+        width: 90px;
+        /* height: auto; */
+    }
+        
+    header .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: .3rem 0; 
+        margin: 0;
+        /* background-color: wheat; */
+    }
+    nav ul{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+    }
+        nav ul li {
+        margin: .2rem 15px;
+    }
+
+    .supH{
+        display:  none;
+    }
+    .signup-container {
+        width: 90%;
+        max-width: grid; 
+    }
+    
+}
+@media screen and (max-width:400px) {
+    .signup-container,
+    .faq-section,
+    .feature-box{
+        padding: 0 0.4rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+}

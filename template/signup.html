@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fincom - Sign Up</title>
     <link rel="stylesheet" href="../static/css/signup.css">
+     <link rel="stylesheet" href="../static/css/mobile.css">
     <link rel="icon" type="image/webp" href="../static/img/Group of 7 Objects (1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
@@ -12,7 +13,8 @@
 <body>
     <!-- Background Slideshow -->
     <div class="background-slideshow"></div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages(with_
+        categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
         <div class="flash-message flash-{{ category }}">{{ message }}</div>
@@ -20,10 +22,10 @@
     {% endif %}  
   {% endwith %}
 
-    <header>
+    <header class = 'supH'>
         <div class="container">
             <div class="logo">
-                <img src="../static/img/fincom_logo.png" alt="Fincom Logo">
+                <img src="../static/img/fincom_logo_rb.png" alt="Fincom Logo">
             </div>
         </div>
     </header>
@@ -94,7 +96,7 @@
         
             <button type="submit" class="signup-btn">Sign Up</button>
         </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}" class="btn">Login</a></p>
+        <p>Already have an account? <a style="text-decoration:none;"href="{{ url_for('login') }}" class="btn">Login</a></p>
     </div>
 
     <!-- FAQ Section -->
