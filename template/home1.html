@@ -6,6 +6,7 @@
     <title>Financial-Overview</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/home1.css') }}"> -->
     <link rel="stylesheet" href="../static/css/home1.css">
+    <link rel="stylesheet" href="../static/css/mobile.css">
     <!-- <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo_rb.png') }}"> -->
     <link rel="shortcut icon" href="../static/img/fincom_logo_rb.png" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -23,12 +24,12 @@
 <body>
     <!-- Sidebar Toggle Icon -->
     <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+        <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
     </div>
 
     <!-- Chat Toggle Icon -->
     <div class="chat-toggle" onclick="toggleChat()">
-        <i class="fas fa-comments"></i> <!-- Font Awesome icon for chat -->
+        <img src="../static/icons/linkedin-brands.svg" style="width: 24px;" alt="">
     </div>
 
     <!-- Sidebar -->
@@ -44,6 +45,7 @@
             <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
             <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session </a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+            
         </ul>
     </div>
 
@@ -95,7 +97,7 @@
             <button id="send">Send</button>
         </div>
     </div>
-    <div id = 'ovl' onclick= 'toggleSidebar()'></div>
+    <div id = 'ovl' onclick= "toggleSidebar()"></div>
 
     <!-- Footer -->
     <footer>

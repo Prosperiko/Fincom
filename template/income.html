@@ -7,33 +7,31 @@
   <link rel="stylesheet" href="../static/css/income.css">
   <link rel="icon" type="image/webp" href="../static/img/fincom_logo_rb.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../static/css/mobile.css">
 </head>
 <body>
-  <div class="sidebar">
+
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+      <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
+  </div>
+  <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
-        <img class = 'logo' src="../static/img/fincom_logo_rb.png" alt="">
-        <h2>Fincom</h2>
+      <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
+      <img class = 'logo' src="../static/img/fincom_logo_rb.png" alt="">
+      <h2>Fincom</h2>
     </div>
-    
     <ul class="sidebar-menu">
-        <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
-        <li><a href="/expenses" onclick="changeBackground('img/graph1.jpg')">Add Expense</a></li>
-        <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
-        
-        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-        <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
-        <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
+      <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+      <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+      <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+      <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+      <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
+      <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
     </ul>
   </div>
-  
-  <div class="sidebar-toggle" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
-  </div>
   <div id = 'ovl' onclick= 'toggleSidebar()'></div>
-  <div class="container">
+<div class="container">
     <h2>Add Income</h2>
-    
     <!-- Display Flash Messages -->
     <div class="flashes">
         {% if get_flashed_messages(with_categories=true) %}
@@ -105,25 +103,15 @@
       </div>
     
       <button type="submit"><i class="fas fa-plus-circle"></i> Add Income</button>
+      <button class="btn" onclick="history.back()">Back</button>
     </form>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const sidebarToggle = document.querySelector('.sidebar-toggle');
-      const sidebar = document.querySelector('.sidebar');
-      const overlay = document.querySelector('.sidebar-overlay');
-
-      sidebarToggle.addEventListener('click', function() {
-          sidebar.classList.toggle('active'); // Toggle the active class
-          overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none'; // Show or hide overlay
-      });
-
-      overlay.addEventListener('click', function() {
-          sidebar.classList.remove('active'); // Remove active class to hide sidebar
-          overlay.style.display = 'none'; // Hide overlay
-      });
-    });
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active'); // Toggle the active class
+  }
   </script>
 </body>
 </html>s

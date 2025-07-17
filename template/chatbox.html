@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../static/css/chatbox.css">
     <link rel="icon" type="image/webp" href="../static/img/fincom_logo_rb.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/mobile.css">
 </head>
 <body>
     <h2><i class="fas fa-users"></i> Users</h2>
@@ -40,31 +41,39 @@
             
             <li><a href="/budget" onclick="changeBackground('img/chatbot-bg.jpg')">create a budget</a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+            <button class="back-btn" onclick="history.back()">Back</button>
 
         </ul>
-      </div>
-      <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
     </div>
-<div class="user-list">
-  {% for user in users %}
-  <div class="user-card">
-    <div class="user-info">
-      <h3><i class="fas fa-user-circle"></i> {{ user.username }}</h3>
-      <p><i class="fas fa-briefcase"></i> {{ user.profession }}</p>
-      <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">
-        <i class="fas fa-comment-dots"></i> Message
-      </a>
+    <div class="sidebar-toggle">
+        <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
     </div>
-  </div>
-  {% else %}
-  <p><i class="fas fa-exclamation-circle"></i> No users found.</p>
-  {% endfor %}
-</div>
+    <div class="ovl"></div>
+    <div class="user-list">
+        {% for user in users %}
+            <div class="user-card">
+                <div class="user-info">
+                <h3><i class="fas fa-user-circle"></i> {{ user.username }}</h3>
+                <p><i class="fas fa-briefcase"></i> {{ user.profession }}</p>
+                <a href="{{ url_for('chatroom', username=user.username) }}" class="message-btn">
+                    <i class="fas fa-comment-dots"></i> Message
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <p><i class="fas fa-exclamation-circle"></i> No users found.</p>
+        {% endfor %}
+    </div>
+    <!-- <div class="ovl" onclick="a"></div> -->
+
 
 
 
     <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Toggle the active class
+        }
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.getElementById("search-input");
             const professionInput = document.getElementById("profession-input");
@@ -90,7 +99,7 @@
         document.addEventListener('DOMContentLoaded', function () {
           const sidebarToggle = document.querySelector('.sidebar-toggle');
           const sidebar = document.querySelector('.sidebar');
-          const overlay = document.querySelector('.sidebar-overlay');
+          const overlay = document.querySelector('.ovl');
       
           sidebarToggle.addEventListener('click', function() {
               sidebar.classList.toggle('active'); // Toggle the active class

@@ -7,30 +7,32 @@
     <link rel="stylesheet" href="../static/css/Analysis.css">
     <link rel="icon" type="image/webp" href="../static/img/fincom_logo_rb.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Updated Font Awesome version -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <link rel="stylesheet" href="../static/css/mobile.css">
 </head>
 <body>
+    
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
-            <img class = 'logo' src="../static/img/fincom_logo_rb.png" alt="">
-            <h2>Fincom</h2>
-        </div>
-        
-        <ul class="sidebar-menu">
-            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
-            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
-            <li><a href="/expenses" onclick="changeBackground('img/analysis-bg.jpg')">Add Expense</a></li>
-            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
-            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
-        </ul>
+    <div class="sidebar-toggle">
+        <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
     </div>
-
-    <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+    <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
+        <img class = 'logo' src="../static/img/fincom_logo_rb.png" alt="">
+        <h2>Fincom</h2>
     </div>
+    <ul class="sidebar-menu">
+        <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+        <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+        <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+        <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+        <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
+        <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
+        <button class="back-btn" onclick="history.back()">Back</button>
+    </ul>
+    </div>
+    <div class = 'ovl'></div>
 
     <h1>Financial Overview</h1>
 
@@ -120,6 +122,7 @@
     <hr>
 
     <!-- Chart.js Script -->
+
     <script>
         async function fetchUserFinancials() {
             try {
@@ -354,7 +357,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const sidebar = document.querySelector(".sidebar");
             const toggleButton = document.querySelector(".sidebar-toggle");
-            const overlay = document.querySelector(".sidebar-overlay");
+            const overlay = document.querySelector(".ovl");
 
             // Toggle sidebar on button click
             toggleButton.addEventListener("click", function () {

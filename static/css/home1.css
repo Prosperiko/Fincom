@@ -41,7 +41,6 @@ body {
     background-color: var(--highlight-gold); /* Change color on hover */
 }
 
-
 /* Sidebar */
 .sidebar {
     z-index: 10;
@@ -115,7 +114,7 @@ body {
 .container {
     margin: 0 auto;
     /* margin-left: 250px; */
-    padding: 20px;
+    padding: 20px 0 0 0;
     flex: 1;
     background-color: var(--color-navy);
     min-height: 100vh;
@@ -124,6 +123,7 @@ body {
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     align-items: center; /* Center align content */
+    margin-bottom: 135px;
 }
 
 /* Financial Summary Section */
@@ -330,7 +330,7 @@ footer {
 
 /* Logout Button */
 .logout-btn {
-    color: var(--color-white);
+    color: var(--color-navy);
     float: right;
     margin-right: 20px;
     text-decoration: none;
@@ -405,7 +405,7 @@ header {
 @media (max-width: 500px) {
     .sidebar {
         z-index: 10;
-        width: 40%;
+        width: 50%;
         background-color: var(--color-deep-blue);
         color: var(--color-white);
         height: 100vh;
@@ -422,6 +422,7 @@ header {
     .container {
         margin-left: 0; /* Remove margin for full-width layout */
         padding-top: 100px; /* Space for fixed header */
+        padding: 20px;
     }
 
     
@@ -458,21 +459,20 @@ footer .social-icon:hover {
 /* Sidebar Toggle Icon */
 .sidebar-toggle, 
 .chat-toggle {
+    border-radius: 50%;
     position: fixed;
     top: 80px;
     margin: .5rem;
     right: .2rem; /* Position from the right */
     background-color: var(--color-gold); /* Gold background */
     border: none;
-    padding: 1rem;
+    padding: .5rem;
     cursor: pointer;
     z-index: 10;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
-
-/* Sidebar Toggle Icon */
 .chat-toggle{
-    top: 30px;
+    top: 10px;
     z-index: 11;
 }
 

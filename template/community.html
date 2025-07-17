@@ -8,28 +8,31 @@
     <link rel="shortcut icon" href="../static/img/fincom_logo_rb.png" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/community.css">
     <title>Communication App</title>
+    <link rel="stylesheet" href="../static/css/mobile.css">
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
+    </div>
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
             <img class = 'logo' src="../static/img/fincom_logo_rb.png" alt="">
             <h2>Fincom</h2>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="/home1"><i class="icon"></i> HOME</a></li>
-            <li><a href="/expenses"><i class="icon"></i> Add Expense</a></li>
-            <li><a href="/income"><i class="icon"></i> Add Income</a></li>
-            <li><a href="/Analysis"><i class="icon"></i> Analysis</a></li>
-            <li><a href="/budget"><i class="icon"></i> Create a Budget</a></li>
-            <li><a href="/chatbox"><i class="icon"></i>Chat-Session</a></li>
+            <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+            <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
+            <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
+            <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
+            <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
+            <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
+            <button class="btn" onclick="history.back()">Back</button>
         </ul>
     </div>
-    <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </div>
+    <div id = 'ovl' onclick= 'toggleSidebar()'></div>
+
     
     <!-- Main Content -->
     <div class="main-content">
@@ -44,9 +47,9 @@
             </div>
 
             <!-- Post Form -->
-            <form action="{{ url_for('post') }}" method="POST" enctype="multipart/form-data" class="post-form">
-                <input type="text" name="title" placeholder="Post Title" required>
-                <textarea name="content" placeholder="What's on your mind?" required></textarea>
+            <form class="uapl" action="{{ url_for('post') }}" method="POST" enctype="multipart/form-data" class="post-form">
+                <input id="search" type="text" name="title" placeholder="Post Title" required>
+                <textarea id="search" name="content" placeholder="What's on your mind?" required></textarea>
                 <label>Upload Media:</label>
                 <input type="file" name="media" accept="image/*,video/*">
                 <button type="submit">Post</button>
@@ -83,7 +86,7 @@
                             <h3>Responses:</h3>
                             {% for response in post.responses %}
                                 <p><strong>{{ response.username }}:</strong> {{ response.content }} 
-                                   <small>on {{ response.timestamp }}</small></p>
+                                <small>on {{ response.timestamp }}</small></p>
                             {% endfor %}
                         </div>
                     </div>
@@ -95,54 +98,54 @@
     </div>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active'); // Toggle the active class
         }
-        // Function to filter posts based on search input
-        function filterPosts() {
-            const input = document.getElementById('search');
-            const filter = input.value.toLowerCase();
-            const posts = document.querySelectorAll('.post-container');
+    // document.addEventListener('DOMContentLoaded', function() {
 
-            posts.forEach(post => {
-                const username = post.getAttribute('data-username').toLowerCase();
-                const content = post.getAttribute('data-content').toLowerCase();
-                const title = post.getAttribute('data-post-title').toLowerCase();
+    //     function filterPosts() {
+    //         const input = document.getElementById('search');
+    //         const filter = input.value.toLowerCase();
+    //         const posts = document.querySelectorAll('.post-container');
 
-                if (username.includes(filter) || content.includes(filter) || title.includes(filter)) {
-                    post.style.display = "";
-                } else {
-                    post.style.display = "none";
-                }
-            });
-        }
+    //         posts.forEach(post => {
+    //             const username = post.getAttribute('data-username').toLowerCase();
+    //             const content = post.getAttribute('data-content').toLowerCase();
+    //             const title = post.getAttribute('data-post-title').toLowerCase();
 
-        // Clear search input and reset visibility
-        function clearSearch() {
-            const input = document.getElementById('search');
-            input.value = '';
-            filterPosts();
-        }
+    //             if (username.includes(filter) || content.includes(filter) || title.includes(filter)) {
+    //                 post.style.display = "";
+    //             } else {
+    //                 post.style.display = "none";
+    //             }
+    //         });
+    //     }
 
-        const searchInput = document.getElementById('search');
-        const searchButton = document.getElementById('search-button');
-        const clearButton = document.getElementById('clear-button');
+    //     // Clear search input and reset visibility
+    //     function clearSearch() {
+    //         const input = document.getElementById('search');
+    //         input.value = '';
+    //         filterPosts();
+    //     }
 
-        searchInput.addEventListener('keyup', filterPosts);
-        searchButton.addEventListener('click', filterPosts);
-        clearButton.addEventListener('click', clearSearch);
-    });
+    //     const searchInput = document.getElementById('search');
+    //     const searchButton = document.getElementById('search-button');
+    //     const clearButton = document.getElementById('clear-button');
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const sidebarToggle = document.querySelector('.sidebar-toggle');
-        const sidebar = document.querySelector('.sidebar');
+    //     searchInput.addEventListener('keyup', filterPosts);
+    //     searchButton.addEventListener('click', filterPosts);
+    //     clearButton.addEventListener('click', clearSearch);
+    // });
 
-        sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-        });
-    });
+    // // document.addEventListener('DOMContentLoaded', function () {
+    // //     const sidebarToggle = document.querySelector('.sidebar-toggle');
+    // //     const sidebar = document.querySelector('.sidebar');
+
+    // //     sidebarToggle.addEventListener('click', function() {
+    // //         sidebar.classList.toggle('active');
+    // //     });
+    // // });
     </script>
 
 </body>

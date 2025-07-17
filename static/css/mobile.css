@@ -1,3 +1,121 @@
+.back-btn {
+    background-color: #FFD700; /* Gold */
+    color: #002147; /* Navy Blue Text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+  background-color: #CCAC00; /* Darker Gold */
+}
+
+
+.sidebar-toggle, 
+.chat-toggle {
+    border-radius: 50%;
+    position: fixed;
+    top: 80px;
+    margin: .5rem;
+    right: .2rem; /* Position from the right */
+    background-color: var(--color-gold); /* Gold background */
+    border: none;
+    padding: .5rem;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+.chat-toggle{
+    top: 10px;
+    z-index: 11;
+}
+#ovl{
+    display:none;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+}
+.ovl{
+    display:none;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+}
+/* Sidebar */
+.sidebar {
+    z-index: 10;
+    width: 25%;
+    background-color: var(--color-deep-blue);
+    color: var(--color-white);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -200%; /* Hide sidebar off-screen */
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow-color);
+    transition: left 0.3s ease; /* Smooth transition */
+}
+
+/* Active class to show sidebar */
+.sidebar.active {
+    left: 0; /* Bring sidebar into view */
+}
+
+.sidebar.active ~#ovl{
+    display: block;
+}
+.sidebar.active ~.ovl{
+    display: block;
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar-header .logo {
+    width: 50%;
+    /* border-radius: 50%; */
+}
+
+.sidebar h2 {
+    margin: 10px 0;
+    color: var(--color-gold);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar-menu li {
+    margin: 15px 0;
+}
+
+.sidebar-menu a {
+    color: var(--color-white);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: var(--color-medium-grey);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+}
+
+
+
+
 @media screen and (max-width:600px) {
     .logo img {
         width: 90px;
@@ -29,7 +147,14 @@
         width: 90%;
         max-width: grid; 
     }
-    
+    .sidebar{
+        width: 30%;
+    }
+}
+@media screen and (max-width:500px) {
+    .sidebar{
+        width: 40%;
+    }
 }
 @media screen and (max-width:400px) {
     .signup-container,
@@ -38,6 +163,9 @@
         padding: 0 0.4rem;
         margin-left: 1rem;
         margin-right: 1rem;
+    }
+    .sidebar{
+        width: 50%;
     }
 
 }
