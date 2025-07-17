@@ -35,7 +35,9 @@ header {
     width: 100%;
     z-index: 10;
 }
-
+.he2{
+    display: block;
+}
 .header-left {
     display: flex;
     align-items: center;
