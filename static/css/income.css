@@ -20,8 +20,8 @@
   background-color: var(--color-navy); /* Navy background */
   border-radius: 8px; /* Slightly smaller border radius */
   box-shadow: 0 3px 6px var(--color-gold); /* Adjusted shadow for a smaller look */
-  max-height: 100vh; /* Limit the height to 80% of the viewport */
-  overflow-y: auto; /* Add scrolling if content exceeds the height */
+  min-height: 100vh; /* Limit the height to 80% of the viewport */
+  height: fit-content;
 }
 .input-icon {
   position: relative;
@@ -90,31 +90,32 @@ body {
 .sidebar.active + .sidebar-overlay {
     display: block; /* Show overlay when sidebar is active */
 }
-.sidebar-toggle, .chat-toggle {
+.sidebar-toggle{
   position: fixed;
-  bottom: 20px; /* Position from the bottom */
-  right: 20px; /* Position from the right */
+  top: 80px;
+  margin: .5rem;
+  right: .2rem; /* Position from the right */
   background-color: var(--color-gold); /* Gold background */
   border: none;
-  border-radius: 50%;
-  padding: 10px;
+  padding: 1rem;
   cursor: pointer;
-  z-index: 1000; /* Ensure it's above other elements */
+  z-index: 10;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-/* Sidebar Toggle Icon */
-.sidebar-toggle {
-  bottom: 80px; /* Position above the chat toggle */
+#ovl{
+    display:none;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 9;
 }
-
 .sidebar-header {
   text-align: center;
 }
 
 .sidebar-header .logo {
-  width: 60px;
-  border-radius: 50%;
+  width: 50%;
 }
 
 .sidebar h2 {

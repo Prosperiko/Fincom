@@ -87,7 +87,7 @@ th {
   height: 100vh;
   position: fixed;
   top: 0;
-  left: -300px; /* Hide sidebar off-screen */
+  left: -200%; /* Hide sidebar off-screen */
   overflow-y: auto;
   padding: 20px;
   box-shadow: 2px 0 5px var(--shadow-color);
@@ -116,31 +116,26 @@ th {
 .sidebar.active + .sidebar-overlay {
   display: block; /* Show overlay when sidebar is active */
 }
-.sidebar-toggle, .chat-toggle {
-position: fixed;
-bottom: 20px; /* Position from the bottom */
-right: 20px; /* Position from the right */
-background-color: var(--color-gold); /* Gold background */
-border: none;
-border-radius: 50%;
-padding: 10px;
-cursor: pointer;
-z-index: 1000; /* Ensure it's above other elements */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+.sidebar-toggle{
+  position: fixed;
+  top: 80px;
+  margin: .5rem;
+  right: .2rem; /* Position from the right */
+  background-color: var(--color-gold); /* Gold background */
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-/* Sidebar Toggle Icon */
-.sidebar-toggle {
-bottom: 80px; /* Position above the chat toggle */
-}
 
 .sidebar-header {
 text-align: center;
 }
 
 .sidebar-header .logo {
-width: 60px;
-border-radius: 50%;
+width: 50%;
 }
 
 .sidebar h2 {

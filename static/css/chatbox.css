@@ -27,7 +27,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .sidebar {
-    width: 250px;
+    width: 30%;
     background-color: var(--color-navy);
     color: var(--color-white);
     height: 100vh;
@@ -62,23 +62,20 @@
   .sidebar.active + .sidebar-overlay {
     display: block; /* Show overlay when sidebar is active */
   }
-  .sidebar-toggle, .chat-toggle {
-    position: fixed;
-    bottom: 20px; /* Position from the bottom */
-    right: 20px; /* Position from the right */
-    background-color: var(--color-gold); /* Gold background */
-    border: none;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it's above other elements */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  }
-  
-  /* Sidebar Toggle Icon */
-  .sidebar-toggle {
-    bottom: 80px; /* Position above the chat toggle */
-  }
+.sidebar-toggle{
+  position: fixed;
+  top: 80px;
+  margin: .5rem;
+  right: .2rem; /* Position from the right */
+  background-color: var(--color-gold); /* Gold background */
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
   
   
   .sidebar-header {
@@ -86,8 +83,7 @@
   }
   
   .sidebar-header .logo {
-    width: 60px;
-    border-radius: 50%;
+    width: 100%;
   }
   
   .sidebar h2 {
@@ -188,7 +184,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Reduced min-width for smaller cards */
     gap: 1rem; /* Reduced gap between cards */
-    margin-left: 260px; /* Add margin to prevent overlap with the sidebar */
+    margin: 0 auto;/* Add margin to prevent overlap with the sidebar */
     padding: 1rem;
 }
 

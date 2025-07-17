@@ -6,7 +6,8 @@
     <title>Financial-Overview</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/home1.css') }}"> -->
     <link rel="stylesheet" href="../static/css/home1.css">
-    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo_rb.png') }}">
+    <!-- <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo_rb.png') }}"> -->
+    <link rel="shortcut icon" href="../static/img/fincom_logo_rb.png" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
 </head>
@@ -114,10 +115,6 @@
             document.body.style.backgroundImage = `url({{ url_for('static', filename='${image}') }})`;
         }
 
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active'); // Toggle the active class
-        }
 
         function toggleChat() {
             const chat = document.getElementById('chat');
