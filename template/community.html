@@ -28,10 +28,10 @@
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
             <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session</a></li>
             <li><a href="/budget" onclick="changeBackground('img/community-bg.jpg')">Create-Budget</a></li>
-            <button class="btn" onclick="history.back()">Back</button>
+            <button class="back-btn" onclick="history.back()">Back</button>
         </ul>
     </div>
-    <div id = 'ovl' onclick= 'toggleSidebar()'></div>
+    <div class= 'ovl'></div>
 
     
     <!-- Main Content -->
@@ -61,7 +61,7 @@
                     <div class="post-container" data-username="{{ post.username }}" data-content="{{ post.content }}" data-post-title="{{ post.title }}">
                         <div class="post-header">
                             <h2 class="he2">{{ post.title }}</h2>
-                            <small> {{ post.username }} <strong>&bull;</strong> &nbsp; {{ post.timestamp }}</small>
+                            <small> {{ post.username }} &nbsp; <strong>&bull;</strong> &nbsp; {{ post.timestamp }}</small>
                         </div>
                         <p>{{ post.content }}</p>
 
@@ -86,7 +86,7 @@
                             <h3>Responses:</h3>
                             {% for response in post.responses %}
                                 <p><strong>{{ response.username }}:</strong> {{ response.content }} </p>
-                                <p><small>Date: {{ response.timestamp }}</small></p>
+                                <p><small>On: {{ response.timestamp }}</small></p>
                             {% endfor %}
                         </div>
                     </div>
@@ -98,10 +98,7 @@
     </div>
     
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active'); // Toggle the active class
-        }
+        
     document.addEventListener('DOMContentLoaded', function() {
 
         function filterPosts() {
