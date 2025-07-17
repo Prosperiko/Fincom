@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial-Overview</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home1.css') }}">
-    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo.png') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/home1.css') }}"> -->
+    <link rel="stylesheet" href="../static/css/home1.css">
+    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo_rb.png') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
 </head>
@@ -32,20 +33,16 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo">
+            <!-- <img src="{{ url_for('static', filename='img/Group of 7 Objects (1).png') }}" alt="Logo" class="logo"> -->
+            <img class="logo" src="../static/img/fincom_logo_rb.png" alt="">
             <h2>Fincom</h2>
         </div>
         <ul class="sidebar-menu">
             <li><a href="/expenses" onclick="changeBackground('img/bank.jpg')">Add Expense</a></li>
             <li><a href="/income" onclick="changeBackground('img/graph1.jpg')">Add Income</a></li>
             <li><a href="/Analysis" onclick="changeBackground('img/analysis-bg.jpg')">Analysis</a></li>
-            
-            
-            
-            
             <li><a href="/chatbox" onclick="changeBackground('img/chatbot-bg.jpg')">Chat-Session </a></li>
             <li><a href="/community" onclick="changeBackground('img/community-bg.jpg')">Business-Blog</a></li>
-            
         </ul>
     </div>
 
@@ -97,6 +94,7 @@
             <button id="send">Send</button>
         </div>
     </div>
+    <div id = 'ovl' onclick= 'toggleSidebar()'></div>
 
     <!-- Footer -->
     <footer>

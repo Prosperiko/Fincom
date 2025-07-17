@@ -219,8 +219,8 @@ header .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: .4rem .7rem; /* Adjust padding as needed */
-    /* margin: .7rem; */
+    padding: 10px 20px; /* Adjust padding as needed */
+    margin: 0;
     width: 100%;
 }
 
@@ -230,7 +230,7 @@ body {
 
 /* Logo */
 .logo img {
-    width: 140px;
+    width: 110px;
     height: auto;
 }
 
@@ -246,7 +246,6 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: space-between;
 }
 
 nav ul li {
@@ -256,7 +255,7 @@ nav ul li {
 nav ul li a {
     color: var(--highlight-gold);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 19px;
     transition: color 3s;
 }
 
@@ -593,7 +592,7 @@ footer .social-icon:hover i {
 
 /* Contact Links */
 footer .contact-info p a,
-footer .footer-links ul a {
+footer .footer-links a {
     color: white;
     margin: 5px 0;
     text-decoration: none;
@@ -603,14 +602,14 @@ footer .footer-links ul a {
 
 /* Link Hover Effects */
 footer .contact-info p a:hover,
-footer .footer-links ul li a:hover {
+footer .footer-links a:hover {
     color: gold;
     text-shadow: 0 0 5px gold;
 }
 
 /* Animated Underline */
 footer .contact-info p a::after,
-footer .footer-links ul li a::after {
+footer .footer-links a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -622,9 +621,11 @@ footer .footer-links ul li a::after {
 }
 
 footer .contact-info p a:hover::after,
-footer .footer-links ul a:hover::after {
+footer .footer-links a:hover::after {
     width: 100%;
 }
+
+
 
 
 
