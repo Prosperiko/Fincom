@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Transactions</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all_transactions.css') }}">
+    <link rel="stylesheet" href="../static/css/all_transactions.css">
+    <link rel="stylesheet" href="../static/css/mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo">
+            <!-- <img src="{{ url_for('static', filename='img/fincom_logo.png') }}" alt="Logo" class="logo"> -->
+            <img src="../static/img/fincom_logo_rb.png" class="logo" alt="">
             <h2>Fincom</h2>
         </div>
         
         <ul class="sidebar-menu">
             <li><a href="/home1" onclick="changeBackground('img/bank.jpg')">Home</a></li>
+            <button class="back-btn" onclick="history.back()">Back</button>
 
         </ul>
     </div>
 
     <div class="sidebar-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i> <!-- Font Awesome icon for sidebar -->
+        <img src="../static/icons/bars-solid (1).svg" style="width: 24px;" alt="">
     </div>
 
     <div class="container">
@@ -55,7 +59,7 @@
     </div>
 
     <div class="sidebar-overlay" style="display: none;"></div> <!-- Overlay for sidebar -->
-
+    <div class="ovl"></div>
     <script>
         // Confirmation for export buttons
         document.querySelectorAll('.export-btn').forEach(button => {
@@ -71,7 +75,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const sidebar = document.querySelector(".sidebar");
             const toggleButton = document.querySelector(".sidebar-toggle");
-            const overlay = document.querySelector(".sidebar-overlay");
+            const overlay = document.querySelector(".ovl");
 
             // Toggle sidebar on button click
             toggleButton.addEventListener("click", function () {

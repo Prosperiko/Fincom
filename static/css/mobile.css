@@ -53,9 +53,10 @@ button:hover {
     width: 25%;
     background-color: var(--color-deep-blue);
     color: var(--color-white);
-    height: 100vh;
+    min-height: 100vh;
     position: fixed;
     top: 0;
+    bottom: 0;
     left: -200%; /* Hide sidebar off-screen */
     padding: 20px;
     box-shadow: 2px 0 5px var(--shadow-color);
