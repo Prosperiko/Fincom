@@ -1463,8 +1463,7 @@ def generate_response(prompt):
     try:
         # Create the OpenAI client (new 1.0+ SDK style)
         client = openai.OpenAI(
-            api_key=OPENAI_KEY,
-            )
+            api_key=(OPENAI_KEY)
 
         # Generate a chat completion (FinBot)
         response = client.chat.completions.create(
@@ -1477,7 +1476,7 @@ def generate_response(prompt):
             temperature=0.7,
             max_tokens=200
         )
-
+        )
         # Get the response
         finbot_reply = response.choices[0].message.content.strip()
         return finbot_reply
