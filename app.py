@@ -53,6 +53,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "mydatabase.db")
 
 mail = Mail(app)
+GEMINI_KEY = os.getenv("GEMINI_API_KEY")
+COHERE_KEY = os.getenv("COHERE_API_KEY")
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 
 @app.route('/')
@@ -1389,9 +1392,6 @@ def chatbox():
     conn.close()
     return render_template('chatbox.html', users=users, search_query=search_query, profession_query=profession_query, active_user=active_user)
 
-GEMINI_KEY = os.getenv("GEMINI_API_KEY")
-COHERE_KEY = os.getenv("COHERE_API_KEY")
-OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 # Initialize the Generative AI model
 genai.configure(api_key=GEMINI_KEY)  # Replace with your actual API key
