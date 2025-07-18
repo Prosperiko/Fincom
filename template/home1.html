@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../static/css/home1.css">
     <link rel="stylesheet" href="../static/css/mobile.css">
     <!-- <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/fincom_logo_rb.png') }}"> -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <link rel="shortcut icon" href="../static/img/fincom_logo_rb.png" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
@@ -113,6 +114,11 @@
 
     <!-- JavaScript -->
     <script>
+        if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/service-worker.js')
+        .then(() => console.log('✅ Service Worker Registered'))
+        .catch(err => console.log('❌ SW Error:', err));
+        }
         function changeBackground(image) {   
             document.body.style.backgroundImage = `url({{ url_for('static', filename='${image}') }})`;
         }
@@ -130,7 +136,7 @@
     
             sendButton.addEventListener('click', async function () {
                 const userInput = userInputField.value.trim();
-                if (!userInput) return; // Prevent empty messages
+                if (!userInput) return ; // Prevent empty messages
     
                 // Append user message
                 const userMessage = document.createElement('div');
@@ -143,8 +149,9 @@
                 const loadingIndicator = document.createElement('div');
                 loadingIndicator.className = 'loading';
                 loadingIndicator.textContent = 'Finbot is typing...';
+                
                 messagesContainer.appendChild(loadingIndicator);
-    
+                
                 try {
                     // Send user input to the server
                     const response = await fetch('/generate', {
@@ -152,10 +159,10 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ user_input: userInput })
                     });
-    
+                    
                     const data = await response.json();
                     loadingIndicator.remove();
-    
+                    
                     // Append bot response
                     const botMessage = document.createElement('div');
                     botMessage.className = 'message bot-message';

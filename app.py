@@ -1394,6 +1394,12 @@ def chatbox():
 genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")  # Replace with your actual API key
 model = genai.GenerativeModel("gemini-1.5-flash")  # Replace with the correct model name
 
+import cohere
+
+co = cohere.Client("7qv6w8wuJ5dFavdiUJ0VKEzE6ePZuiz26akB3lUa")  # Replace with your real key
+import openai
+from openai import OpenAI
+openai.api_key = "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"
 
 
 def generate_response(prompt):
@@ -1415,12 +1421,11 @@ def generate_response(prompt):
         conn = sqlite3.connect("mydatabase.db")
         conn.row_factory = sqlite3.Row  # Access columns by name
         cursor = conn.cursor()
-        
         try:
             # Fetch data for the logged-in user
             cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
             user = cursor.fetchone()
-            
+    
             if user:
                 # Format user data into a brief summary
                 user_data = f":User  {user['fullname']} (Username: {user['username']})\n" \
@@ -1428,18 +1433,21 @@ def generate_response(prompt):
                             f"Cash Balance: {user['cash_balance']}, Card Balance: {user['card_balance']}, Savings: {user['savings_balance']}"
                 
                 context += f"\nHere is your financial summary:\n{user_data}\n"
-                
+        
                 # Perform financial analysis and insights
                 analysis = perform_financial_analysis(user)
                 context += f"\nFinancial Analysis:\n{analysis}\n"
             else:
                 context += "\nNo financial data found for your account.\n"
+            
         except sqlite3.Error as e:
             print(f"Database error: {e}")
             context += "\nUnable to retrieve financial data due to a database error.\n"
+
         finally:
             cursor.close()
             conn.close()
+            
     else:
         # If no keywords are detected, provide a general chat response
         context += "\nHow can I assist you today? Feel free to ask me anything, whether it's about finances or general topics."
@@ -1447,11 +1455,83 @@ def generate_response(prompt):
     # Combine the context with the user's prompt
     full_prompt = context + "\n" + prompt
     
-    # Generate a response using the AI model
-    response = model.generate_content(full_prompt)
     
-    # Limit the response length to keep it concise
-    return response.text[:500]
+
+    try:
+        # Create the OpenAI client (new 1.0+ SDK style)
+        client = openai.OpenAI(
+            api_key="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"
+            )
+
+        # Generate a chat completion (FinBot)
+        response = client.chat.completions.create(
+            # model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are FinBot, a witty and intelligent finance assistant created by Fincom. You can provide financial insights and also engage in general conversation. Please provide concise and relevant responses to user queries.You can provide financial insights and also engage in general conversation. Please provide concise and relevant responses to user queries."},
+                {"role": "user", "content": full_prompt}
+            ],
+            temperature=0.7,
+            max_tokens=200
+        )
+
+        # Get the response
+        finbot_reply = response.choices[0].message.content.strip()
+        return finbot_reply
+
+    except Exception as openai_e:
+        print("❌ OpenAI error:", openai_e)
+        # Attempt to generate with Gemini next
+        try:
+            response = model.generate_content(full_prompt)
+            print("Gemini success")
+            return response.text[:500]
+
+        except Exception as e:
+            print("Gemini error:", e)
+    
+            # Handle quota or rate limit
+            if "quota" in str(e) or "429" in str(e):
+                print("Gemini rate limit hit, trying Cohere...")
+            else:
+                print("Gemini failed, trying Cohere as fallback...")
+
+            # Fallback to Cohere
+            try:
+                co_response = co.chat(
+                    model='command-r',
+                    message=full_prompt,
+                    max_tokens=200,
+                    temperature=0.7
+                )
+                print("Cohere success")
+                return co_response.text.strip()
+
+            except Exception as co_e:
+                print("Cohere error:", co_e)
+                return "FinBot is currently unavailable. Please try again later or contact support for assistance."
+
+
+
+
+
+
+# client = OpenAI(
+#   api_key="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"
+# )
+
+# completion = client.chat.completions.create(
+#   model="gpt-4o-mini",
+#   store=True,
+#   messages=[
+#     {"role": "user", "content": "write a haiku about ai"}
+#   ]
+# )
+
+# print(completion.choices[0].message);
+
+
+
 
 def perform_financial_analysis(user):
     # This function will perform various analyses based on user data
@@ -1604,6 +1684,9 @@ def generate():
     except Exception as e:
         print(f"Error in /generate route: {e}")
         return jsonify({'error': 'Internal server error'}), 500
+
+    return jsonify({
+        "response": "🚫 FinBot is currently offline and cannot process AI responses."
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
@@ -1904,20 +1987,20 @@ def logout():
     
     return redirect('/login')
 
-def keep_alive():
-    while True:
-        try:
-            url = "https://fincom.onrender.com/"  # Replace with your actual Render URL
-            res = requests.get(url)
-            print(f"Pinged at {time.ctime()}: Status {res.status_code}")
-        except Exception as e:
-            print(f"Error pinging at {time.ctime()}: {e}")
-        time.sleep(60 * 12)  # Ping every 14 minutes
+# def keep_alive():
+#     while True:
+#         try:
+#             url = "https://fincom.onrender.com/"  # Replace with your actual Render URL
+#             res = requests.get(url)
+#             print(f"Pinged at {time.ctime()}: Status {res.status_code}")
+#         except Exception as e:
+#             print(f"Error pinging at {time.ctime()}: {e}")
+#         time.sleep(60 * 12)  # Ping every 14 minutes
 
-# Create and start the background thread
-t = threading.Thread(target=keep_alive)
-t.daemon = True
-t.start()
+# # Create and start the background thread
+# t = threading.Thread(target=keep_alive)
+# t.daemon = True
+# t.start()
 
 
 
