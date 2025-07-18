@@ -1519,7 +1519,7 @@ def generate_response(prompt):
 
 
 # client = OpenAI(
-#   api_key="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"
+#   apekey = 
 # )
 
 # completion = client.chat.completions.create(
