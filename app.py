@@ -1402,7 +1402,7 @@ import cohere
 co = cohere.Client(COHERE_KEY)  # Replace with your real key
 import openai
 from openai import OpenAI
-openai.api_key = os.getenv(OPENAI_KEY)
+openai.api_key = OPENAI_KEY
 
 
 def generate_response(prompt):
@@ -1463,7 +1463,7 @@ def generate_response(prompt):
     try:
         # Create the OpenAI client (new 1.0+ SDK style)
         client = openai.OpenAI(
-            api_key=(OPENAI_KEY)
+            api_key=(OPENAI_KEY))
 
         # Generate a chat completion (FinBot)
         response = client.chat.completions.create(
@@ -1476,7 +1476,7 @@ def generate_response(prompt):
             temperature=0.7,
             max_tokens=200
         )
-        )
+        
         # Get the response
         finbot_reply = response.choices[0].message.content.strip()
         return finbot_reply
@@ -1688,7 +1688,7 @@ def generate():
         return jsonify({'error': 'Internal server error'}), 500
 
     return jsonify({
-        "response": "🚫 FinBot is currently offline and cannot process AI responses."
+        "response": "🚫 FinBot is currently offline and cannot process AI responses."})
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
