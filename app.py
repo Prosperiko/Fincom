@@ -1402,7 +1402,7 @@ import cohere
 co = cohere.Client(COHERE_KEY)  # Replace with your real key
 import openai
 from openai import OpenAI
-openai.api_key = OPENAI_KEY
+openai.api_key = os.getenv(OPENAI_KEY)
 
 
 def generate_response(prompt):
@@ -1463,7 +1463,7 @@ def generate_response(prompt):
     try:
         # Create the OpenAI client (new 1.0+ SDK style)
         client = openai.OpenAI(
-            api_key=(OPhiENAI_KEY)
+            api_key=(OPENAI_KEY)
 
         # Generate a chat completion (FinBot)
         response = client.chat.completions.create(
