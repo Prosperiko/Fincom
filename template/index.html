@@ -356,10 +356,20 @@
             }
     
             // Start the animation loop
-            setInterval(showFeature, 2000); // Change feature every 2 seconds
-        });
+            // Change feature every 2 seconds
+            setInterval(showFeature, 2000); 
+
+            });
         
-        
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+            navigator.serviceWorker
+                .register("../static/service-worker.js")
+                .then((reg) => console.log("Service Worker registered:", reg.scope))
+                .catch((err) => console.log("Service Worker registration failed:", err));
+            });
+        }
     </script>
+
 </body>
 </html>

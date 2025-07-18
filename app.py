@@ -38,15 +38,14 @@ socketio = SocketIO(app)
 app.secret_key = "your_secret_key"
 
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER")
+app.config['MAIL_PORT'] = int(os.getenv("MAIL_PORT", 465))
 app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'projectfinodido@gmail.com'
-app.config['MAIL_PASSWORD'] = 'csqv yavo jcwj bghz'  # email password
-app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'  # 
+app.config['MAIL_USE_SSL'] = os.getenv("MAIL_USE_SSL", "True") == "True"
+app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
 # Flask-Mail Configuration (Already in your code)
-app.config['MAIL_DEFAULT_SENDER'] = 'projectfinodido@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_USERNAME")
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -82,7 +81,6 @@ def signup():
         nationality = request.form['nationality']
         customer_type = request.form['customer_type']
         number_of_workers = request.form.get('number_of_workers', 0)  # Default to 0 if not provided
-
         # Check if all required fields are filled
         if not username or not email or not password or not customer_type:
             flash("All fields are required!", "error")
@@ -95,10 +93,8 @@ def signup():
 
         # Hash the password using Flask-Bcrypt
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
         conn = sqlite3.connect("mydatabase.db")
         cursor = conn.cursor()
-
         try:
             # Check if the username or email already exists
             cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", (username, email))
@@ -109,12 +105,18 @@ def signup():
 
             # Generate a verification PIN
             pin = random.randint(100000, 999999)
-
             # Send the verification email
             msg = Message("Email Verification", recipients=[email])
             msg.body = f"Your verification PIN is: {pin}"
-            mail.send(msg)
+            print('good6',pin)
+            try:
+                mail.send(msg)
+            except Exception as e:
+                print("Mail sending error:", e)
+                flash("⚠️ Failed to send verification email. Please try again.", "danger")
 
+            # mail.send(msg)
+            print('good5')
             # Store user data temporarily
             session['pending_user'] = {
                 'username': username,
@@ -1483,6 +1485,8 @@ def generate_response(prompt):
 
     except Exception as openai_e:
         print("❌ OpenAI error:", openai_e)
+        if "Connection error" in str(openai_e):
+            return "You are currently offline."
         # Attempt to generate with Gemini next
         try:
             response = model.generate_content(full_prompt)
