@@ -1463,7 +1463,7 @@ def generate_response(prompt):
     try:
         # Create the OpenAI client (new 1.0+ SDK style)
         client = openai.OpenAI(
-            api_key="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"
+            api_key=OPENAI_KEY,
             )
 
         # Generate a chat completion (FinBot)
