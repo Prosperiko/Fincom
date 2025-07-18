@@ -1389,17 +1389,20 @@ def chatbox():
     conn.close()
     return render_template('chatbox.html', users=users, search_query=search_query, profession_query=profession_query, active_user=active_user)
 
+GEMINI_KEY = os.getenv("GEMINI_API_KEY")
+COHERE_KEY = os.getenv("COHERE_API_KEY")
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 # Initialize the Generative AI model
-genai.configure(api_key="AIzaSyByWhip1y1g6VuCnCq0avs2QrabdAk3z68")  # Replace with your actual API key
+genai.configure(api_key=GEMINI_KEY)  # Replace with your actual API key
 model = genai.GenerativeModel("gemini-1.5-flash")  # Replace with the correct model name
 
 import cohere
 
-co = cohere.Client("7qv6w8wuJ5dFavdiUJ0VKEzE6ePZuiz26akB3lUa")  # Replace with your real key
+co = cohere.Client(COHERE_KEY)  # Replace with your real key
 import openai
 from openai import OpenAI
-openai.api_key = "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"
+openai.api_key = OPENAI_KEY
 
 
 def generate_response(prompt):
