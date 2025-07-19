@@ -1993,20 +1993,20 @@ def logout():
     
     return redirect('/login')
 
-# def keep_alive():
-#     while True:
-#         try:
-#             url = "https://fincom.onrender.com/"  # Replace with your actual Render URL
-#             res = requests.get(url)
-#             print(f"Pinged at {time.ctime()}: Status {res.status_code}")
-#         except Exception as e:
-#             print(f"Error pinging at {time.ctime()}: {e}")
-#         time.sleep(60 * 12)  # Ping every 14 minutes
+def keep_alive():
+    while True:
+        try:
+            url = "https://fincom.onrender.com/"  # Replace with your actual Render URL
+            res = requests.get(url)
+            print(f"Pinged at {time.ctime()}: Status {res.status_code}")
+        except Exception as e:
+            print(f"Error pinging at {time.ctime()}: {e}")
+        time.sleep(60 * 12)  # Ping every 14 minutes
 
 # # Create and start the background thread
-# t = threading.Thread(target=keep_alive)
-# t.daemon = True
-# t.start()
+t = threading.Thread(target=keep_alive)
+t.daemon = True
+t.start()
 
 
 
